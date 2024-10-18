@@ -124,9 +124,9 @@
 
 ■ 機能の実装方針予定
 - 開発環境: Docker
-- サーバーサイド: Ruby on Rails 7.1.3(Rails API), Ruby 3.2.2
-- フロントエンド: React 18.2.0 , Next.js 14.1.0
-- CSSフレームワーク: Chakra UI
+- サーバーサイド: Ruby on Rails 7系, Ruby 3.x.x
+- フロントエンド: Hotwire
+- CSSフレームワーク: TailwindCSS, daisyUI
 - インフラ:
   ・Webアプリケーションサーバ: Heroku
   ・ファイルストレージ: AWS S3
