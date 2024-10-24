@@ -111,8 +111,9 @@
    - インデックス機能[一覧表示/検索]
    - トレーニング機能(トレーニング負荷の推移を表示)
    - コンディション機能(体重、睡眠時間、睡眠の質、疲労感、怪我の状況、安静時心拍数の日報入力)
-   - グラフ表示機能(React-chartjs-2を使用)
+   - グラフ表示機能(Chart.jsを使用)
    - 画像アップロード機能(Active Storage, Amazon S3)
+   - 連絡事項投稿機能
 
  - その後の機能
    - フィジカル機能(体組成データや関節可動域データの表示)
@@ -126,8 +127,11 @@
 - 開発環境: Docker
 - サーバーサイド: Ruby on Rails 7系, Ruby 3.x.x
 - フロントエンド: Hotwire
-- CSSフレームワーク: TailwindCSS, daisyUI
+- CSSフレームワーク: TailwindCSS, daisyUIgit 
 - インフラ:
   ・Webアプリケーションサーバ: Heroku
   ・ファイルストレージ: AWS S3
   ・データベースサーバ: PostgreSQL(Heroku Postgres)
+
+### 画面遷移図
+Figma：https://www.figma.com/design/PJbEeLROfqU2Ypz1zKSYpb/SwimFirst?node-id=1503-422&node-type=canvas&t=Xto9YQkWK9iBAPye-0
