@@ -135,3 +135,6 @@
 
 ### 画面遷移図
 Figma：https://www.figma.com/design/PJbEeLROfqU2Ypz1zKSYpb/SwimFirst?node-id=1503-422&node-type=canvas&t=Xto9YQkWK9iBAPye-0
+
+### ER図
+dbdiagram : https://dbdocs.io/b.boowy1002/SwimFirst?view=relationships
