@@ -108,11 +108,12 @@
 ■ 機能候補
  - MVP
    - 会員登録/ログイン機能(Google認証)
-   - インデックス機能[一覧表示/検索]
+   - 招待機能
    - トレーニング機能(トレーニング負荷の推移を表示)
-   - コンディション機能(体重、睡眠時間、睡眠の質、疲労感、怪我の状況、安静時心拍数の日報入力)
+   - コンディション機能(投稿/閲覧/編集/削除)
    - グラフ表示機能(Chart.jsを使用)
    - 画像アップロード機能(Active Storage, Amazon S3)
+   - 検索機能
    - 連絡事項投稿機能
 
  - その後の機能
@@ -135,3 +136,6 @@
 
 ### 画面遷移図
 Figma：https://www.figma.com/design/PJbEeLROfqU2Ypz1zKSYpb/SwimFirst?node-id=1503-422&node-type=canvas&t=Xto9YQkWK9iBAPye-0
+
+### ER図
+dbdiagram : https://dbdocs.io/b.boowy1002/SwimFirst?view=relationships
