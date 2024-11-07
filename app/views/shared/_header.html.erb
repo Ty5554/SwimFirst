@@ -1,0 +1,21 @@
+<header>
+<div class="navbar bg-sky-900">
+  <div class="flex-1">
+    <%= link_to "SwimFirst", "#", class: "btn btn-ghost text-xl text-cyan-300" %>
+  </div>
+  <div class="flex-none">
+    <ul class="menu menu-horizontal px-1 text-cyan-300">
+      <li><%= link_to "選手の方はこちら", "#" %></li>
+      <li><%= link_to "指導者の方はこちら", "#" %></li>
+      <li>
+        <details>
+          <summary>新規登録</summary>
+          <ul class="bg-sky-900 rounded-t-none p-2">
+            <li><%= link_to "ログイン", "#" %></li>
+          </ul>
+        </details>
+      </li>
+    </ul>
+  </div>
+</div>
+</header>
