@@ -27,6 +27,7 @@ services:
       - node_modules:/myapp/node_modules
     environment:
       TZ: Asia/Tokyo
+      SECRET_KEY_BASE: bd4a1b66e8333660420eb4be37b69307e7b0dd1a09a6bd7a85d29e8d4a29609064a8f6ad288b77ffc6ff9ef8c58dcebe9de597743ccc1c4998acc04260309175
     ports:
       - "3000:3000"
     depends_on:
