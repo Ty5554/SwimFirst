@@ -1,21 +1,33 @@
 <header>
 <div class="navbar bg-sky-900">
   <div class="flex-1">
-    <%= link_to "SwimFirst", "#", class: "btn btn-ghost text-xl text-cyan-300" %>
+    <%= link_to "SwimFirst", root_path, class: "btn btn-ghost text-xl text-cyan-300" %>
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1 text-cyan-300">
-      <li><%= link_to "選手の方はこちら", "#" %></li>
-      <li><%= link_to "指導者の方はこちら", "#" %></li>
-      <li>
-        <details>
-          <summary>新規登録</summary>
-          <ul class="bg-sky-900 rounded-t-none p-2">
-            <li><%= link_to "ログイン", "#" %></li>
-          </ul>
-        </details>
-      </li>
-    </ul>
+  <li><%= link_to "選手の方はこちら", "#", class: "hover:text-white" %></li>
+  <li><%= link_to "指導者の方はこちら", "#", class: "hover:text-white" %></li>
+  <li>
+    <details>
+      <summary class="cursor-pointer hover:text-white">新規登録</summary>
+      <ul class="bg-sky-900 rounded-t-none p-2">
+        <% if user_signed_in? %>
+          <li class="my-2">
+            <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_confirm: "本当にログアウトしますか？" }, class: "font-semibold py-2 px-4 rounded text-white bg-sky-600 hover:bg-sky-800 cursor-pointer block" %>
+          </li>
+        <% else %>
+          <li class="my-2">
+            <%= link_to "新規登録", new_user_registration_path, class: "font-semibold py-2 px-4 rounded text-white bg-sky-600 hover:bg-sky-800 cursor-pointer block" %>
+          </li>
+          <li class="my-2">
+            <%= link_to "ログイン", new_user_session_path, class: "font-semibold py-2 px-4 rounded border-2 hover:bg-gray-100 cursor-pointer block" %>
+          </li>
+        <% end %>
+      </ul>
+    </details>
+  </li>
+</ul>
   </div>
 </div>
 </header>
+
