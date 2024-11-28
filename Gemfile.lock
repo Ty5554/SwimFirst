@@ -307,6 +307,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise
+  i18n
   jbuilder
   jsbundling-rails
   mysql2 (~> 0.5)
@@ -321,4 +322,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   2.5.17
+   2.4.19
