@@ -1,0 +1,14 @@
+<h1><%= @team.team_name %> の管理ページ</h1>
+
+<h2>申請中の選手</h2>
+<% @team.team_invitations.pending.each do |invitation| %>
+  <p>
+    <%= invitation.user.name %>
+    <%= button_to "承認", approve_team_invitation_path(invitation), method: :patch %>
+  </p>
+<% end %>
+
+<h2>承認済みの選手</h2>
+<% @team.team_invitations.approved.each do |invitation| %>
+  <p><%= invitation.user.name %></p>
+<% end %>

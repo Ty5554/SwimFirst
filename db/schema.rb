@@ -10,13 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_27_032508) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_28_054756) do
   create_table "roles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "role"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_roles_on_user_id"
+  end
+
+  create_table "team_invitations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "team_id", null: false
+    t.string "status", default: "pending", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_team_invitations_on_team_id"
+    t.index ["user_id"], name: "index_team_invitations_on_user_id"
+  end
+
+  create_table "teams", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "team_name", null: false
+    t.string "invitation_token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invitation_token"], name: "index_teams_on_invitation_token", unique: true
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -39,4 +57,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_27_032508) do
   end
 
   add_foreign_key "roles", "users"
+  add_foreign_key "team_invitations", "teams"
+  add_foreign_key "team_invitations", "users"
 end
