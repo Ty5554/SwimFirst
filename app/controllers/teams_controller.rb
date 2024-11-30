@@ -1,5 +1,4 @@
 class TeamsController < ApplicationController
-=begin
   before_action :authenticate_user!
   before_action :authorize_coach, only: [:generate_invitation]
   
@@ -13,7 +12,11 @@ class TeamsController < ApplicationController
     @team = Team.find_by(invitation_token: params[:invitation_token])
     unless @team
       redirect_to root_path, alert: "無効な招待リンクです。"
+      return
     end
+
+    # 招待リンクを受け取った選手向けの登録画面を表示
+    render "teams/invite"
   end
   
   private
@@ -21,6 +24,5 @@ class TeamsController < ApplicationController
   def authorize_coach
     redirect_to root_path, alert: "権限がありません。" unless current_user.role.coach?
   end
-=end
 end
   

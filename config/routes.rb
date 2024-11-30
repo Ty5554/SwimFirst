@@ -9,7 +9,12 @@ Rails.application.routes.draw do
     member do
       patch :approve
     end
+    collection do
+      post :generate_url # 招待URL生成用
+    end
   end
+  
+  post 'generate_team_invitation_url', to: 'team_invitations#generate_url'
 
   resources :teams, only: [:show] do
     member do
