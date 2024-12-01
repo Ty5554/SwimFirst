@@ -22,13 +22,34 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def create_athlete
+    @team = Team.find_by(invitation_token: params[:invitation_token])
+    unless @team
+      redirect_to root_path, alert: "無効な招待リンクです。"
+      return
+    end
+
+    @user = build_resource(sign_up_params)
+    @user.teams << @team # チームに紐付ける
+
+    if @user.save
+      # 招待ステータスをapprovedに更新
+      invitation = TeamInvitation.find_by(user: resource, team: @team)
+      invitation&.update!(status: :pending)
+
+      sign_up(resource_name, @user)
+      redirect_to root_path, notice: "登録が完了しました。"
+    else
+      @resource = @user
+      render "teams/invite", alert: "登録に失敗しました。"
+    end
+  end
+
   private
 
   def sign_up_params
     params.require(:user).permit(
-      :email, :password, :password_confirmation, :first_name, :last_name,
-      role_attributes: [:role],
-      teams_attributes: [:id]
+      :email, :password, :password_confirmation, :first_name, :last_name
     )
   end
 

@@ -10,7 +10,7 @@ class TeamInvitationsController < ApplicationController
     else
       flash[:alert] = "Invitation is already approved."
     end
-    redirect_to team_path(@invitation.team)
+    redirect_to athletes_team_path(@invitation.team)
   end
 
   def create

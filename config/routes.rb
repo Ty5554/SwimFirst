@@ -5,9 +5,13 @@ Rails.application.routes.draw do
     registrations: 'registrations'
   }
 
+  devise_scope :user do
+    post "registrations/create_athlete", to: "registrations#create_athlete", as: :registrations_create_athlete
+  end
+
   resources :team_invitations, only: [:index, :show, :destroy] do
     member do
-      patch :approve
+      post :approve
     end
     collection do
       post :generate_url # 招待URL生成用
@@ -19,6 +23,7 @@ Rails.application.routes.draw do
   resources :teams, only: [:show] do
     member do
       post :generate_invitation
+      get :athletes # 登録状況ページ
     end
   end
   get "teams/:invitation_token/invite", to: "teams#invite", as: :invite_team
