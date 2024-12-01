@@ -7,7 +7,7 @@ class Role < ApplicationRecord
   after_initialize :set_default_role, if: :new_record?
 
   def self.roles_i18n
-    roles.map { |key, _| [I18n.t("activerecord.attributes.role.roles.#{key}"), key] }
+    roles.map { |key, _| [ I18n.t("activerecord.attributes.role.roles.#{key}"), key ] }
   end
 
   private

@@ -1,5 +1,4 @@
 class RegistrationsController < Devise::RegistrationsController
-
   def new
     build_resource({})
     resource.build_role unless resource.role.present?
@@ -11,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
     resource.build_role(role_params) unless resource.role.present?
     resource.teams.build(teams_params) if resource.teams.empty?
-    
+
     if resource.save
       sign_up(resource_name, resource)
       respond_with resource, location: after_sign_up_path_for(resource)

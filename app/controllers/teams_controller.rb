@@ -1,13 +1,13 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :authorize_coach, only: [:generate_invitation, :athletes]
-  
+  before_action :authorize_coach, only: [ :generate_invitation, :athletes ]
+
   def generate_invitation
     @team = current_user.teams.find(params[:id]) # 現在ログイン中のcoachのチーム
     @team.update(invitation_token: SecureRandom.hex(10)) # 招待トークンを生成
     redirect_to team_path(@team), notice: "招待URLが生成されました: #{invite_team_url(@team.invitation_token)}"
   end
-  
+
   def invite
     @team = Team.find_by(invitation_token: params[:invitation_token])
     unless @team
@@ -29,7 +29,7 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     @athletes = @team.team_invitations.includes(:user) # 必要に応じて変更
   end
-  
+
   private
 
   def authorize_coach
@@ -38,4 +38,3 @@ class TeamsController < ApplicationController
     end
   end
 end
-  

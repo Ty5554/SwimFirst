@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
   root "home_pages#top"
-  
+
   devise_for :users, controllers: {
-    registrations: 'registrations'
+    registrations: "registrations"
   }
 
   devise_scope :user do
     post "registrations/create_athlete", to: "registrations#create_athlete", as: :registrations_create_athlete
   end
 
-  resources :team_invitations, only: [:index, :show, :destroy] do
+  resources :team_invitations, only: [ :index, :show, :destroy ] do
     member do
       post :approve
     end
@@ -17,10 +17,10 @@ Rails.application.routes.draw do
       post :generate_url # 招待URL生成用
     end
   end
-  
-  post 'generate_team_invitation_url', to: 'team_invitations#generate_url'
 
-  resources :teams, only: [:show] do
+  post "generate_team_invitation_url", to: "team_invitations#generate_url"
+
+  resources :teams, only: [ :show ] do
     member do
       post :generate_invitation
       get :athletes # 登録状況ページ

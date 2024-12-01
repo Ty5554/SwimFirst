@@ -1,7 +1,7 @@
 class TeamInvitationsController < ApplicationController
   def index
   end
-    
+
   def approve
     @invitation = TeamInvitation.find(params[:id])
     if @invitation.pending?
@@ -46,9 +46,9 @@ class TeamInvitationsController < ApplicationController
     # エラーハンドリング
     render json: { error: e.message }, status: :unprocessable_entity
   end
-  
+
   private
-  
+
   def team_invitation_params
     params.require(:team_invitation).permit(:team_id)
   end
