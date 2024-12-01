@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    attributes:
+      role:
+        roles:
+          coach: "コーチ"
+          athlete: "アスリート"
+      team:
+        team_name: "チーム名"

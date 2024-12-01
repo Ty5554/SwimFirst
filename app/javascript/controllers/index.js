@@ -4,5 +4,8 @@
 
 import { application } from "./application"
 
+import GenerateUrlController from "./generate_url_controller"
+application.register("generate-url", GenerateUrlController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)

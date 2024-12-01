@@ -1,3 +1,4 @@
 class HomePagesController < ApplicationController
-  def top; end
+  def top
+  end
 end

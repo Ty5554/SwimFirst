@@ -1,5 +1,32 @@
 Rails.application.routes.draw do
-  devise_for :users
+  root "home_pages#top"
+
+  devise_for :users, controllers: {
+    registrations: "registrations"
+  }
+
+  devise_scope :user do
+    post "registrations/create_athlete", to: "registrations#create_athlete", as: :registrations_create_athlete
+  end
+
+  resources :team_invitations, only: [ :index, :show, :destroy ] do
+    member do
+      post :approve
+    end
+    collection do
+      post :generate_url # 招待URL生成用
+    end
+  end
+
+  post "generate_team_invitation_url", to: "team_invitations#generate_url"
+
+  resources :teams, only: [ :show ] do
+    member do
+      post :generate_invitation
+      get :athletes # 登録状況ページ
+    end
+  end
+  get "teams/:invitation_token/invite", to: "teams#invite", as: :invite_team
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -9,7 +36,6 @@ Rails.application.routes.draw do
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  root "home_pages#top"
 
   # Defines the root path route ("/")
   # root "posts#index"
