@@ -13,8 +13,10 @@ class RegistrationsController < Devise::RegistrationsController
 
     if resource.save
       sign_up(resource_name, resource)
+      flash[:notice] = "登録が完了しました。"
       respond_with resource, location: after_sign_up_path_for(resource)
     else
+      flash.now[:alert] = "登録に失敗しました。"
       clean_up_passwords resource
       set_minimum_password_length
       respond_with resource
@@ -37,10 +39,10 @@ class RegistrationsController < Devise::RegistrationsController
       invitation&.update!(status: :pending)
 
       sign_up(resource_name, @user)
-      redirect_to root_path, notice: "登録が完了しました。"
+      redirect_to root_path, notice: "選手登録を申請しました。"
     else
       @resource = @user
-      render "teams/invite", alert: "登録に失敗しました。"
+      render "teams/invite", alert: "選手登録の申請に失敗しました。"
     end
   end
 

@@ -1,0 +1,16 @@
+ja:
+  devise:
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      already_signed_in: "すでにログインしています。"
+    passwords:
+      send_instructions: "パスワードリセットの手順を送信しました。"
+      updated: "パスワードが更新されました。"
+      updated_not_active: "パスワードが更新されましたが、アカウントは無効です。"
+    registrations:
+      signed_up: "アカウント登録が完了しました。"
+      updated: "アカウント情報が更新されました。"
+      destroyed: "アカウントが削除されました。"
+    confirmations:
+      confirmed: "メールアドレスの確認が完了しました。"

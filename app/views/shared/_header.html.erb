@@ -1,38 +1,52 @@
 <header>
-<div class="navbar bg-sky-900">
-  <div class="flex-1">
-    <%= link_to "SwimFirst", root_path, class: "btn btn-ghost text-xl text-cyan-300" %>
+  <div class="navbar bg-sky-900 text-white">
+    <!-- ロゴ -->
+    <div class="flex-1">
+      <%= link_to "SwimFirst", root_path, class: "btn btn-ghost text-xl text-cyan-300 hover:text-white" %>
+    </div>
+    <!-- メニューとユーザー情報 -->
+    <div class="flex items-center space-x-4">
+      <!-- メニュー -->
+      <div class="relative">
+        <ul class="menu menu-horizontal px-2">
+          <li>
+            <details class="relative">
+              <!-- ドロップダウンメニューのトリガー -->
+              <summary class="cursor-pointer hover:text-cyan px-4 py-2 rounded-md hover:bg-sky-700 transition">
+                メニューリスト
+              </summary>
+              <!-- ドロップダウンメニュー -->
+              <ul class="absolute right-0 bg-sky-900 rounded-lg p-2 mt-1 shadow-lg w-56 z-50">
+                <% if user_signed_in? %>
+                  <li class="mb-2">
+                    <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_confirm: "本当にログアウトしますか？" }, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+                  </li>
+                  <li class="mb-2">
+                    <%= link_to "招待URLを発行", team_invitations_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+                  </li>
+                  <li class="mb-2">
+                    <%= link_to "登録状況一覧", athletes_team_path(@team), class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+                  </li>
+                <% else %>
+                  <li class="mb-2">
+                    <%= link_to "新規登録", new_user_registration_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+                  </li>
+                  <li class="mb-2">
+                    <%= link_to "ログイン", new_user_session_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+                  </li>
+                <% end %>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ログイン中のユーザー名 -->
+      <% if user_signed_in? %>
+        <div class="text-sm font-medium text-cyan-300">
+          ようこそ、<span class="font-bold"><%= current_user.last_name %></span> さん
+        </div>
+      <% end %>
+    </div>
   </div>
-  <div class="flex-none">
-    <ul class="menu menu-horizontal px-1 text-cyan-300">
-  <li><%= link_to "選手の方はこちら", "#", class: "hover:text-white" %></li>
-  <li><%= link_to "指導者の方はこちら", "#", class: "hover:text-white" %></li>
-  <li>
-    <details>
-      <summary class="cursor-pointer hover:text-white">新規登録</summary>
-      <ul class="bg-sky-900 rounded-t-none p-2">
-        <% if user_signed_in? %>
-          <li class="my-2">
-            <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_confirm: "本当にログアウトしますか？" }, class: "font-semibold py-2 px-4 rounded text-white bg-sky-600 hover:bg-sky-800 cursor-pointer block" %>
-          </li>
-          <li class="my-2">
-            <%= link_to "招待URLを発行", team_invitations_path, class: "font-semibold py-2 px-4 rounded text-white bg-sky-600 hover:bg-sky-800 cursor-pointer block" %>
-          </li>
-          <li class="my-2">
-            <%= link_to "登録状況一覧", athletes_team_path(@team), class: "font-semibold py-2 px-4 rounded text-white bg-sky-600 hover:bg-sky-800 cursor-pointer block" %>
-          </li>
-        <% else %>
-          <li class="my-2">
-            <%= link_to "新規登録", new_user_registration_path, class: "font-semibold py-2 px-4 rounded text-white bg-sky-600 hover:bg-sky-800 cursor-pointer block" %>
-          </li>
-          <li class="my-2">
-            <%= link_to "ログイン", new_user_session_path, class: "font-semibold py-2 px-4 rounded border-2 hover:bg-gray-100 cursor-pointer block" %>
-          </li>
-        <% end %>
-      </ul>
-    </details>
-  </li>
-</ul>
-  </div>
-</div>
 </header>
