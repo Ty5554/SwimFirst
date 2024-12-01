@@ -1,37 +1,53 @@
-<h1 class="text-2xl font-bold mb-6"><%= @team.team_name %> - 登録状況</h1>
+<div class="p-6 bg-gray-50 min-h-screen">
+  <h1 class="text-3xl font-bold mb-6 text-gray-800">
+    <span class="text-blue-600"><%= @team.team_name %></span> - 選手登録状況
+  </h1>
 
-<table class="table-auto w-full border border-gray-200 rounded-lg shadow-md">
-  <thead class="bg-gray-100">
-    <tr>
-      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">名前</th>
-      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">メールアドレス</th>
-      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">ステータス</th>
-      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">操作</th>
-    </tr>
-  </thead>
-  <tbody class="bg-white divide-y divide-gray-200">
-    <% @athletes.each do |invitation| %>
-      <tr class="hover:bg-gray-50">
-        <td class="px-6 py-4 text-sm text-gray-900"><%= invitation.user.first_name %> <%= invitation.user.last_name %></td>
-        <td class="px-6 py-4 text-sm text-gray-900"><%= invitation.user.email %></td>
-        <td class="px-6 py-4 text-sm">
-          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-            <%= invitation.pending? ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800' %>">
-            <%= invitation.status.capitalize %>
-          </span>
-        </td>
-        <td class="px-6 py-4 text-sm text-gray-500">
-          <% if invitation.pending? %>
-            <%= button_to "承認", approve_team_invitation_path(invitation), 
-                          method: :post, 
-                          data: { turbo: false }, 
-                          class: "text-blue-500 hover:underline" %>
-          <% else %>
-            <span class="text-gray-400">承認済み</span>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+  <div class="overflow-x-auto">
+    <table class="table w-full border-collapse rounded-lg shadow-md">
+      <thead class="bg-gray-200">
+        <tr>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">名前</th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">メールアドレス</th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">ステータス</th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">操作</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <% @athletes.each do |invitation| %>
+          <tr class="hover:bg-gray-100">
+            <!-- 名前 -->
+            <td class="px-6 py-4 text-sm text-gray-900">
+              <%= invitation.user.first_name %> <%= invitation.user.last_name %>
+            </td>
+            
+            <!-- メールアドレス -->
+            <td class="px-6 py-4 text-sm text-gray-900">
+              <%= invitation.user.email %>
+            </td>
+            
+            <!-- ステータス -->
+            <td class="px-6 py-4 text-sm">
+              <span class="badge 
+                <%= invitation.pending? ? 'badge-warning' : 'badge-success' %>">
+                <%= invitation.status.capitalize %>
+              </span>
+            </td>
+            
+            <!-- 操作 -->
+            <td class="px-6 py-4 text-sm">
+              <% if invitation.pending? %>
+                <%= button_to "申請中", approve_team_invitation_path(invitation), 
+                              method: :post, 
+                              data: { turbo: false }, 
+                              class: "btn btn-outline btn-sm text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white" %>
+              <% else %>
+                <span class="text-gray-500">承認済み</span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
