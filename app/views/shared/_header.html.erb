@@ -1,55 +1,78 @@
-<header>
-  <div class="navbar bg-sky-900 text-white">
+<header class="bg-sky-900 text-white shadow-md">
+  <div class="flex justify-between items-center p-4">
     <!-- ロゴ -->
-    <div class="flex-1">
-      <%= link_to "SwimFirst", root_path, class: "btn btn-ghost text-xl text-cyan-300 hover:text-white" %>
-    </div>
-    <!-- メニューとユーザー情報 -->
-    <div class="flex items-center space-x-4">
-      <!-- メニュー -->
-      <div class="relative">
-        <ul class="menu menu-horizontal px-2">
-          <li>
-            <details class="relative">
-              <!-- ドロップダウンメニューのトリガー -->
-              <summary class="cursor-pointer hover:text-cyan px-4 py-2 rounded-md hover:bg-sky-700 transition">
-                メニューリスト
-              </summary>
-              <!-- ドロップダウンメニュー -->
-              <ul class="absolute right-0 bg-sky-900 rounded-lg p-2 mt-1 shadow-lg w-56 z-50">
-                <% if user_signed_in? %>
-                  <li class="mb-2">
-                    <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_confirm: "本当にログアウトしますか？" }, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
-                  </li>
-                  <li class="mb-2">
-                    <%= link_to "招待URLを発行", team_invitations_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
-                  </li>
-                  <li class="mb-2">
-                    <%= link_to "登録状況一覧", athletes_team_path(@team), class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
-                  </li>
-                  <li class="mb-2">
-                    <%= link_to "記録一覧", self_records_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
-                  </li>
-                <% else %>
-                  <li class="mb-2">
-                    <%= link_to "新規登録", new_user_registration_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
-                  </li>
-                  <li class="mb-2">
-                    <%= link_to "ログイン", new_user_session_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
-                  </li>
-                <% end %>
-              </ul>
-            </details>
-          </li>
-        </ul>
-      </div>
-
-      <!-- ログイン中のユーザー名 -->
+    <div>
+      <%= link_to "SwimFirst", root_path, class: "text-xl font-bold text-cyan-300 hover:text-white" %>
       <% if user_signed_in? %>
-        <div class="text-sm font-medium text-cyan-300">
-          ようこそ、<span class="font-bold"><%= current_user.last_name %></span> さん
-        </div>
-      <% end %>
+      <div class="flex justify-between items-center text-sm font-medium text-cyan-300">
+        ようこそ、<span class="font-bold"><%= current_user.last_name %></span> さん
+      </div>
+    <% end %>
     </div>
+    <div class="relative">
+      <ul class="menu menu-horizontal px-2">
+        <li>
+        <details class="relative">
+              <!-- ドロップダウンメニューのトリガー -->
+        <summary class="cursor-pointer hover:text-cyan px-4 py-2 rounded-md hover:bg-sky-700 transition">
+          メニューリスト
+        </summary>
+              <!-- ドロップダウンメニュー -->
+        <ul class="absolute right-0 bg-sky-900 rounded-lg p-2 mt-1 shadow-lg w-56 z-50">
+          <% if user_signed_in? %>
+            <li class="mb-2">
+              <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_confirm: "本当にログアウトしますか？" }, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+            </li>
+            <li class="mb-2">
+              <%= link_to "招待URLを発行", team_invitations_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+            </li>
+            <li class="mb-2">
+              <%= link_to "登録状況一覧", athletes_team_path(@team), class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+            </li>
+            <li class="mb-2">
+              <%= link_to "ダッシュボード", self_records_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+            </li>
+          <% else %>
+            <li class="mb-2">
+              <%= link_to "新規登録", new_user_registration_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+            </li>
+            <li class="mb-2">
+              <%= link_to "ログイン", new_user_session_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+            </li>
+          <% end %>
+        </ul>
+        </details>
+       </li>
+      </ul>
+    </div>
+
+    <!-- ハンバーガーメニュー (スマホ画面のみ表示) -->
+    <button id="hamburger-toggle" class="lg:hidden p-2 rounded focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+      </svg>
+    </button>
   </div>
+
+  <!-- モバイルメニュー -->
+  <nav id="mobile-menu" class="lg:hidden bg-sky-900 lg:hidden">
+    <ul class="p-4">
+      <li><%= link_to "自己記録", self_records_path, class: "block text-cyan-300 hover:text-white" %></li>
+      <li><%= link_to "コンディション", conditions_path, class: "block text-cyan-300 hover:text-white" %></li>
+      <li><a href="#" class="block text-cyan-300 hover:text-white">トレーニング</a></li>
+      <li><a href="#" class="block text-cyan-300 hover:text-white">データ入力</a></li>
+      <li><a href="#" class="block text-cyan-300 hover:text-white">連絡事項</a></li>
+    </ul>
+  </nav>
 </header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggleButton = document.getElementById("hamburger-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    toggleButton.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  });
+</script>
