@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # allow_browser versions: :modern
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_team
+  before_action :set_self_records
 
   protected
 
@@ -13,5 +14,11 @@ class ApplicationController < ActionController::Base
 
   def set_team
     @team = current_user.teams.first if user_signed_in?
+  end
+
+  def set_self_records
+    @self_records = current_user.self_records || []
+  rescue ActiveRecord::RecordNotFound
+    redirect_to self_records_path, alert: "指定された記録が見つかりませんでした。"
   end
 end

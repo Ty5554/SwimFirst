@@ -7,3 +7,8 @@ ja:
           athlete: "アスリート"
       team:
         team_name: "チーム名"
+  date:
+    order:
+      - :year
+      - :month
+      - :day

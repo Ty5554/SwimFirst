@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root "home_pages#top"
+  resources :self_records, only: [ :index, :new, :create, :edit, :update, :show, :destroy ]
 
   devise_for :users, controllers: {
     registrations: "registrations"

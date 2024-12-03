@@ -1,0 +1,47 @@
+<div class="container mx-auto p-6">
+  <!-- タイトル -->
+  <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">記録一覧</h1>
+
+  <% if @self_records.any? %>
+    <!-- テーブルカード -->
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+      <table class="table-auto w-full border-collapse border border-gray-300">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="border border-gray-300 px-4 py-2 text-center">スタイル</th>
+            <th class="border border-gray-300 px-4 py-2 text-center">距離</th>
+            <th class="border border-gray-300 px-4 py-2 text-center">記録</th>
+            <th class="border border-gray-300 px-4 py-2 text-center">記録日</th>
+            <th class="border border-gray-300 px-4 py-2 text-center">アクション</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @self_records.each do |record| %>
+            <tr>
+              <td class="border border-gray-300 px-4 py-2 text-center"><%= record.style %></td>
+              <td class="border border-gray-300 px-4 py-2 text-center"><%= record.distance %></td>
+              <td class="border border-gray-300 px-4 py-2 text-center"><%= record.record %></td>
+              <td class="border border-gray-300 px-4 py-2 text-center"><%= record.recorded_on %></td>
+              <td class="border border-gray-300 px-4 py-2 text-center">
+                <div class="flex justify-center space-x-2">
+                  <%= link_to '編集', edit_self_record_path(record), class: "btn btn-sm btn-outline btn-info" %>
+                  <%= button_to '削除', self_record_path(record), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-outline btn-error" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <!-- 空の状態 -->
+    <div class="text-center p-6 bg-gray-100 rounded-lg shadow-md">
+      <p class="text-lg text-gray-600">現在、登録されている記録はありません。</p>
+    </div>
+  <% end %>
+
+  <!-- 新しい記録を追加 -->
+  <div class="mt-6 text-center">
+    <%= link_to '新しい記録を追加', new_self_record_path, class: "btn btn-primary btn-lg" %>
+  </div>
+</div>

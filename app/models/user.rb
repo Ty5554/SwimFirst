@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_one :role, dependent: :destroy
   has_many :team_invitations
   has_many :teams, through: :team_invitations
+  has_many :self_records, dependent: :destroy
 
   accepts_nested_attributes_for :role
   accepts_nested_attributes_for :teams
