@@ -50,8 +50,20 @@
     </button>
   </div>
 <% end %>
-
-    <%= yield %>
-    <%= render 'shared/footer' %>
+    <% if controller_name == "home_pages" && action_name == "top" %>
+      <!-- トップページにはサイドバーを非表示 -->
+      <%= yield %>
+    <% else %>
+      <div class="flex h-screen">
+        <!-- サイドバー -->
+        <div class="w-64 bg-sky-900 text-white">
+          <%= render 'shared/sidebar' %>
+        </div>
+        <!-- メインコンテンツ -->
+        <div class="flex-1 p-6 overflow-auto">
+          <%= yield %>
+        </div>
+      </div>
+    <% end %>
   </body>
 </html>
