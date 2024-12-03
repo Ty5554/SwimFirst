@@ -15,7 +15,6 @@ class ConditionsController < ApplicationController
       if @condition.save
         redirect_to conditions_path, notice: "記録が作成されました。"
       else
-        Rails.logger.debug(@condition.errors.full_messages) 
         render :new, status: :unprocessable_entity
       end
     end
