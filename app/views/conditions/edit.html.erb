@@ -1,0 +1,43 @@
+<div class="container mx-auto p-6">
+  <!-- タイトル -->
+  <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">コンディション編集フォーム</h1>
+
+  <div class="bg-white p-6 rounded-lg shadow-md">
+    <%= form_with model: @condition, local: true, class: "space-y-6" do |form| %>
+      <!-- 体温 -->
+      <div class="form-control">
+        <%= form.label :body_temperature, '体温', class: "label font-bold text-gray-700" %>
+        <%= form.number_field :body_temperature, step: 0.1, class: "input input-bordered w-full", placeholder: "例: 36.5" %>
+      </div>
+
+      <!-- 睡眠時間 -->
+      <div class="form-control">
+        <%= form.label :sleep_hours, '睡眠時間', class: "label font-bold text-gray-700" %>
+        <%= form.number_field :sleep_hours, step: 0.1, class: "input input-bordered w-full", placeholder: "例: 7.5" %>
+      </div>
+
+      <!-- 疲労度 -->
+      <div class="form-control">
+        <%= form.label :fatigue_level, '疲労度', class: "label font-bold text-gray-700" %>
+        <%= form.range_field :fatigue_level, min: 0, max: 100, class: "range w-full" %>
+      </div>
+
+      <!-- 精神的疲労 -->
+      <div class="form-control">
+        <%= form.label :mental_state, '精神的疲労', class: "label font-bold text-gray-700" %>
+        <%= form.range_field :mental_state, min: 0, max: 100, class: "range w-full" %>
+      </div>
+
+      <!-- 記録日 -->
+      <div class="form-control">
+        <%= form.label :recorded_on, '記録日', class: "label font-bold text-gray-700" %>
+        <%= form.date_field :recorded_on, class: "input input-bordered w-full" %>
+      </div>
+
+      <!-- ボタン -->
+      <div class="form-control">
+        <%= form.submit '更新する', class: "btn btn-primary w-full" %>
+      </div>
+    <% end %>
+  </div>
+</div>

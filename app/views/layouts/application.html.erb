@@ -11,58 +11,41 @@
 
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="<%= asset_path('swimerLogo.png') %>" type="image/png">
-
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
+  <body class="bg-gray-100 text-gray-800">
     <%= render 'shared/header' %>
-<% if flash[:notice] %>
-  <div class="flex items-center justify-between bg-green-100 border border-green-300 text-green-800 px-4 py-3 rounded-lg shadow-md mt-4 mx-4">
-    <div class="flex items-center">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-      </svg>
-      <span class="font-medium"><%= flash[:notice] %></span>
-    </div>
-    <button class="text-green-600 hover:text-green-800 focus:outline-none" onclick="this.parentElement.style.display='none'">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm4.293-10.707a1 1 0 00-1.414 0L10 10.586 7.121 7.707a1 1 0 10-1.414 1.414L8.586 12l-2.879 2.879a1 1 0 101.414 1.414L10 13.414l2.879 2.879a1 1 0 001.414-1.414L11.414 12l2.879-2.879a1 1 0 000-1.414z" clip-rule="evenodd" />
-      </svg>
-    </button>
-  </div>
-<% end %>
 
-<% if flash[:alert] %>
-  <div class="flex items-center justify-between bg-red-100 border border-red-300 text-red-800 px-4 py-3 rounded-lg shadow-md mt-4 mx-4">
-    <div class="flex items-center">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l-2-2m2 2H6m8 0a1 1 0 011-1m-1 1a1 1 0 01-1 1m1-1a1 1 0 00-1 1m1-1H6" />
-      </svg>
-      <span class="font-medium"><%= flash[:alert] %></span>
-    </div>
-    <button class="text-red-600 hover:text-red-800 focus:outline-none" onclick="this.parentElement.style.display='none'">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm4.293-10.707a1 1 0 00-1.414 0L10 10.586 7.121 7.707a1 1 0 10-1.414 1.414L8.586 12l-2.879 2.879a1 1 0 101.414 1.414L10 13.414l2.879 2.879a1 1 0 001.414-1.414L11.414 12l2.879-2.879a1 1 0 000-1.414z" clip-rule="evenodd" />
-      </svg>
-    </button>
-  </div>
-<% end %>
+    <!-- Flash メッセージ -->
+    <% if flash[:notice] || flash[:alert] %>
+      <div class="fixed top-4 left-1/2 transform -translate-x-1/2 w-11/12 max-w-md z-50">
+        <% if flash[:notice] %>
+          <div class="bg-green-100 border border-green-300 text-green-800 px-4 py-3 rounded-lg shadow-md">
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
+        <% if flash[:alert] %>
+          <div class="bg-red-100 border border-red-300 text-red-800 px-4 py-3 rounded-lg shadow-md mt-2">
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <!-- レイアウトの主な構造 -->
     <% if controller_name == "home_pages" && action_name == "top" %>
-      <!-- トップページにはサイドバーを非表示 -->
       <%= yield %>
     <% else %>
-      <div class="flex h-screen">
-        <!-- サイドバー -->
-        <div class="w-64 bg-sky-900 text-white">
-          <%= render 'shared/sidebar' %>
-        </div>
+      <div class="flex flex-col lg:flex-row lg:h-screen">
+        <!-- サイドバー (PC画面のみ表示) -->
+        <%= render 'shared/sidebar' %>
         <!-- メインコンテンツ -->
-        <div class="flex-1 p-6 overflow-auto">
+        <main class="flex-1 p-4 overflow-auto">
           <%= yield %>
-        </div>
+        </main>
       </div>
     <% end %>
   </body>
