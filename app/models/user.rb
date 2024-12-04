@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :teams, through: :team_invitations
   has_many :self_records, dependent: :destroy
   has_many :conditions, dependent: :destroy
+  has_many :bodies, dependent: :destroy
 
   accepts_nested_attributes_for :role
   accepts_nested_attributes_for :teams
