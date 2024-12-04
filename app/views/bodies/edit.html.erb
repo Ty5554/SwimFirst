@@ -1,0 +1,36 @@
+<div class="container mx-auto p-6">
+  <!-- タイトル -->
+  <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">フィジカル編集フォーム</h1>
+
+  <div class="bg-white p-6 rounded-lg shadow-md">
+    <%= form_with model: @body, local: true, class: "space-y-6" do |form| %>
+      <!-- 身長 -->
+      <div class="form-control">
+        <%= form.label :height, '身長', class: "label font-bold text-gray-700" %>
+        <%= form.number_field :hegith, step: 0.1, class: "input input-bordered w-full", placeholder: "例: 170" %>
+      </div>
+
+      <!-- 体重 -->
+      <div class="form-control">
+        <%= form.label :weight, '体重', class: "label font-bold text-gray-700" %>
+        <%= form.number_field :weight, step: 0.1, class: "input input-bordered w-full", placeholder: "例: 70" %>
+      </div>
+
+      <div class="form-control">
+        <%= form.label :body_fat, '体脂肪率', class: "label font-bold text-gray-700" %>
+        <%= form.number_field :body_fat, step: 0.1, class: "input input-bordered w-full", placeholder: "例: 10.0" %>
+      </div>
+
+      <!-- 記録日 -->
+      <div class="form-control">
+        <%= form.label :recorded_on, '記録日', class: "label font-bold text-gray-700" %>
+        <%= form.date_field :recorded_on, class: "input input-bordered w-full" %>
+      </div>
+
+      <!-- ボタン -->
+      <div class="form-control">
+        <%= form.submit '更新する', class: "btn btn-primary w-full" %>
+      </div>
+    <% end %>
+  </div>
+</div>

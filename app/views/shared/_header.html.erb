@@ -55,12 +55,11 @@
   </div>
 
   <!-- モバイルメニュー -->
-  <nav id="mobile-menu" class="lg:hidden bg-sky-900 lg:hidden">
+  <nav id="mobile-menu" class="hidden bg-sky-900 lg:hidden">
     <ul class="p-4">
       <li><%= link_to "自己記録", self_records_path, class: "block text-cyan-300 hover:text-white" %></li>
       <li><%= link_to "コンディション", conditions_path, class: "block text-cyan-300 hover:text-white" %></li>
-      <li><a href="#" class="block text-cyan-300 hover:text-white">トレーニング</a></li>
-      <li><a href="#" class="block text-cyan-300 hover:text-white">データ入力</a></li>
+      <li><%= link_to "フィジカル", bodies_path, class: "block text-cyan-300 hover:text-white" %></li>
       <li><a href="#" class="block text-cyan-300 hover:text-white">連絡事項</a></li>
     </ul>
   </nav>

@@ -36,8 +36,10 @@
     <% end %>
 
     <!-- レイアウトの主な構造 -->
-    <% if controller_name == "home_pages" && action_name == "top" %>
-      <%= yield %>
+    <% if (controller_name == "home_pages" && action_name == "top") || 
+      (controller_name == "sessions" && action_name == "new") || 
+      (controller_name == "registrations" && (action_name == "new" || action_name == "create")) %>
+    <%= yield %>
     <% else %>
       <div class="flex flex-col lg:flex-row lg:h-screen">
         <!-- サイドバー (PC画面のみ表示) -->
