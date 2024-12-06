@@ -1,4 +1,6 @@
 class TeamInvitationsController < ApplicationController
+  before_action :authorize_coach, only: [ :index ]
+
   def index
   end
 
@@ -51,5 +53,11 @@ class TeamInvitationsController < ApplicationController
 
   def team_invitation_params
     params.require(:team_invitation).permit(:team_id)
+  end
+
+  def authorize_coach
+    unless current_user.role&.coach?
+      redirect_to root_path, alert: "権限がありません。"
+    end
   end
 end

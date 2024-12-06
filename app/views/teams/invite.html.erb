@@ -12,16 +12,16 @@
       </p>
 
       <%= form_for @user, url: registrations_create_athlete_path(invitation_token: @team.invitation_token), html: { class: "space-y-6" } do |f| %>
-        <!-- 名前 -->
-        <div class="form-control">
-          <%= f.label :first_name, "名前", class: "label text-sm font-medium text-gray-900 dark:text-white" %>
-          <%= f.text_field :first_name, autofocus: true, class: "input input-bordered w-full dark:bg-gray-700 dark:text-white", placeholder: "田中", required: true %>
-        </div>
-
         <!-- 苗字 -->
         <div class="form-control">
-          <%= f.label :last_name, "苗字", class: "label text-sm font-medium text-gray-900 dark:text-white" %>
-          <%= f.text_field :last_name, class: "input input-bordered w-full dark:bg-gray-700 dark:text-white", placeholder: "圭介", required: true %>
+          <%= f.label :last_name, "姓", class: "label text-sm font-medium text-gray-900 dark:text-white" %>
+          <%= f.text_field :last_name, class: "input input-bordered w-full dark:bg-gray-700 dark:text-white", placeholder: "田中", required: true %>
+        </div>
+
+                <!-- 名前 -->
+        <div class="form-control">
+          <%= f.label :first_name, "名", class: "label text-sm font-medium text-gray-900 dark:text-white" %>
+          <%= f.text_field :first_name, autofocus: true, class: "input input-bordered w-full dark:bg-gray-700 dark:text-white", placeholder: "圭介", required: true %>
         </div>
 
         <!-- メールアドレス -->

@@ -1,20 +1,22 @@
-<aside id="sidebar" class="hidden lg:block w-64 bg-sky-900 text-white">
+<aside id="sidebar" class="hidden lg:block w-64 bg-sky-900 text-white shadow-md">
   <nav class="p-4">
-    <ul>
+    <ul class="menu menu-compact">
+      <!-- メニュータイトル -->
       <li class="menu-title">
-        <span class="text-cyan-300">メインメニュー</span>
+        <span class="text-cyan-300">ダッシュボード</span>
       </li>
+      <!-- メニュー項目 -->
       <li class="mt-2">
-        <%= link_to "自己記録", self_records_path, class: "block px-4 py-2 rounded hover:bg-sky-700" %>
+        <%= link_to "自己記録", self_records_path, class: "rounded hover:bg-sky-700 transition ease-in-out duration-300" %>
       </li>
       <li>
-        <%= link_to "コンディション", conditions_path, class: "block px-4 py-2 rounded hover:bg-sky-700" %>
+        <%= link_to "コンディション", conditions_path, class: "rounded hover:bg-sky-700 transition ease-in-out duration-300" %>
       </li>
       <li>
-        <%= link_to "フィジカル", bodies_path, class: "block px-4 py-2 rounded hover:bg-sky-700" %>
+        <%= link_to "フィジカル", bodies_path, class: "rounded hover:bg-sky-700 transition ease-in-out duration-300" %>
       </li>
       <li>
-        <%= link_to "トレーニング", training_menus_path, class: "block px-4 py-2 rounded hover:bg-sky-700" %>
+        <%= link_to "トレーニング", training_menus_path, class: "rounded hover:bg-sky-700 transition ease-in-out duration-300" %>
       </li>
     </ul>
   </nav>
