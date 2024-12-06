@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_04_055045) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_04_064741) do
   create_table "bodies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.float "height", null: false
@@ -71,6 +71,28 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_04_055045) do
     t.index ["invitation_token"], name: "index_teams_on_invitation_token", unique: true
   end
 
+  create_table "training_menus", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "training_date", null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_training_menus_on_user_id"
+  end
+
+  create_table "training_sets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "training_menu_id", null: false
+    t.integer "set_number", null: false
+    t.integer "intensity", default: 0, null: false
+    t.integer "heart_rate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["training_menu_id", "set_number"], name: "index_training_sets_on_training_menu_id_and_set_number", unique: true
+    t.index ["training_menu_id"], name: "index_training_sets_on_training_menu_id"
+    t.index ["user_id"], name: "index_training_sets_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.datetime "created_at", null: false
@@ -96,4 +118,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_04_055045) do
   add_foreign_key "self_records", "users"
   add_foreign_key "team_invitations", "teams"
   add_foreign_key "team_invitations", "users"
+  add_foreign_key "training_menus", "users"
+  add_foreign_key "training_sets", "training_menus"
+  add_foreign_key "training_sets", "users"
 end

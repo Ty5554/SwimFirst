@@ -1,0 +1,8 @@
+<%= form_with model: @training_set do |f| %>
+  <div>
+    <%= f.label :heart_rate, '心拍数' %>
+    <%= f.number_field :heart_rate %>
+  </div>
+
+  <%= f.submit '更新する' %>
+<% end %>
