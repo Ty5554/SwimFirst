@@ -1,0 +1,28 @@
+<div class="container mx-auto p-6">
+  <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">心拍数登録</h1>
+
+  <%= form_with model: @training_set, url: training_menu_training_set_path(@training_set.training_menu, @training_set), method: :patch, class: "space-y-6 bg-white p-6 shadow-lg rounded-lg" do |f| %>
+    <!-- セット番号 -->
+    <div class="form-control">
+      <label class="label font-semibold text-lg">セット番号</label>
+      <p class="input input-bordered w-full bg-gray-100"><%= @training_set.set_number %></p>
+    </div>
+
+    <!-- 運動強度 -->
+    <div class="form-control">
+      <label class="label font-semibold text-lg">運動強度</label>
+      <p class="input input-bordered w-full bg-gray-100"><%= @training_set.intensity %></p>
+    </div>
+
+    <!-- 心拍数 -->
+    <div class="form-control">
+      <%= f.label :heart_rate, '心拍数', class: "label font-semibold text-lg" %>
+      <%= f.number_field :heart_rate, class: "input input-bordered w-full", min: 0 %>
+    </div>
+
+    <!-- 保存ボタン -->
+    <div class="form-control">
+      <%= f.submit '保存', class: "btn btn-primary w-full" %>
+    </div>
+  <% end %>
+</div>

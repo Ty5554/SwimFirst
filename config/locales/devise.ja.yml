@@ -14,3 +14,5 @@ ja:
       destroyed: "アカウントが削除されました。"
     confirmations:
       confirmed: "メールアドレスの確認が完了しました。"
+    failure:
+      unauthenticated: "ログインが必要です。" # ログインが必要な場合のエラーメッセージ

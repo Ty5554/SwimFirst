@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    attributes:
+      role:
+        roles:
+          coach: コーチ
+          athlete: アスリート

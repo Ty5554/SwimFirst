@@ -3,8 +3,8 @@ ja:
     attributes:
       role:
         roles:
-          coach: "コーチ"
-          athlete: "アスリート"
+          coach: コーチ
+          athlete: アスリート
       team:
         team_name: "チーム名"
     errors:
@@ -19,6 +19,16 @@ ja:
               not_an_integer: "睡眠時間は整数でなければなりません"
           less_than: "%{attribute}は%{count}未満でなければなりません"
           less_than_or_equal_to: "%{attribute}は%{count}以下でなければなりません"
+        training_set:
+          attributes:
+            user:
+              required: "ユーザーを設定してください。"
+        messages:
+          record_invalid: "レコードの保存に失敗しました"
+          # 他のエラーメッセージも必要に応じて追加
+          blank: "を入力してください"
+          invalid: "が無効です"
+          taken: "はすでに存在します"
   errors:
     messages:
       less_than: "%{attribute}は%{count}未満でなければなりません"
