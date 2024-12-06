@@ -53,8 +53,8 @@ class TrainingMenusController < ApplicationController
 
     def training_menu_params
       params.require(:training_menu).permit(
-        :training_date, 
-        :description, 
+        :training_date,
+        :description,
         training_sets_attributes: [ :id, :intensity, :set_number, :_destroy ]
       )
     end

@@ -9,6 +9,6 @@ class CreateTrainingSets < ActiveRecord::Migration[7.2]
 
       t.timestamps
     end
-    add_index :training_sets, [:training_menu_id, :set_number], unique: true
+    add_index :training_sets, [ :training_menu_id, :set_number ], unique: true
   end
 end
