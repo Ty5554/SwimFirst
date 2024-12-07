@@ -9,6 +9,7 @@
         <tr>
           <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">名前</th>
           <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">メールアドレス</th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">ロール</th>
           <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">ステータス</th>
           <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">操作</th>
         </tr>
@@ -24,6 +25,11 @@
             <!-- メールアドレス -->
             <td class="px-6 py-4 text-sm text-gray-900">
               <%= invitation.user.email %>
+            </td>
+
+            <!-- ロール -->
+            <td class="px-6 py-4 text-sm text-gray-900">
+              <%= invitation.user.role&.role || '未設定' %>
             </td>
             
             <!-- ステータス -->
