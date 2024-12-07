@@ -41,6 +41,7 @@ class RegistrationsController < Devise::RegistrationsController
       sign_up(resource_name, @user)
       redirect_to root_path, notice: "選手登録を申請しました。"
     else
+      Rails.logger.error(@user.errors.full_messages.join(", "))
       @resource = @user
       render "teams/invite", alert: "選手登録の申請に失敗しました。"
     end
@@ -50,7 +51,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def sign_up_params
     params.require(:user).permit(
-      :email, :password, :password_confirmation, :first_name, :last_name
+      :email, :password, :password_confirmation, :first_name, :last_name, role_attributes: [ :role ]
     )
   end
 

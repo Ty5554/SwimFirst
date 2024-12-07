@@ -9,6 +9,10 @@ ja:
         team_name: "チーム名"
     errors:
       models:
+        user:
+          attributes:
+            email:
+              taken: "このメールアドレスはすでに登録されています"
         condition:
           attributes:
             fatigue_level:
