@@ -1,6 +1,7 @@
 class BodiesController < ApplicationController
     before_action :set_bodies, only: %i[show edit update destroy]
     before_action :authenticate_user!
+    before_action :authorize_approved, only: %i[index new create edit update show edit update destroy]
 
     def index
       @bodies = current_user.bodies
@@ -49,5 +50,11 @@ class BodiesController < ApplicationController
 
     def body_params
       params.require(:body).permit(:height, :weight, :body_fat, :recorded_on)
+    end
+
+    def authorize_approved
+      unless current_user.team_invitations.where(status: :approved).exists?
+        redirect_to root_path, alert: "権限がありません。"
+      end
     end
 end
