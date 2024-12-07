@@ -1,6 +1,7 @@
 class SelfRecordsController < ApplicationController
     before_action :set_self_records, only: %i[show edit update destroy]
     before_action :authenticate_user!
+    before_action :authorize_approved, only: %i[index new create edit update show edit update destroy]
 
     def index
       @self_records = current_user.self_records
@@ -49,5 +50,11 @@ class SelfRecordsController < ApplicationController
 
     def self_record_params
       params.require(:self_record).permit(:style, :distance, :record, :recorded_on)
+    end
+
+    def authorize_approved
+      unless current_user.team_invitations.where(status: :approved).exists?
+        redirect_to root_path, alert: "権限がありません。"
+      end
     end
 end

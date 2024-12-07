@@ -2,6 +2,7 @@ class TrainingMenusController < ApplicationController
     before_action :set_training_menus, only: %i[show edit update destroy]
     before_action :set_team
     before_action :authenticate_user!
+    before_action :authorize_approved, only: %i[index new create edit update show edit update destroy]
 
     def index
       @training_menus = current_user.training_menus.includes(:training_sets)
@@ -61,5 +62,11 @@ class TrainingMenusController < ApplicationController
 
     def set_team
       @team = current_user.teams.first if user_signed_in?
+    end
+
+    def authorize_approved
+      unless current_user.team_invitations.where(status: :approved).exists?
+        redirect_to root_path, alert: "権限がありません。"
+      end
     end
 end
