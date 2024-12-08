@@ -12,10 +12,26 @@ ja:
       signed_up: "アカウント登録が完了しました。"
       updated: "アカウント情報が更新されました。"
       destroyed: "アカウントが削除されました。"
+      signed_up_but_inactive: "アカウントが作成されましたが、有効化されていません。"
     confirmations:
       confirmed: "メールアドレスの確認が完了しました。"
     failure:
-      unauthenticated: "ログインが必要です。" # ログインが必要な場合のエラーメッセージ
+      unauthenticated: "ログインが必要です。"
       not_found_in_database: "メールアドレスまたはパスワードが正しくありません"
       already_authenticated: "すでにログインしています"
       invalid: "メールアドレスまたはパスワードが有効ではありません。"
+  activerecord:
+    attributes:
+      user: # Userモデルの日本語化
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認用）"
+        current_password: "現在のパスワード"
+  errors:
+    messages:
+      blank: "入力してください"
+      invalid: "無効な値です"
+      already_confirmed: "すでに確認済みです。"
+      not_found: "見つかりませんでした。"
+      too_short: "短すぎます（%{count}文字以上）"
+      too_long: "長すぎます（%{count}文字以内）"

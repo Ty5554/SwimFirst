@@ -1,7 +1,7 @@
 class SelfRecord < ApplicationRecord
   belongs_to :user
 
-  enum style: { free_style: 0, back_stroke: 1, breast_stroke: 2, fly: 3, im: 4  } # バリデーションを追加
+  enum style: { "自由形": 0, "背泳ぎ": 1, "平泳ぎ": 2, "バタフライ": 3, "個人メドレー": 4  } # バリデーションを追加
   validates :style, presence: true
   validates :distance, presence: true
   validates :record, presence: true

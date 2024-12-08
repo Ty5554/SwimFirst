@@ -8,24 +8,27 @@
       <table class="table-auto w-full border-collapse border border-gray-300">
         <thead>
           <tr class="bg-gray-100">
+            <th class="border border-gray-300 px-4 py-2 text-center">記録日</th>
             <th class="border border-gray-300 px-4 py-2 text-center">身長</th>
             <th class="border border-gray-300 px-4 py-2 text-center">体重</th>
             <th class="border border-gray-300 px-4 py-2 text-center">体脂肪率</th>
-            <th class="border border-gray-300 px-4 py-2 text-center">記録日</th>
             <th class="border border-gray-300 px-4 py-2 text-center">アクション</th>
           </tr>
         </thead>
         <tbody>
           <% @bodies.each do |body| %>
             <tr>
+              <td class="border border-gray-300 px-4 py-2 text-center"><%= body.recorded_on %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= body.height %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= body.weight %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= body.body_fat %></td>
-              <td class="border border-gray-300 px-4 py-2 text-center"><%= body.recorded_on %></td>
               <td class="border border-gray-300 px-4 py-2 text-center">
                 <div class="flex justify-center space-x-2">
-                  <%= link_to '編集', edit_body_path(body), class: "btn btn-sm btn-outline btn-info" %>
-                  <%= button_to '削除', body_path(body), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-outline btn-error" %>
+                  <%= link_to '編集', edit_body_path(body), class: "btn btn-sm btn-outline btn-info w-20" %>
+                  <%= button_to '削除', body_path(body),
+                                method: :delete, 
+                                data: { confirm: '本当に削除しますか？' }, 
+                                class: "btn btn-sm btn-outline btn-error w-20" %>
                 </div>
               </td>
             </tr>

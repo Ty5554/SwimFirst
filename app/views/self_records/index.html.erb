@@ -1,6 +1,6 @@
 <div class="container mx-auto p-6">
   <!-- タイトル -->
-  <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">自己記録</h1>
+  <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">マイレコード</h1>
 
   <% if @self_records.any? %>
     <!-- テーブルカード -->
@@ -8,24 +8,27 @@
       <table class="table-auto min-w-full border-collapse border border-gray-300">
         <thead>
           <tr class="bg-gray-100">
+            <th class="border border-gray-300 px-4 py-2 text-center">記録日</th>
             <th class="border border-gray-300 px-4 py-2 text-center">スタイル</th>
             <th class="border border-gray-300 px-4 py-2 text-center">距離</th>
             <th class="border border-gray-300 px-4 py-2 text-center">記録</th>
-            <th class="border border-gray-300 px-4 py-2 text-center">記録日</th>
             <th class="border border-gray-300 px-4 py-2 text-center">アクション</th>
           </tr>
         </thead>
         <tbody>
           <% @self_records.each do |record| %>
             <tr>
+              <td class="border border-gray-300 px-4 py-2 text-center"><%= record.recorded_on %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.style %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.distance %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.record %></td>
-              <td class="border border-gray-300 px-4 py-2 text-center"><%= record.recorded_on %></td>
               <td class="border border-gray-300 px-4 py-2 text-center">
                 <div class="flex justify-center space-x-2">
-                  <%= link_to '編集', edit_self_record_path(record), class: "btn btn-sm btn-outline btn-info" %>
-                  <%= button_to '削除', self_record_path(record), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-outline btn-error" %>
+                  <%= link_to '編集', edit_self_record_path(record), class: "btn btn-sm btn-outline btn-info w-20" %>
+                  <%= button_to '削除', self_record_path(record), 
+                                method: :delete, 
+                                data: { confirm: '本当に削除しますか？' }, 
+                                class: "btn btn-sm btn-outline btn-error w-20" %>
                 </div>
               </td>
             </tr>

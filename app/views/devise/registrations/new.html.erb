@@ -2,19 +2,19 @@
   <div class="w-full max-w-md bg-white rounded-lg shadow-md dark:border dark:border-gray-700 dark:bg-gray-800">
     <div class="p-6 space-y-4 sm:p-8">
       <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-        Create an account
+        新規アカウント登録
       </h1>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-4" }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <div>
           <%= f.label :email, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" do %>
-            Your email
+            メールアドレス
           <% end %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white", placeholder: "name@company.com", required: true %>
         </div>
         <div>
           <%= f.label :password, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" do %>
-            Password
+            パスワード
           <% end %>
           <% if @minimum_password_length %>
             <em class="text-sm text-gray-500 dark:text-gray-400">(<%= @minimum_password_length %> characters minimum)</em>
@@ -23,7 +23,7 @@
         </div>
         <div>
           <%= f.label :password_confirmation, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" do %>
-            Confirm password
+            パスワード(確認用)
           <% end %>
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white", placeholder: "••••••••", required: true %>
         </div>
@@ -42,15 +42,15 @@
         <div>
           <%= f.fields_for :role, resource.role || resource.build_role do |role_form| %>
             <%= role_form.label :role, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" do %>
-              役割
+              ロール
             <% end %>
             <%= role_form.select :role, Role.roles_i18n, prompt: "役割を選択してください", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" %>
           <% end %>
         </div>
         <div>
           <%= f.fields_for :teams_attributes, resource.teams.build do |team_form| %>
-            <%= team_form.label :team_name, "Team Name", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
-            <%= team_form.text_field :team_name, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white", placeholder: "Enter your team name" %>
+            <%= team_form.label :team_name, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+            <%= team_form.text_field :team_name, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white", placeholder: "チーム名を入力してください" %>
           <% end %>
         </div>
         <div class="flex items-start">
