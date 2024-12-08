@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [ :generate_invitation, :athletes, :show ]
   before_action :authorize_coach, only: [ :generate_invitation, :athletes ]
 
   def generate_invitation

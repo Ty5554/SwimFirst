@@ -5,6 +5,9 @@ class SelfRecordsController < ApplicationController
 
     def index
       @self_records = current_user.self_records
+      @all_records = SelfRecord.joins(user: :teams)
+                             .where(teams: { id: current_user.teams.ids })
+                             .distinct
     end
 
     def new

@@ -3,26 +3,26 @@
     <ul class="menu menu-compact">
       <!-- メニュータイトル -->
       <li class="menu-title">
-        <span class="text-cyan-300">ダッシュボード</span>
+        <span class="text-cyan-300 text-xl">メニュー</span>
       </li>
       <!-- メニュー項目 -->
       <li class="mt-2">
-        <%= link_to "TOPページへ戻る", root_path, class: "rounded hover:bg-sky-700 transition ease-in-out duration-300" %>
+        <%= link_to "TOPページへ戻る", root_path, class: "text-xl rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
       </li>
       <li class="mt-2">
-        <%= link_to "マイレコード", self_records_path, class: "rounded hover:bg-sky-700 transition ease-in-out duration-300" %>
+        <%= link_to "マイレコード", self_records_path, class: "text-xl rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
       </li>
       <li>
-        <%= link_to "コンディション", conditions_path, class: "rounded hover:bg-sky-700 transition ease-in-out duration-300" %>
+        <%= link_to "コンディション", conditions_path, class: "text-xl rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
       </li>
       <li>
-        <%= link_to "フィジカル", bodies_path, class: "rounded hover:bg-sky-700 transition ease-in-out duration-300" %>
+        <%= link_to "フィジカル", bodies_path, class: "text-xl rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
       </li>
       <li>
-        <%= link_to "トレーニング", training_menus_path, class: "rounded hover:bg-sky-700 transition ease-in-out duration-300" %>
+        <%= link_to "トレーニング", training_menus_path, class: "text-xl rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
       </li>
       <li>
-        <%= link_to "メンバー登録状況", athletes_team_path(@team), class: "rounded hover:bg-sky-700 transition ease-in-out duration-300" %>
+        <%= link_to "メンバー登録状況", athletes_team_path(@team), class: "text-xl rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
       </li>
     </ul>
   </nav>
