@@ -5,6 +5,9 @@ class BodiesController < ApplicationController
 
     def index
       @bodies = current_user.bodies
+      @all_bodies = ::Body.joins(user: :teams)
+      .where(teams: { id: current_user.teams.ids })
+      .distinct
     end
 
     def new

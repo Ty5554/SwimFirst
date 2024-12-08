@@ -5,6 +5,9 @@ class ConditionsController < ApplicationController
 
     def index
       @conditions = current_user.conditions
+      @all_conditions = Condition.joins(user: :teams)
+      .where(teams: { id: current_user.teams.ids })
+      .distinct
     end
 
     def new

@@ -1,17 +1,21 @@
 <div class="container mx-auto p-6">
   <!-- タイトル -->
-  <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">コンディションデータ</h1>
+  <% if current_user.role.athlete? %>
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">コンディションデータ</h1>
+  <% else %>
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">コンディションデータ(選手一覧)</h1>
+  <% end %>
 
-  <% if @conditions.any? %>
+  <% if current_user.role.athlete? && @conditions.any? %>
     <!-- テーブルカード -->
-    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
-      <table class="table-auto w-full border-collapse border border-gray-300">
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg max-w-full">
+      <table class="table-auto w-[800px] border-collapse border border-gray-300">
         <thead>
           <tr class="bg-gray-100">
             <th class="border border-gray-300 px-4 py-2 text-center">記録日</th>
             <th class="border border-gray-300 px-4 py-2 text-center">体温</th>
             <th class="border border-gray-300 px-4 py-2 text-center">睡眠時間</th>
-            <th class="border border-gray-300 px-4 py-2 text-center">疲労度</th>
+            <th class="border border-gray-300 px-4 py-2 text-center">肉体的疲労度</th>
             <th class="border border-gray-300 px-4 py-2 text-center">精神的疲労度</th>
             <th class="border border-gray-300 px-4 py-2 text-center">アクション</th>
           </tr>
@@ -27,12 +31,39 @@
               <td class="border border-gray-300 px-4 py-2 text-center">
                 <div class="flex justify-center space-x-2">
                   <%= link_to '編集', edit_condition_path(condition), class: "btn btn-sm btn-outline btn-info w-20" %>
-                  <%= button_to '削除', condition_path(condition),
+                  <%= button_to '削除', body_path(condition), 
                                 method: :delete, 
                                 data: { confirm: '本当に削除しますか？' }, 
                                 class: "btn btn-sm btn-outline btn-error w-20" %>
                 </div>
               </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% elsif current_user.role.coach? && @all_conditions.any? %>
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg max-w-full">
+      <table class="table-auto w-[1000px] border-collapse border border-gray-300">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="border border-gray-300 px-4 py-2 text-center">名前</th>
+            <th class="border border-gray-300 px-4 py-2 text-center">記録日</th>
+            <th class="border border-gray-300 px-4 py-2 text-center">体温</th>
+            <th class="border border-gray-300 px-4 py-2 text-center">睡眠時間</th>
+            <th class="border border-gray-300 px-4 py-2 text-center">肉体的疲労度</th>
+            <th class="border border-gray-300 px-4 py-2 text-center">精神的疲労度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @all_conditions.each do |condition| %>
+            <tr>
+              <td class="border border-gray-300 px-4 py-2 text-center"><%= condition.user.last_name %></td>
+              <td class="border border-gray-300 px-4 py-2 text-center"><%= condition.recorded_on %></td>
+              <td class="border border-gray-300 px-4 py-2 text-center"><%= condition.body_temperature %></td>
+              <td class="border border-gray-300 px-4 py-2 text-center"><%= condition.sleep_hours %></td>
+              <td class="border border-gray-300 px-4 py-2 text-center"><%= condition.fatigue_level %></td>
+              <td class="border border-gray-300 px-4 py-2 text-center"><%= condition.mental_state %></td>
             </tr>
           <% end %>
         </tbody>
@@ -44,9 +75,8 @@
       <p class="text-lg text-gray-600">現在、登録されている記録はありません。</p>
     </div>
   <% end %>
-
   <!-- 新しい記録を追加 -->
   <div class="mt-6 text-center">
-    <%= link_to '新しいコンディションデータを追加', new_condition_path, class: "btn btn-primary btn-lg" %>
+    <%= link_to '新しい記録を追加', new_condition_path, class: "btn btn-primary btn-lg" %>
   </div>
 </div>
