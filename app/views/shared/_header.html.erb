@@ -1,4 +1,4 @@
-<header class="bg-sky-900 text-white shadow-md">
+<header class="bg-sky-900 text-white shadow-md" data-turbo="false">
   <div class="flex justify-between items-center p-4">
     <!-- ロゴ -->
     <div>
@@ -12,7 +12,7 @@
 
     <!-- メニューリスト -->
     <!-- ヘッダー -->
-    <div class="bg-sky-900 text-white">
+    <div class="bg-sky-900 text-white" >
       <div class="container mx-auto flex justify-center items-center h-16">
     <!-- メニューリスト -->
         <ul class="flex space-x-4 items-center">
@@ -52,7 +52,7 @@
   </div>
 <% if user_signed_in? %>
     <!-- ハンバーガーメニュー (スマホ画面用) -->
-  <nav id="mobile-menu" class="hidden bg-sky-900">
+  <nav id="mobile-menu" class="hidden bg-sky-900" >
     <ul class="p-4 space-y-4">
       <li>
         <%= link_to "自己記録", self_records_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>

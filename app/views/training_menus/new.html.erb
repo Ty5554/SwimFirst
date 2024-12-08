@@ -1,8 +1,9 @@
-<div class="container mx-auto p-6">
+<div class="container mx-auto p-6" >
   <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">メニュー設定</h1>
 
   <%= form_with model: @training_menu, class: "space-y-6 bg-white p-6 shadow-lg rounded-lg" do |f| %>
     <!-- トレーニング日 -->
+    <div>
     <div class="form-control">
       <%= f.label :training_date, 'トレーニング日', class: "label font-semibold text-lg" %>
       <%= f.date_field :training_date, class: "input input-bordered w-full" %>
@@ -21,9 +22,9 @@
     </div>
 
     <!-- 動的フィールド: セット毎の運動強度 -->
-    <div id="training-sets-fields" class="space-y-4 mt-4">
+    <div id="training-sets-fields" class="space-y-4 mt-4" >
       <!-- 初期セットフィールド -->
-      <div class="form-control border border-gray-200 rounded-lg p-4 bg-gray-50 shadow-sm">
+      <div class="form-control border border-gray-200 rounded-lg p-4 bg-gray-50 shadow-sm" >
         <div>
           <label class="label font-semibold text-lg">1セット目の運動強度</label>
           <select name="training_menu[training_sets_attributes][0][intensity]" class="select select-bordered w-full">
@@ -40,39 +41,43 @@
       <%= f.submit '登録', class: "btn btn-primary w-full" %>
     </div>
   <% end %>
+  </div>
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const setCountInput = document.getElementById("set_count");
-    const trainingSetsFields = document.getElementById("training-sets-fields");
+document.addEventListener("turbo:load", () => {
+  const setCountInput = document.getElementById("set_count");
+  const trainingSetsFields = document.getElementById("training-sets-fields");
 
-    // セット数変更時にフィールドを再生成
-    setCountInput.addEventListener("input", () => {
-      const setCount = parseInt(setCountInput.value, 10) || 1;
-      trainingSetsFields.innerHTML = ""; // フィールドをクリア
+  if (!setCountInput || !trainingSetsFields) return;
 
-      // 運動強度の選択肢をRailsから取得
-      const intensityOptions = `
-        <% TrainingSet.intensities.each do |key, _value| %>
-          <option value="<%= key %>"><%= key %></option>
-        <% end %>
-      `;
+  // セット数変更時にフィールドを再生成
+  setCountInput.addEventListener("input", () => {
+    const setCount = parseInt(setCountInput.value, 10) || 1;
+    trainingSetsFields.innerHTML = ""; // フィールドをクリア
 
-      for (let i = 0; i < setCount; i++) {
-        const field = `
-          <div class="form-control border border-gray-200 rounded-lg p-4 bg-gray-50 shadow-sm">
-            <div>
-              <label class="label font-semibold text-lg">${i + 1}セット目の運動強度</label>
-              <select name="training_menu[training_sets_attributes][${i}][intensity]" class="select select-bordered w-full">
-                ${intensityOptions}
-              </select>
-              <input type="hidden" name="training_menu[training_sets_attributes][${i}][set_number]" value="${i + 1}" />
-            </div>
+    // 運動強度の選択肢をRailsから取得
+    const intensityOptions = `
+      <% TrainingSet.intensities.each do |key, _value| %>
+        <option value="<%= key %>"><%= key %></option>
+      <% end %>
+    `;
+
+    for (let i = 0; i < setCount; i++) {
+      const field = `
+        <div class="form-control border border-gray-200 rounded-lg p-4 bg-gray-50 shadow-sm">
+          <div>
+            <label class="label font-semibold text-lg">${i + 1}セット目の運動強度</label>
+            <select name="training_menu[training_sets_attributes][${i}][intensity]" class="select select-bordered w-full">
+              ${intensityOptions}
+            </select>
+            <input type="hidden" name="training_menu[training_sets_attributes][${i}][set_number]" value="${i + 1}" />
           </div>
-        `;
-        trainingSetsFields.insertAdjacentHTML("beforeend", field);
-      }
-    });
+        </div>
+      `;
+      trainingSetsFields.insertAdjacentHTML("beforeend", field);
+    }
   });
+});
+
 </script>
