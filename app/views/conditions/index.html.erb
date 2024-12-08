@@ -8,26 +8,29 @@
       <table class="table-auto w-full border-collapse border border-gray-300">
         <thead>
           <tr class="bg-gray-100">
+            <th class="border border-gray-300 px-4 py-2 text-center">記録日</th>
             <th class="border border-gray-300 px-4 py-2 text-center">体温</th>
             <th class="border border-gray-300 px-4 py-2 text-center">睡眠時間</th>
             <th class="border border-gray-300 px-4 py-2 text-center">疲労度</th>
             <th class="border border-gray-300 px-4 py-2 text-center">精神的疲労度</th>
-            <th class="border border-gray-300 px-4 py-2 text-center">記録日</th>
             <th class="border border-gray-300 px-4 py-2 text-center">アクション</th>
           </tr>
         </thead>
         <tbody>
           <% @conditions.each do |condition| %>
             <tr>
+              <td class="border border-gray-300 px-4 py-2 text-center"><%= condition.recorded_on %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= condition.body_temperature %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= condition.sleep_hours %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= condition.fatigue_level %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= condition.mental_state %></td>
-              <td class="border border-gray-300 px-4 py-2 text-center"><%= condition.recorded_on %></td>
               <td class="border border-gray-300 px-4 py-2 text-center">
                 <div class="flex justify-center space-x-2">
-                  <%= link_to '編集', edit_condition_path(condition), class: "btn btn-sm btn-outline btn-info" %>
-                  <%= button_to '削除', condition_path(condition), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-outline btn-error" %>
+                  <%= link_to '編集', edit_condition_path(condition), class: "btn btn-sm btn-outline btn-info w-20" %>
+                  <%= button_to '削除', condition_path(condition),
+                                method: :delete, 
+                                data: { confirm: '本当に削除しますか？' }, 
+                                class: "btn btn-sm btn-outline btn-error w-20" %>
                 </div>
               </td>
             </tr>

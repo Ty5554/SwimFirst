@@ -1,6 +1,6 @@
 <div class="p-6 bg-gray-50 min-h-screen">
   <h1 class="text-3xl font-bold mb-6 text-gray-800">
-    <span class="text-blue-600"><%= @team.team_name %></span> - 選手登録状況
+    <span class="text-blue-600"><%= @team.team_name %></span> - メンバー登録状況
   </h1>
 
   <div class="overflow-x-auto">
@@ -42,18 +42,24 @@
             
             <!-- 操作 -->
             <td class="px-4 py-4 text-sm">
-              <% if invitation.pending? %>
-                <%= button_to "申請中", approve_team_invitation_path(invitation), 
-                              method: :post, 
-                              data: { turbo: false }, 
-                              class: "btn btn-outline btn-sm text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white w-full whitespace-nowrap" %>
-              <% else %>
-                <span class="text-gray-500">承認済み</span>
-              <% end %>
+            <% if invitation.pending? %>
+             <%= button_to "申請中", approve_team_invitation_path(invitation), 
+                           method: :post, 
+                           data: { turbo: false }, 
+                           class: "btn btn-outline btn-sm text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white w-full whitespace-nowrap" %>
+           <% else %>
+             <%= button_to "申請取り消し", pending_team_invitation_path(invitation), 
+                           method: :post, 
+                           data: { turbo: false }, 
+                           class: "btn btn-outline btn-sm text-green-500 border-green-500 hover:bg-green-500 hover:text-white w-full whitespace-nowrap" %>
+           <% end %>
             </td>
           </tr>
         <% end %>
       </tbody>
     </table>
+    <div class="mt-6 text-center">
+      <%= link_to "招待URLを発行", team_invitations_path, class: "btn btn-primary btn-lg shadow-lg hover:shadow-xl transition-shadow duration-300" %>
+    </div>
   </div>
 </div>

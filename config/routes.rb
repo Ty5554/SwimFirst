@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :team_invitations, only: [ :index, :show, :destroy ] do
     member do
-      post :approve
+      post :approve, :pending
     end
     collection do
       post :generate_url # 招待URL生成用

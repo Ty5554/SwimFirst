@@ -1,7 +1,13 @@
 ja:
   activerecord:
     attributes:
-      role:
-        roles:
-          coach: コーチ
-          athlete: アスリート
+      user: # Userモデルの属性
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認用）"
+        first_name: "名"
+        last_name: "姓"
+        role:
+          role: "役割"
+      team: # Teamモデルの属性
+        team_name: "チーム名"

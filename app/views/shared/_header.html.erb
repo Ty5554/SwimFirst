@@ -2,7 +2,7 @@
   <div class="flex justify-between items-center p-4">
     <!-- ロゴ -->
     <div>
-      <%= link_to "SwimFirst", root_path, class: "text-xl font-bold text-cyan-300 hover:text-white" %>
+      <%= link_to "SwimFirst", root_path, class: "text-2xl font-bold text-cyan-300 hover:text-white" %>
       <% if user_signed_in? %>
         <div class="flex items-center text-sm font-medium text-cyan-300 mt-1">
           ようこそ、<span class="font-bold ml-1"><%= current_user.last_name %></span> さん
@@ -18,25 +18,25 @@
         <ul class="flex space-x-4 items-center">
         <% if user_signed_in? %>
         <li class="hidden sm:block">
-        <%= link_to "ダッシュボードへ", self_records_path, 
-          class: "btn btn-outline text-cyan-500 hover:text-white hover:bg-cyan-600 border-cyan-500 shadow-lg" %>
+        <%= link_to "ダッシュボード", self_records_path, 
+          class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
         </li>
         <li class="hidden sm:block">
-        <%= link_to "登録状況一覧", athletes_team_path(@team), 
-          class: "btn btn-outline text-cyan-500 hover:text-white hover:bg-cyan-600 border-cyan-500 shadow-lg" %>
+        <%= link_to "招待URLを発行", team_invitations_path, 
+          class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
         </li>
         <li>
         <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_confirm: "本当にログアウトしますか？" }, 
-          class: "btn btn-outline text-cyan-500 hover:text-white hover:bg-cyan-600 border-cyan-500 shadow-lg" %>
+          class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
         </li>
         <% else %>
         <li>
         <%= link_to "新規登録", new_user_registration_path, 
-          class: "btn btn-outline text-cyan-500 hover:text-white hover:bg-cyan-600 border-cyan-500 shadow-lg" %>
+          class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
         </li>
         <li>
         <%= link_to "ログイン", new_user_session_path, 
-          class: "btn btn-outline text-cyan-500 hover:text-white hover:bg-cyan-600 border-cyan-500 shadow-lg" %>
+          class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
         </li>
         <% end %>
         </ul>
@@ -55,7 +55,10 @@
   <nav id="mobile-menu" class="hidden bg-sky-900" >
     <ul class="p-4 space-y-4">
       <li>
-        <%= link_to "自己記録", self_records_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+        <%= link_to "TOPページへ戻る", root_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+      </li>
+      <li>
+        <%= link_to "マイレコード", self_records_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
       </li>
       <li>
         <%= link_to "コンディション", conditions_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
@@ -67,13 +70,7 @@
         <%= link_to "トレーニング", training_menus_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
       </li>
       <li>
-        <%= link_to "招待URLを発行", team_invitations_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
-      </li>
-      <li>
-        <%= link_to "登録状況一覧", athletes_team_path(@team), class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
-      </li>
-      <li>
-        <%= link_to "ダッシュボード", self_records_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+        <%= link_to "メンバー登録状況", athletes_team_path(@team), class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
       </li>
     </ul>
   </nav>

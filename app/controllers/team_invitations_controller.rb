@@ -8,7 +8,18 @@ class TeamInvitationsController < ApplicationController
     @invitation = TeamInvitation.find(params[:id])
     if @invitation.pending?
       @invitation.update!(status: :approved)
-      flash[:notice] = "Invitation approved."
+      flash[:notice] = "承認しました。"
+    else
+      flash[:alert] = "Invitation is already approved."
+    end
+    redirect_to athletes_team_path(@invitation.team)
+  end
+
+  def pending
+    @invitation = TeamInvitation.find(params[:id])
+    if @invitation.approved?
+      @invitation.update!(status: :pending)
+      flash[:notice] = "承認を取り消しました。"
     else
       flash[:alert] = "Invitation is already approved."
     end
