@@ -57,7 +57,7 @@ class SelfRecordsController < ApplicationController
 
     def authorize_approved
       unless current_user.team_invitations.where(status: :approved).exists?
-        redirect_to root_path, alert: "権限がありません。"
+        redirect_to root_path, alert: "権限がありません。メンバー管理ページにてステータスを更新してください。"
       end
     end
 end

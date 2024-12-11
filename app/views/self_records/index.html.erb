@@ -9,9 +9,9 @@
   <% if current_user.role.athlete? && @self_records.any? %>
     <!-- テーブルカード -->
     <div class="overflow-x-auto bg-white shadow-md rounded-lg max-w-full">
-      <table class="table-auto w-[1200px] border-collapse border border-gray-300">
+      <table class="table min-w-full border-collapse border border-gray-300">
         <thead>
-          <tr class="bg-gray-100">
+          <tr class="bg-gray-100 text-sm">
             <th class="border border-gray-300 px-4 py-2 text-center">記録日</th>
             <th class="border border-gray-300 px-4 py-2 text-center">スタイル</th>
             <th class="border border-gray-300 px-4 py-2 text-center">距離</th>
@@ -19,20 +19,20 @@
             <th class="border border-gray-300 px-4 py-2 text-center">アクション</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="text-sm">
           <% @self_records.each do |record| %>
-            <tr>
+            <tr class="hover:bg-gray-50">
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.recorded_on %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.style %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.distance %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.record %></td>
               <td class="border border-gray-300 px-4 py-2 text-center">
                 <div class="flex justify-center space-x-2">
-                  <%= link_to '編集', edit_self_record_path(record), class: "btn btn-sm btn-outline btn-info w-20" %>
+                  <%= link_to '編集', edit_self_record_path(record), class: "btn btn-sm btn-outline btn-info" %>
                   <%= button_to '削除', self_record_path(record), 
                                 method: :delete, 
                                 data: { confirm: '本当に削除しますか？' }, 
-                                class: "btn btn-sm btn-outline btn-error w-20" %>
+                                class: "btn btn-sm btn-outline btn-error" %>
                 </div>
               </td>
             </tr>
@@ -41,8 +41,8 @@
       </table>
     </div>
   <% elsif current_user.role.coach? && @all_records.any? %>
-    <div class="overflow-x-auto bg-white shadow-md rounded-lg max-w-full">
-      <table class="table-auto w-[1200px] border-collapse border border-gray-300">
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+      <table class="table min-w-full border-collapse border border-gray-300">
         <thead>
           <tr class="bg-gray-100">
             <th class="border border-gray-300 px-4 py-2 text-center">名前</th>
@@ -52,9 +52,9 @@
             <th class="border border-gray-300 px-4 py-2 text-center">記録</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="text-sm">
           <% @all_records.each do |record| %>
-            <tr>
+            <tr class="hover:bg-gray-50">
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.user.last_name %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.recorded_on %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.style %></td>

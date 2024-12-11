@@ -17,7 +17,7 @@ class ConditionsController < ApplicationController
     def create
       @condition = current_user.conditions.new(condition_params)
       if @condition.save
-        redirect_to conditions_path, notice: "記録が作成されました。"
+        redirect_to conditions_path, notice: "コンディションデータが作成されました。"
       else
         render :new, status: :unprocessable_entity
       end
@@ -29,9 +29,9 @@ class ConditionsController < ApplicationController
 
     def update
       if @condition.update(condition_params)
-        redirect_to conditions_path, notice: "記録が更新されました。"
+        redirect_to conditions_path, notice: "コンディションデータが更新されました。"
       else
-        flash.now[:alert] = "記録の更新に失敗しました"
+        flash.now[:alert] = "コンディションデータの更新に失敗しました"
         render :edit, status: :unprocessable_entity
       end
     end
@@ -40,7 +40,7 @@ class ConditionsController < ApplicationController
 
     def destroy
       @condition.destroy
-      redirect_to conditions_path, notice: "記録が削除されました。"
+      redirect_to conditions_path, notice: "コンディションデータが削除されました。"
     end
 
     private
@@ -48,7 +48,7 @@ class ConditionsController < ApplicationController
     def set_conditions
       @condition = current_user.conditions.find(params[:id]) || []
     rescue ActiveRecord::RecordNotFound
-      redirect_to conditions_path, alert: "指定された記録が見つかりませんでした。"
+      redirect_to conditions_path, alert: "指定されたコンディションデータが見つかりませんでした。"
     end
 
     def condition_params
@@ -57,7 +57,7 @@ class ConditionsController < ApplicationController
 
     def authorize_approved
       unless current_user.team_invitations.where(status: :approved).exists?
-        redirect_to root_path, alert: "権限がありません。"
+        redirect_to root_path, alert: "権限がありません。メンバー管理ページにてステータスを更新してください。"
       end
     end
 end

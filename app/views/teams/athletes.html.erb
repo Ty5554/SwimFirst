@@ -1,6 +1,6 @@
 <div class="p-6 bg-gray-50 min-h-screen">
   <h1 class="text-3xl font-bold mb-6 text-gray-800">
-    <span class="text-blue-600"><%= @team.team_name %></span> - メンバー登録状況
+    <span class="text-blue-600"><%= @team.team_name %></span><br> - メンバー登録状況 -
   </h1>
 
   <div class="overflow-x-auto">
@@ -19,7 +19,7 @@
           <tr class="hover:bg-gray-100">
             <!-- 名前 -->
             <td class="px-4 py-4 text-sm text-gray-900 whitespace-normal">
-              <%= invitation.user.first_name %> <%= invitation.user.last_name %>
+              <%= invitation.user.last_name %> <%= invitation.user.first_name %> 
             </td>
             
             <!-- メールアドレス -->
@@ -29,7 +29,7 @@
 
             <!-- ロール -->
             <td class="px-4 py-4 text-sm text-gray-900 whitespace-normal">
-              <%= invitation.user.role&.role || '未設定' %>
+              <%= I18n.t("role.roles.#{invitation.user.role&.role}", default: '未設定') %>
             </td>
             
             <!-- ステータス -->
@@ -43,12 +43,12 @@
             <!-- 操作 -->
             <td class="px-4 py-4 text-sm">
             <% if invitation.pending? %>
-             <%= button_to "申請中", approve_team_invitation_path(invitation), 
+             <%= button_to "承認する", approve_team_invitation_path(invitation), 
                            method: :post, 
                            data: { turbo: false }, 
                            class: "btn btn-outline btn-sm text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white w-full whitespace-nowrap" %>
            <% else %>
-             <%= button_to "申請取り消し", pending_team_invitation_path(invitation), 
+             <%= button_to "承認取り消し", pending_team_invitation_path(invitation), 
                            method: :post, 
                            data: { turbo: false }, 
                            class: "btn btn-outline btn-sm text-green-500 border-green-500 hover:bg-green-500 hover:text-white w-full whitespace-nowrap" %>
@@ -58,8 +58,8 @@
         <% end %>
       </tbody>
     </table>
+  </div>
     <div class="mt-6 text-center">
       <%= link_to "招待URLを発行", team_invitations_path, class: "btn btn-primary btn-lg shadow-lg hover:shadow-xl transition-shadow duration-300" %>
     </div>
-  </div>
 </div>

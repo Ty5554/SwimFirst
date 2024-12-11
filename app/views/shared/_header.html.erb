@@ -5,8 +5,9 @@
       <%= link_to "SwimFirst", root_path, class: "text-2xl font-bold text-cyan-300 hover:text-white" %>
       <% if user_signed_in? %>
         <div class="flex items-center text-sm font-medium text-cyan-300 mt-1">
-          ようこそ、<span class="font-bold ml-1"><%= current_user.last_name %></span> さん
+          ようこそ、<span class="font-bold ml-1"><%= current_user.last_name %><%= current_user.first_name %></span> さん
         </div>
+        <p class="text-sm font-bold text-cyan-300"><%= current_user.role.role %></p>
       <% end %>
     </div>
 
@@ -23,6 +24,10 @@
         </li>
         <li class="hidden sm:block">
         <%= link_to "招待URLを発行", team_invitations_path, 
+          class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
+        </li>
+        <li class="hidden sm:block">
+        <%= link_to "メンバー管理", athletes_team_path(@team), 
           class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
         </li>
         <li>
@@ -58,8 +63,17 @@
         <%= link_to "TOPページへ戻る", root_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
       </li>
       <li>
+        <%= link_to "メンバー管理", athletes_team_path(@team), class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+      </li>
+      <% if current_user.role.coach? %>
+      <li>
+        <%= link_to "選手レコード", self_records_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+      </li>
+      <% else %>
+      <li>
         <%= link_to "マイレコード", self_records_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
       </li>
+      <% end %>
       <li>
         <%= link_to "コンディション", conditions_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
       </li>
@@ -68,9 +82,6 @@
       </li>
       <li>
         <%= link_to "トレーニング", training_menus_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
-      </li>
-      <li>
-        <%= link_to "メンバー登録状況", athletes_team_path(@team), class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
       </li>
     </ul>
   </nav>
