@@ -17,7 +17,7 @@ class BodiesController < ApplicationController
     def create
       @body = current_user.bodies.new(body_params)
       if @body.save
-        redirect_to bodies_path, notice: "記録が作成されました。"
+        redirect_to bodies_path, notice: "フィジカルデータが作成されました。"
       else
         render :new, status: :unprocessable_entity
       end
@@ -29,9 +29,9 @@ class BodiesController < ApplicationController
 
     def update
       if @body.update(body_params)
-        redirect_to bodies_path, notice: "記録が更新されました。"
+        redirect_to bodies_path, notice: "フィジカルデータが更新されました。"
       else
-        flash.now[:alert] = "記録の更新に失敗しました"
+        flash.now[:alert] = "フィジカルデータの更新に失敗しました"
         render :edit, status: :unprocessable_entity
       end
     end
@@ -40,7 +40,7 @@ class BodiesController < ApplicationController
 
     def destroy
       @body.destroy
-      redirect_to bodies_path, notice: "記録が削除されました。"
+      redirect_to bodies_path, notice: "フィジカルデータが削除されました。"
     end
 
     private
@@ -48,7 +48,7 @@ class BodiesController < ApplicationController
     def set_bodies
       @body = current_user.bodies.find(params[:id]) || []
     rescue ActiveRecord::RecordNotFound
-      redirect_to bodies_path, alert: "指定された記録が見つかりませんでした。"
+      redirect_to bodies_path, alert: "指定されたフィジカルデータが見つかりませんでした。"
     end
 
     def body_params
@@ -57,7 +57,7 @@ class BodiesController < ApplicationController
 
     def authorize_approved
       unless current_user.team_invitations.where(status: :approved).exists?
-        redirect_to root_path, alert: "権限がありません。"
+        redirect_to root_path, alert: "権限がありません。メンバー管理ページにてステータスを更新してください。"
       end
     end
 end

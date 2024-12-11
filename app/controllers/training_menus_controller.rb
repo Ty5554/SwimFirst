@@ -25,7 +25,7 @@ class TrainingMenusController < ApplicationController
       end
 
       if @training_menu.save
-        redirect_to training_menus_path, notice: "記録が作成されました。"
+        redirect_to training_menus_path, notice: "トレーニングメニューが作成されました。"
       else
         Rails.logger.debug @training_menu.errors.full_messages
         render :new, status: :unprocessable_entity
@@ -41,9 +41,9 @@ class TrainingMenusController < ApplicationController
     def update
       if current_user.role.coach?
         if @training_menu.update(training_menu_params)
-          redirect_to training_menus_path, notice: "記録が更新されました。"
+          redirect_to training_menus_path, notice: "トレーニングメニューが更新されました。"
         else
-          flash.now[:alert] = "記録の更新に失敗しました"
+          flash.now[:alert] = "トレーニングメニューの更新に失敗しました"
           render :edit, status: :unprocessable_entity
         end
       elsif current_user.role.athlete?
@@ -63,7 +63,7 @@ class TrainingMenusController < ApplicationController
 
     def destroy
       @training_menu.destroy
-      redirect_to training_menus_path, notice: "記録が削除されました。"
+      redirect_to training_menus_path, notice: "トレーニングメニューが削除されました。"
     end
 
     private
@@ -73,7 +73,7 @@ class TrainingMenusController < ApplicationController
                                    .where(teams: { id: current_user.teams.ids })
                                    .find(params[:id])
     rescue ActiveRecord::RecordNotFound
-      redirect_to training_menus_path, alert: "指定された記録が見つかりませんでした。"
+      redirect_to training_menus_path, alert: "指定されたトレーニングメニューが見つかりませんでした。"
     end
 
     def training_menu_params
@@ -118,7 +118,7 @@ class TrainingMenusController < ApplicationController
 
     def authorize_approved
       unless current_user.team_invitations.where(status: :approved).exists?
-        redirect_to root_path, alert: "権限がありません。"
+        redirect_to root_path, alert: "権限がありません。メンバー管理ページにてステータスを更新してください。"
       end
     end
 

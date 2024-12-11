@@ -13,7 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
 
     if resource.save
       sign_up(resource_name, resource)
-      flash[:notice] = "登録が完了しました。"
+      flash[:notice] = "登録が完了しました。メンバー管理ページにてステータスを更新してください。"
       respond_with resource, location: after_sign_up_path_for(resource)
     else
       flash.now[:alert] = "登録に失敗しました。"

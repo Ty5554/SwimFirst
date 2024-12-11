@@ -28,21 +28,21 @@
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white", placeholder: "••••••••", required: true %>
         </div>
         <div>
-          <%= f.label :first_name, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" do %>
+          <%= f.label :last_name, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" do %>
             姓
           <% end %>
-          <%= f.text_field :first_name, autofocus: true, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white", placeholder: "田中", required: true %>
+          <%= f.text_field :last_name, autofocus: true, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white", placeholder: "田中", required: true %>
         </div>
         <div>
-          <%= f.label :last_name, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" do %>
+          <%= f.label :first_name, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" do %>
             名
           <% end %>
-          <%= f.text_field :last_name, autofocus: true, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white", placeholder: "圭介", required: true %>
+          <%= f.text_field :first_name, autofocus: true, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white", placeholder: "圭介", required: true %>
         </div>
         <div>
           <%= f.fields_for :role, resource.role || resource.build_role do |role_form| %>
             <%= role_form.label :role, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" do %>
-              ロール
+              ロール(指導者は"コーチ"を選択してください)
             <% end %>
             <%= role_form.select :role, Role.roles_i18n, prompt: "役割を選択してください", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" %>
           <% end %>
@@ -64,7 +64,7 @@
           </div>
         </div>
         <div>
-          <%= f.submit "Sign up", class: "w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+          <%= f.submit "登録", class: "w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
         </div>
       <% end %>
       <p class="text-sm font-light text-gray-500 dark:text-gray-400">

@@ -45,7 +45,7 @@
         <!-- 役割 -->
         <div class="form-control">
           <%= f.fields_for :role, @user.role || @user.build_role do |role_form| %>
-            <%= role_form.label :role, "役割", class: "label text-sm font-medium text-gray-900 dark:text-white" %>
+            <%= role_form.label :role, "ロール(選手の方はアスリートを選択してください。)", class: "label text-sm font-medium text-gray-900 dark:text-white" %>
             <%= role_form.select :role, Role.roles_i18n, prompt: "役割を選択してください", class: "select select-bordered w-full dark:bg-gray-700 dark:text-white" %>
           <% end %>
         </div>

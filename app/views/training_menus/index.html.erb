@@ -1,53 +1,49 @@
 <div class="container mx-auto p-6">
-  <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">トレーニングメニュー</h1>
+  <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">トレーニングメニュー</h1>
 
   <% if @training_menus.any? %>
     <!-- カードグリッド -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       <% @training_menus.each do |training_menu| %>
         <!-- カード -->
-        <div class="card bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+        <div class="card bg-base-100 shadow-xl rounded-lg hover:scale-105 transform transition-transform duration-300">
           <div class="card-body p-6">
-            <!-- 日付 -->
-            <h2 class="card-title text-xl font-bold text-gray-800">
-              <%= training_menu.training_date.strftime('%Y年%m月%d日') %>
-            </h2>
-
+            <!-- タイトル -->
+            <h2 class="card-title text-xl font-bold text-gray-800"><%= training_menu.training_date %></h2>
             <!-- 説明 -->
-            <p class="text-gray-600 mt-2 text-sm"><%= training_menu.description %></p>
-
+            <p class="text-gray-600 mt-3 text-sm leading-relaxed"><%= training_menu.description %></p>
             <!-- セット詳細 -->
-            <div class="mt-4">
+            <div class="mt-6">
               <h3 class="font-semibold text-lg text-gray-800">セット詳細</h3>
-              <div class="space-y-2 mt-2">
+              <div class="space-y-3 mt-4">
                 <% training_menu.training_sets.each_with_index do |set, index| %>
-                  <div class="flex justify-between items-center bg-gray-100 rounded-lg p-3 shadow-sm">
-                    <span class="font-semibold text-gray-800"><%= index + 1 %>セット目</span>
+                  <div class="flex justify-between items-center bg-gray-100 rounded-lg p-3 shadow-md">
+                    <span class="font-semibold text-gray-800"><%= index + 1 %> セット目</span>
                     <span class="text-sm text-gray-600">運動強度: <%= set.intensity %></span>
                   </div>
                 <% end %>
               </div>
             </div>
           </div>
-
           <!-- アクションボタン -->
-        <div class="card-actions flex justify-center items-center bg-gray-100 px-6 py-4">
-          <% if current_user.role.coach? %>
-            <%= link_to '編集', edit_training_menu_path(training_menu), class: "btn btn-outline btn-info mx-2" %>
-            <%= button_to '削除', training_menu_path(training_menu), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-outline btn-error mx-2" %>
-          <% end %>
+          <div class="card-actions flex justify-center items-center bg-gray-50 px-6 py-4 space-x-4">
+            <% if current_user.role.coach? %>
+              <%= link_to '編集', edit_training_menu_path(training_menu), class: "btn btn-sm btn-outline btn-info w-20" %>
+              <%= button_to '削除', training_menu_path(training_menu), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-outline btn-error w-20" %>
+            <% end %>
+          </div>
         </div>
-        <% end %>
+      <% end %>
     </div>
   <% else %>
     <!-- 空の状態 -->
-    <div class="text-center p-6 bg-gray-100 rounded-lg shadow-md">
+    <div class="text-center p-6 bg-gray-50 rounded-lg shadow-lg">
       <p class="text-lg text-gray-600">現在、登録されている記録はありません。</p>
     </div>
   <% end %>
+
   <!-- 新しいメニュー作成 -->
+  <div class="mt-10 text-center">
+    <%= link_to '新しいメニューを作成', new_training_menu_path, class: "btn btn-primary btn-lg shadow-lg hover:shadow-xl transition-shadow duration-300" %>
   </div>
-</div>
-<div class="mt-6 text-center">
-  <%= link_to '新しいメニューを作成', new_training_menu_path, class: "btn btn-primary btn-lg shadow-lg hover:shadow-xl transition-shadow duration-300" %>
 </div>

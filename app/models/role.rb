@@ -13,6 +13,6 @@ class Role < ApplicationRecord
   private
 
   def set_default_role
-    self.role ||= :athlete.to_s
+    self.role ||= :coach.to_s
   end
 end
