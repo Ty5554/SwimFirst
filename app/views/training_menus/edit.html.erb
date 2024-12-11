@@ -52,28 +52,27 @@
   <% end %>
 </div>
 
-
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("turbo:load", () => {
     const setCountInput = document.getElementById("set_count");
     const trainingSetsFields = document.getElementById("training-sets-fields");
-
-    // 既存のセット数
-    const existingSetCount = <%= @training_menu.training_sets.size %>;
 
     // セット数変更時にフィールドを再生成
     setCountInput.addEventListener("input", () => {
       const setCount = parseInt(setCountInput.value, 10) || 1;
 
-      // 現在のセット数より多い場合のみ追加
-      if (setCount > existingSetCount) {
+      // 現在のフィールド数
+      const currentFieldCount = trainingSetsFields.children.length;
+
+      // セット数が増加した場合、フィールドを追加
+      if (setCount > currentFieldCount) {
         const intensityOptions = `
           <% TrainingSet.intensities.each do |key, _value| %>
             <option value="<%= key %>"><%= key %></option>
           <% end %>
         `;
 
-        for (let i = existingSetCount; i < setCount; i++) {
+        for (let i = currentFieldCount; i < setCount; i++) {
           const field = `
             <div class="form-control border border-gray-200 rounded-lg p-4 bg-gray-50 shadow-sm">
               <div>
@@ -86,6 +85,13 @@
             </div>
           `;
           trainingSetsFields.insertAdjacentHTML("beforeend", field);
+        }
+      }
+
+      // セット数が減少した場合、フィールドを削除
+      if (setCount < currentFieldCount) {
+        for (let i = currentFieldCount - 1; i >= setCount; i--) {
+          trainingSetsFields.children[i].remove();
         }
       }
     });

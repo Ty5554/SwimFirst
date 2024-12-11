@@ -33,29 +33,15 @@ class TrainingMenusController < ApplicationController
     end
 
     def edit
-      @training_menu = TrainingMenu.joins(user: :teams)
-      .where(teams: { id: current_user.teams.ids })
-      .find(params[:id])
+      @training_menu = current_user.training_menus.find(params[:id])
     end
 
     def update
-      if current_user.role.coach?
-        if @training_menu.update(training_menu_params)
-          redirect_to training_menus_path, notice: "トレーニングメニューが更新されました。"
-        else
-          flash.now[:alert] = "トレーニングメニューの更新に失敗しました"
-          render :edit, status: :unprocessable_entity
-        end
-      elsif current_user.role.athlete?
-        # heart_rateのみ更新を許可
-        if update_heart_rate
-          redirect_to training_menus_path, notice: "心拍数が更新されました。"
-        else
-          flash.now[:alert] = "心拍数の更新に失敗しました。"
-          render :edit, status: :unprocessable_entity
-        end
+      if @training_menu.update(training_menu_params)
+        redirect_to training_menus_path, notice: "トレーニングメニューが更新されました。"
       else
-        redirect_to root_path, alert: "権限がありません。"
+        flash.now[:alert] = "トレーニングメニューの更新に失敗しました"
+        render :edit, status: :unprocessable_entity
       end
     end
 
@@ -80,10 +66,11 @@ class TrainingMenusController < ApplicationController
       params.require(:training_menu).permit(
         :training_date,
         :description,
-        training_sets_attributes: [ :id, :intensity, :set_number, :_destroy, :heart_rate, :athlete_id ]
+        training_sets_attributes: [ :id, :intensity, :set_number, :_destroy ]
       )
     end
 
+=begin
     def heart_rate_set_params
       params.require(:training_menu).permit(training_sets_attributes: [ :id, :heart_rate ])
     end
@@ -97,7 +84,7 @@ class TrainingMenusController < ApplicationController
       end
 
       redirect_to training_menus_path, notice: "心拍数が更新されました。"
-=begin
+
       heart_rate_updates = heart_rate_set_params[:training_sets_attributes].to_h.values
 
       ActiveRecord::Base.transaction do
@@ -109,8 +96,9 @@ class TrainingMenusController < ApplicationController
       true
     rescue ActiveRecord::RecordInvalid
       false
-=end
+
     end
+=end
 
     def set_team
       @team = current_user.teams.first if user_signed_in?

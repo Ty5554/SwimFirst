@@ -4,10 +4,10 @@
     <div>
       <%= link_to "SwimFirst", root_path, class: "text-2xl font-bold text-cyan-300 hover:text-white" %>
       <% if user_signed_in? %>
+        <p class="flex items-center text-sm font-medium text-cyan-300 mt-1"><%= t("role.roles.#{current_user.role.role}") %></p>
         <div class="flex items-center text-sm font-medium text-cyan-300 mt-1">
-          ようこそ、<span class="font-bold ml-1"><%= current_user.last_name %><%= current_user.first_name %></span> さん
+          <span class="font-bold ml-1"><%= current_user.last_name %><%= current_user.first_name %></span>さん
         </div>
-        <p class="text-sm font-bold text-cyan-300"><%= current_user.role.role %></p>
       <% end %>
     </div>
 
@@ -23,7 +23,7 @@
           class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
         </li>
         <li class="hidden sm:block">
-        <%= link_to "招待URLを発行", team_invitations_path, 
+        <%= link_to "招待URL", team_invitations_path, 
           class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
         </li>
         <li class="hidden sm:block">
