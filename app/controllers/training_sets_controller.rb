@@ -8,7 +8,7 @@ class TrainingSetsController < ApplicationController
   def create
     @training_set = TrainingSet.new(heart_rate_set_params)
     @training_set.athlete_id = current_user.id
-  
+
     if @training_set.save
       redirect_to training_menu_path(@training_set.training_menu_id), notice: "トレーニングセットが作成されました。"
     else

@@ -23,7 +23,7 @@ class TrainingMenusController < ApplicationController
       @training_menu.training_sets.each do |set|
         set.athlete_id ||= current_user.id if current_user.role.athlete?
       end
-      
+
       if @training_menu.save
         redirect_to training_menus_path, notice: "記録が作成されました。"
       else
@@ -64,7 +64,7 @@ class TrainingMenusController < ApplicationController
     def destroy
       @training_menu.destroy
       redirect_to training_menus_path, notice: "記録が削除されました。"
-    end 
+    end
 
     private
 
@@ -85,7 +85,7 @@ class TrainingMenusController < ApplicationController
     end
 
     def heart_rate_set_params
-      params.require(:training_menu).permit(training_sets_attributes: [:id, :heart_rate])
+      params.require(:training_menu).permit(training_sets_attributes: [ :id, :heart_rate ])
     end
 
     def update_heart_rate
@@ -95,11 +95,11 @@ class TrainingMenusController < ApplicationController
           set.update(heart_rate: set_params[:heart_rate])
         end
       end
-    
+
       redirect_to training_menus_path, notice: "心拍数が更新されました。"
 =begin
       heart_rate_updates = heart_rate_set_params[:training_sets_attributes].to_h.values
-  
+
       ActiveRecord::Base.transaction do
         heart_rate_updates.each do |set_params|
           training_set = @training_menu.training_sets.find(set_params[:id])
