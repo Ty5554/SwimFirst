@@ -1,20 +1,11 @@
 class TrainingSetsController < ApplicationController
+=begin
   before_action :set_training_set, only: %i[show edit update destroy]
   before_action :authenticate_user!
   before_action :authorize_athlete!, only: %i[edit_heart_rate update_heart_rate]
 
-  before_validation :set_athlete
-
   def create
-    @training_set = TrainingSet.new(heart_rate_set_params)
-    @training_set.athlete_id = current_user.id
-
-    if @training_set.save
-      redirect_to training_menu_path(@training_set.training_menu_id), notice: "トレーニングセットが作成されました。"
-    else
-      flash.now[:alert] = "トレーニングセットの作成に失敗しました。"
-      render :new, status: :unprocessable_entity
-    end
+    @training_set = current_user.training_sets.build(heart_rate_sets_params)
   end
 
   def update_heart_rate_sets
@@ -34,9 +25,11 @@ class TrainingSetsController < ApplicationController
     @training_set = TrainingSet.find(params[:id])
   end
 
+
   def set_athlete
     self.athlete_id ||= Current.user&.id # 現在のユーザーを自動的にathlete_idに設定
   end
+
 
   # 許可パラメータ (athlete用)
   def heart_rate_set_params
@@ -49,4 +42,5 @@ class TrainingSetsController < ApplicationController
       redirect_to root_path, alert: "権限がありません。"
     end
   end
+=end
 end
