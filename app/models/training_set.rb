@@ -1,9 +1,11 @@
 class TrainingSet < ApplicationRecord
   belongs_to :user
   belongs_to :training_menu
+  belongs_to :athlete, class_name: "User", optional: true
 
   validates :set_number, presence: true, numericality: { only_integer: true }
   validates :intensity, presence: true
+  validates :heart_rate, numericality: { only_integer: true }, allow_nil: true
 
   before_validation :assign_user
 
