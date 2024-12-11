@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_04_064741) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_10_164950) do
   create_table "bodies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.float "height", null: false
@@ -88,6 +88,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_04_064741) do
     t.integer "heart_rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "athlete_id"
+    t.index ["athlete_id"], name: "index_training_sets_on_athlete_id"
     t.index ["training_menu_id", "set_number"], name: "index_training_sets_on_training_menu_id_and_set_number", unique: true
     t.index ["training_menu_id"], name: "index_training_sets_on_training_menu_id"
     t.index ["user_id"], name: "index_training_sets_on_user_id"

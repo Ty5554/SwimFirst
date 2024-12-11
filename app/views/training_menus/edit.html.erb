@@ -2,23 +2,18 @@
   <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">メニュー編集</h1>
 
   <%= form_with model: @training_menu, class: "space-y-6 bg-white p-6 shadow-lg rounded-lg" do |f| %>
-    <!-- トレーニング日 -->
-    <div class="form-control">
-      <%= f.label :training_date, 'トレーニング日', class: "label font-semibold text-lg" %>
-      <%= f.date_field :training_date, class: "input input-bordered w-full" %>
-    </div>
+    <% if current_user.role.coach? %>
+      <!-- トレーニング日 -->
+      <div class="form-control">
+        <%= f.label :training_date, 'トレーニング日', class: "label font-semibold text-lg" %>
+        <%= f.date_field :training_date, class: "input input-bordered w-full" %>
+      </div>
 
-    <!-- 説明 -->
-    <div class="form-control">
-      <%= f.label :description, '説明', class: "label font-semibold text-lg" %>
-      <%= f.text_field :description, class: "input input-bordered w-full" %>
-    </div>
-
-    <!-- セット数 -->
-    <div class="form-control">
-      <label class="label font-semibold text-lg">セット数</label>
-      <input type="number" id="set_count" class="input input-bordered w-full" value="<%= @training_menu.training_sets.size %>" min="1" />
-    </div>
+      <!-- 説明 -->
+      <div class="form-control">
+        <%= f.label :description, '説明', class: "label font-semibold text-lg" %>
+        <%= f.text_field :description, class: "input input-bordered w-full" %>
+      </div>
 
     <!-- 動的フィールド: セット毎の運動強度 -->
     <div id="training-sets-fields" class="space-y-4 mt-4">
@@ -38,6 +33,17 @@
         </div>
       <% end %>
     </div>
+    <% else %>
+      <!-- トレーニングメニューの詳細（表示のみ） -->
+      <div class="form-control">
+        <label class="label font-semibold text-lg">トレーニング日</label>
+        <p class="text-gray-700"><%= @training_menu.training_date %></p>
+      </div>
+      <div class="form-control">
+        <label class="label font-semibold text-lg">説明</label>
+        <p class="text-gray-700"><%= @training_menu.description %></p>
+      </div>
+    <% end %>
 
     <!-- フォーム送信 -->
     <div class="form-control">
@@ -45,6 +51,7 @@
     </div>
   <% end %>
 </div>
+
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {

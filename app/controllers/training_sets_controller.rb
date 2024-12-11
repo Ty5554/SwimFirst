@@ -1,23 +1,30 @@
 class TrainingSetsController < ApplicationController
   before_action :set_training_set, only: %i[show edit update destroy]
   before_action :authenticate_user!
-  before_action :authorize_athlete!, only: %i[edit update]
+  before_action :authorize_athlete!, only: %i[edit_heart_rate update_heart_rate]
+
+  before_validation :set_athlete
 
   def create
-    @training_set = current_user.training_sets.build(training_sets_params)
-  end
+    @training_set = TrainingSet.new(heart_rate_set_params)
+    @training_set.athlete_id = current_user.id
 
-  def edit
-    # 編集画面を表示 (athleteユーザーのみアクセス可能)
-  end
-
-  def update
-    if @training_set.update(training_set_params)
-      redirect_to training_menu_path(@training_set.training_menu), notice: "心拍数が更新されました。"
+    if @training_set.save
+      redirect_to training_menu_path(@training_set.training_menu_id), notice: "トレーニングセットが作成されました。"
     else
-      flash.now[:alert] = "心拍数の更新に失敗しました。"
-      render :edit, status: :unprocessable_entity
+      flash.now[:alert] = "トレーニングセットの作成に失敗しました。"
+      render :new, status: :unprocessable_entity
     end
+  end
+
+  def update_heart_rate_sets
+    params[:training_menu][:training_sets_attributes].each do |_, set_params|
+      training_set = @training_menu.training_sets.find(set_params[:id])
+      if training_set.athlete_id == current_user.id
+        training_set.update(heart_rate: set_params[:heart_rate])
+      end
+    end
+    true
   end
 
   private
@@ -27,9 +34,13 @@ class TrainingSetsController < ApplicationController
     @training_set = TrainingSet.find(params[:id])
   end
 
+  def set_athlete
+    self.athlete_id ||= Current.user&.id # 現在のユーザーを自動的にathlete_idに設定
+  end
+
   # 許可パラメータ (athlete用)
-  def training_set_params
-    params.require(:training_set).permit(:heart_rate)
+  def heart_rate_set_params
+    params.require(:training_set).permit(:heart_rate, :training_menu_id, :set_number, :intensity)
   end
 
   # 認可チェック (athleteユーザーのみ許可)

@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :conditions, dependent: :destroy
   has_many :bodies, dependent: :destroy
   has_many :training_menus
+  has_many :training_sets
 
   accepts_nested_attributes_for :role
   accepts_nested_attributes_for :teams
