@@ -1,5 +1,0 @@
-<h1><%= @team.team_name %> に参加申請を送信します</h1>
-<%= form_with model: TeamInvitation.new, url: team_invitations_path do |f| %>
-  <%= f.hidden_field :team_id, value: @team.id %>
-  <%= f.submit "申請を送信" %>
-<% end %>

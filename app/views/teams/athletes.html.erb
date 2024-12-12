@@ -2,7 +2,8 @@
   <h1 class="text-3xl font-bold mb-6 text-gray-800">
     <span class="text-blue-600"><%= @team.team_name %></span><br> - メンバー登録状況 -
   </h1>
-
+  <div class="bg-gray-100 p-6 rounded-xl mb-8 shadow-inner">
+    <p class="text-gray-600 mb-4">ステータスを「Approved」に更新し、以下の招待URLページから選手登録を行いましょう。</p>
   <div class="overflow-x-auto">
     <table class="table w-full border-collapse rounded-lg shadow-md">
       <thead class="bg-gray-200">
@@ -58,8 +59,9 @@
         <% end %>
       </tbody>
     </table>
+</div>
   </div>
     <div class="mt-6 text-center">
-      <%= link_to "招待URLを発行", team_invitations_path, class: "btn btn-primary btn-lg shadow-lg hover:shadow-xl transition-shadow duration-300" %>
+      <%= link_to "招待URLページへ", team_invitations_path, class: "btn btn-primary btn-lg shadow-lg hover:shadow-xl transition-shadow duration-300" %>
     </div>
 </div>

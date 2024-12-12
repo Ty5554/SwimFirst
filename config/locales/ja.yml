@@ -3,7 +3,7 @@ ja:
     roles:
       coach: "コーチ"
       athlete: "アスリート"
-  errors:
+  error:
     messages:
       not_saved: "保存に失敗しました"
       taken: "すでに使用されています"
@@ -12,20 +12,17 @@ ja:
       less_than: "%{attribute}は%{count}未満でなければなりません"
       less_than_or_equal_to: "%{attribute}は%{count}以下でなければなりません"
       not_an_integer: "%{attribute}は整数である必要があります"
+    team:
+      team_name: "チーム名"
   activerecord:
-    errors:
-      models:
-        user:
-          attributes:
-            email:
-              taken: "このメールアドレスはすでに使用されています"
+    models:
+      user: "ユーザー"
     attributes:
-      user: # Userモデルの属性
+      user:
         email: "メールアドレス"
-        password: "パスワード"
-        password_confirmation: "パスワード（確認用）"
-        first_name: "名"
-        last_name: "姓"
+      errors:
+        messages:
+          taken: "このメールアドレスはすでに使用されています"
       team:
         team_name: "チーム名"
       role:
@@ -44,6 +41,10 @@ ja:
         attributes:
           user:
             required: "ユーザーを設定してください。"
+    errors:
+      models:
+        user:
+          taken: "このメールアドレスはすでに使用されています"
   date:
     order:
       - :year

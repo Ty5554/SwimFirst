@@ -12,6 +12,7 @@
       </p>
 
       <%= form_for @user, url: registrations_create_athlete_path(invitation_token: @team.invitation_token), html: { class: "space-y-6" } do |f| %>
+        <%= render "shared/error_messages", resource: @user %>
         <!-- 苗字 -->
         <div class="form-control">
           <%= f.label :last_name, "姓", class: "label text-sm font-medium text-gray-900 dark:text-white" %>
