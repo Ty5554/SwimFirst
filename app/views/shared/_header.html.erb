@@ -18,41 +18,41 @@
     <!-- メニューリスト -->
         <ul class="flex space-x-4 items-center">
         <% if user_signed_in? %>
-        <li class="hidden md:block">
-        <%= link_to "ダッシュボード", self_records_path, 
-          class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
-        </li>
-        <li class="hidden md:block">
-        <%= link_to "招待URL", team_invitations_path, 
-          class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
-        </li>
-        <li class="hidden md:block">
-        <%= link_to "メンバー管理", athletes_team_path(@team), 
-          class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
-        </li>
-        <li>
-        <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_confirm: "本当にログアウトしますか？" }, 
-          class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
-        </li>
+          <li class="hidden md:block">
+            <%= link_to "ダッシュボード", self_records_path, 
+              class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
+          </li>
+          <li class="hidden md:block">
+            <%= link_to "招待URL", team_invitations_path, 
+            class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
+          </li>
+          <li class="hidden md:block">
+            <%= link_to "メンバー管理", athletes_team_path(@team), 
+            class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
+          </li>
+          <li>
+            <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_confirm: "本当にログアウトしますか？" }, 
+            class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
+          </li>
         <% else %>
-        <li>
-        <%= link_to "新規登録", new_user_registration_path, 
-          class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
-        </li>
-        <li>
-        <%= link_to "ログイン", new_user_session_path, 
-          class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
-        </li>
+          <li>
+            <%= link_to "新規登録", new_user_registration_path, 
+            class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
+          </li>
+          <li>
+            <%= link_to "ログイン", new_user_session_path, 
+            class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
+          </li>
         <% end %>
         </ul>
       </div>
     </div>
     <% if user_signed_in? %>
-    <button id="hamburger-toggle" class="btn btn-square lg:hidden text-white bg-sky-900 hover:bg-sky-700">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
-    </svg>
-    </button>
+      <button id="hamburger-toggle" class="btn btn-square lg:hidden text-white bg-sky-900 hover:bg-sky-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
     <% end %>
   </div>
 <% if user_signed_in? %>
