@@ -21,7 +21,7 @@
       <!-- 記録 -->
       <div class="form-control">
         <%= form.label :record, '記録', class: "label font-bold text-gray-700" %>
-        <%= form.text_field :record, class: "input input-bordered w-full" %>
+        <%= form.number_field :record, step: "0.01", class: "input input-bordered w-full" %>
       </div>
 
       <!-- 記録日 -->

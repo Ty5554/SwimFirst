@@ -27,6 +27,8 @@ ja:
         password: "パスワード"
         password_confirmation: "パスワード（確認用）"
         current_password: "現在のパスワード"
+      teams:
+        team_name: "チーム名"
   errors:
     messages:
       blank: "入力してください"

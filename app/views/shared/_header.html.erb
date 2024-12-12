@@ -13,20 +13,20 @@
 
     <!-- メニューリスト -->
     <!-- ヘッダー -->
-    <div class="bg-sky-900 text-white" >
+    <div class="bg-sky-900 text-white">
       <div class="container mx-auto flex justify-center items-center h-16">
     <!-- メニューリスト -->
         <ul class="flex space-x-4 items-center">
         <% if user_signed_in? %>
-        <li class="hidden sm:block">
+        <li class="hidden md:block">
         <%= link_to "ダッシュボード", self_records_path, 
           class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
         </li>
-        <li class="hidden sm:block">
+        <li class="hidden md:block">
         <%= link_to "招待URL", team_invitations_path, 
           class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
         </li>
-        <li class="hidden sm:block">
+        <li class="hidden md:block">
         <%= link_to "メンバー管理", athletes_team_path(@team), 
           class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
         </li>
@@ -57,7 +57,7 @@
   </div>
 <% if user_signed_in? %>
     <!-- ハンバーガーメニュー (スマホ画面用) -->
-  <nav id="mobile-menu" class="hidden bg-sky-900" >
+  <nav id="mobile-menu" class="hidden bg-sky-900">
     <ul class="p-4 space-y-4">
       <li>
         <%= link_to "TOPページへ戻る", root_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>

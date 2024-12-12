@@ -41,8 +41,6 @@ class RegistrationsController < Devise::RegistrationsController
       sign_up(resource_name, @user)
       redirect_to root_path, notice: "選手登録を申請しました。"
     else
-      Rails.logger.error(@user.errors.full_messages.join(", "))
-      @resource = @user
       render "teams/invite", alert: "選手登録の申請に失敗しました。"
     end
   end

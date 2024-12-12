@@ -4,6 +4,8 @@ class Team < ApplicationRecord
 
   before_validation :set_invitation_token, on: :create
 
+  validates :team_name, presence: true
+
   private
 
   def set_invitation_token

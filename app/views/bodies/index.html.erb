@@ -3,7 +3,9 @@
   <% if current_user.role.athlete? %>
     <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">フィジカルデータ</h1>
   <% else %>
-    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">フィジカルデータ(選手一覧)</h1>
+    <h1 class="text-3xl font-bold mb-6 text-gray-800 text-center">
+      <span>フィジカルデータ</span><br> (選手一覧)
+    </h1>
   <% end %>
 
   <% if current_user.role.athlete? && @bodies.any? %>
