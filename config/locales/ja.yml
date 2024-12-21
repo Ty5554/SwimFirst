@@ -50,3 +50,7 @@ ja:
       - :year
       - :month
       - :day
+  views:
+    pagination:
+      previous: "前へ"
+      next: "次へ"

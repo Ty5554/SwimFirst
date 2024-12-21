@@ -40,6 +40,7 @@
       <p class="text-lg text-gray-600">現在、登録されている記録はありません。</p>
     </div>
   <% end %>
+  <%= paginate @training_menus %>
     <!-- 新しいメニュー作成 -->
   <div class="mt-10 text-center mb-6">
     <%= link_to '新しいメニューを作成', new_training_menu_path, class: "btn btn-primary btn-lg shadow-lg hover:shadow-xl transition-shadow duration-300" %>
