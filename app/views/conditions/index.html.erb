@@ -77,6 +77,11 @@
       <p class="text-lg text-gray-600">現在、登録されている記録はありません。</p>
     </div>
   <% end %>
+  <% if current_user.role.coach? %>
+    <%= paginate @all_conditions %>
+  <% elsif current_user.role.athlete? %>
+    <%= paginate @conditions %>
+  <% end %>
   <!-- 新しい記録を追加 -->
   <div class="mt-6 text-center">
     <%= link_to '新しい記録を追加', new_condition_path, class: "btn btn-primary btn-lg" %>

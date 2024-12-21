@@ -4,10 +4,10 @@ class BodiesController < ApplicationController
     before_action :authorize_approved, only: %i[index new create edit update show edit update destroy]
 
     def index
-      @bodies = current_user.bodies
+      @bodies = current_user.bodies.page(params[:page]).per(3)
       @all_bodies = ::Body.joins(user: :teams)
       .where(teams: { id: current_user.teams.ids })
-      .distinct
+      .distinct.page(params[:page]).per(3)
     end
 
     def new
