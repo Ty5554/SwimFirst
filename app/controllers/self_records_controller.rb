@@ -4,7 +4,8 @@ class SelfRecordsController < ApplicationController
     before_action :authorize_approved, only: %i[index new create edit update show edit update destroy]
 
     def index
-      @self_records = current_user.self_records.page(params[:page]).per(3)
+      @q = current_user.self_records.page(params[:page]).per(3).ransack(params[:q])
+      @self_records = @q.result(distinct: true)
       @all_records = SelfRecord.joins(user: :teams)
                              .where(teams: { id: current_user.teams.ids })
                              .distinct

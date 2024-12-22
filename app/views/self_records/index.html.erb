@@ -2,6 +2,7 @@
   <!-- タイトル -->
   <% if current_user.role.athlete? %>
     <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">マイレコード</h1>
+    <%= render 'search', q: @q, url: self_records_path %>
   <% else %>
     <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">選手レコード</h1>
   <% end %>

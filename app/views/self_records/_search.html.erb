@@ -1,0 +1,17 @@
+<form class="flex items-center space-x-4 mb-6">
+  <%= search_form_for @q, url: url, method: :get do |f| %>
+    <div>
+      <%= f.label :style_eq, "スタイル", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.select :style_eq, SelfRecord.styles.map { |style, value| [style, value] }, 
+                   { include_blank: "選択してください" },
+                   class: "form-select block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" %>
+    </div>
+    <div>
+      <%= f.label :distance_eq, "距離", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.search_field :distance_eq, class: "form-input block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" %>
+    </div>
+    <div>
+      <%= f.submit "検索", class: "btn btn-sm btn-outline btn-info" %>
+    </div>
+  <% end %>
+</form>

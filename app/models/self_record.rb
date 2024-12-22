@@ -6,4 +6,8 @@ class SelfRecord < ApplicationRecord
   validates :distance, presence: true
   validates :record, presence: true
   validates :recorded_on, presence: true
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "distance", "id", "record", "recorded_on", "style", "updated_at", "user_id"]
+  end
 end
