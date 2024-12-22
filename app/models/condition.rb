@@ -6,4 +6,12 @@ class Condition < ApplicationRecord
   validates :sleep_hours, presence: true# 0〜100
   validates :mental_state, presence: true, numericality: { greater_than: 0, less_than: 100 }
   validates :recorded_on, presence: true
+
+  def self.ransackable_attributes(auth_object = nil)
+    [ "created_at", "fatigue_level", "id", "body_temperature", "recorded_on", "sleep_hours", "mental_state", "updated_at", "user_id" ]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    [ "user" ]
+  end
 end
