@@ -6,10 +6,12 @@ class SelfRecordsController < ApplicationController
     def index
       @q = current_user.self_records.page(params[:page]).per(3).ransack(params[:q])
       @self_records = @q.result(distinct: true)
-      @all_records = SelfRecord.joins(user: :teams)
-                             .where(teams: { id: current_user.teams.ids })
-                             .distinct
-                             .page(params[:page]).per(3)
+      @all_q = SelfRecord.joins(user: :teams)
+                         .where(teams: { id: current_user.teams.ids })
+                         .distinct
+                         .page(params[:page]).per(3)
+                         .ransack(params[:all_q])
+      @all_records = @all_q.result(distinct: true)
     end
 
     def new

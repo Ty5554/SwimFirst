@@ -10,6 +10,14 @@ class User < ApplicationRecord
   has_many :training_menus
   has_many :training_sets
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["first_name", "last_name"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["bodies", "conditions", "role", "self_records", "team_invitations", "teams", "training_menus", "training_sets"]
+  end
+
   accepts_nested_attributes_for :role
   accepts_nested_attributes_for :teams
   devise :database_authenticatable, :registerable,

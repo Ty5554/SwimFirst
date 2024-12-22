@@ -5,6 +5,7 @@
     <%= render 'search', q: @q, url: self_records_path %>
   <% else %>
     <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">選手レコード</h1>
+    <%= render 'search', q: @all_q, url: self_records_path %>
   <% end %>
 
   <% if current_user.role.athlete? && @self_records.any? %>
@@ -56,7 +57,7 @@
         <tbody class="text-sm">
           <% @all_records.each do |record| %>
             <tr class="hover:bg-gray-50">
-              <td class="border border-gray-300 px-4 py-2 text-center"><%= record.user.last_name %></td>
+              <td class="border border-gray-300 px-4 py-2 text-center"><%= record.user.last_name %><%= record.user.first_name %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.recorded_on %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.style %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.distance %></td>
