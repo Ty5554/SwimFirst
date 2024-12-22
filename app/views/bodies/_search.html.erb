@@ -1,0 +1,48 @@
+<% if current_user.role.athlete? || current_user.role.coach? %>
+  <% search_object = current_user.role.athlete? ? @q : @all_q %>
+  <% search_key = current_user.role.athlete? ? :q : :all_q %>
+  <form class="space-y-4 p-4 bg-white shadow-md rounded-md mb-4">
+    <%= search_form_for search_object, as: search_key, url: url, method: :get do |f| %>
+      <% if current_user.role.coach? %>
+        <div class="flex flex-col md:flex-row md:space-x-4 items-start">
+          <div class="w-full md:w-1/2">
+            <%= f.label :user_first_name_or_user_last_name_cont, "名前", class: "block text-sm font-medium text-gray-700 mb-2" %>
+            <%= f.search_field :user_first_name_or_user_last_name_cont, 
+                               class: "form-input block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <!-- 測定期間 -->
+        <div class="p-4 bg-gray-100 rounded-md shadow-sm">
+          <%= f.label :recorded_on, "測定期間(開始日と終了日を選択してください)", class: "block text-sm font-medium text-gray-700 mb-2" %>
+          <div class="flex space-x-2">
+            <%= f.date_field :recorded_on_gteq, 
+                             class: "form-input block w-1/2 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500",
+                             placeholder: "開始日" %>
+            <%= f.date_field :recorded_on_lteq, 
+                             class: "form-input block w-1/2 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500",
+                             placeholder: "終了日" %>
+          </div>
+        </div>
+        <!-- 体脂肪率 -->
+        <div class="p-4 bg-gray-100 rounded-md shadow-sm">
+          <%= f.label :body_fat, "体脂肪率", class: "block text-sm font-medium text-gray-700 mb-2" %>
+          <div class="flex space-x-2">
+            <%= f.number_field :body_fat_gteq, 
+                               class: "form-input block w-1/2 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500",
+                               placeholder: "最低値" %>
+            <%= f.number_field :body_fat_lteq, 
+                               class: "form-input block w-1/2 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500",
+                               placeholder: "最高値" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-end">
+        <%= f.submit "検索", class: "btn btn-info text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600" %>
+      </div>
+    <% end %>
+  </form>
+<% end %>
