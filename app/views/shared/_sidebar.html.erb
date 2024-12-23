@@ -1,35 +1,31 @@
-<aside id="sidebar" class="hidden lg:block w-30 bg-sky-900 text-white shadow-md">
-  <nav class="p-4">
+<aside id="sidebar" class="hidden lg:block w-25 bg-blue-950 text-white shadow-lg">
+  <nav class="p-1">
     <ul class="menu menu-compact">
-      <!-- メニュータイトル -->
-      <li class="menu-title">
-        <span class="text-cyan-300 text-xl">メニュー</span>
-      </li>
       <!-- メニュー項目 -->
-      <li class="mt-2">
-        <%= link_to "TOPページ", root_path, class: "text-xl rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
-      </li>
-      <li>
-        <%= link_to "メンバー管理", athletes_team_path(@team), class: "text-xl rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
-      </li>
       <% if user_signed_in? %>
       <% if current_user.role.coach? %>
       <li class="mt-2">
-        <%= link_to "選手レコード", self_records_path, class: "text-xl rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
+        <%= link_to "選手レコード", self_records_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
       </li>
       <% else %>
       <li class="mt-2">
-        <%= link_to "マイレコード", self_records_path, class: "text-xl rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
+        <%= link_to "マイレコード", self_records_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
       </li>
       <% end %>
       <li>
-        <%= link_to "コンディション", conditions_path, class: "text-xl rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
+        <%= link_to "コンディション", conditions_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
       </li>
       <li>
-        <%= link_to "フィジカル", bodies_path, class: "text-xl rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
+        <%= link_to "フィジカル", bodies_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
       </li>
       <li>
-        <%= link_to "トレーニング", training_menus_path, class: "text-xl rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
+        <%= link_to "トレーニング", training_menus_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
+      </li>
+      <li>
+        <%= link_to "メンバー管理", athletes_team_path(@team), class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
+      </li>
+      <li class="mt-2">
+        <%= link_to "TOPページ", root_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
       </li>
     <% end %>
     </ul>
