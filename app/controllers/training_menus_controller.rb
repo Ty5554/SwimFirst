@@ -20,14 +20,9 @@ class TrainingMenusController < ApplicationController
     def create
       @training_menu = current_user.training_menus.new(training_menu_params)
 
-      @training_menu.training_sets.each do |set|
-        set.athlete_id ||= current_user.id if current_user.role.athlete?
-      end
-
       if @training_menu.save
         redirect_to training_menus_path, notice: "トレーニングメニューが作成されました。"
       else
-        Rails.logger.debug @training_menu.errors.full_messages
         render :new, status: :unprocessable_entity
       end
     end
@@ -69,36 +64,6 @@ class TrainingMenusController < ApplicationController
         training_sets_attributes: [ :id, :intensity, :set_number, :_destroy ]
       )
     end
-
-=begin
-    def heart_rate_set_params
-      params.require(:training_menu).permit(training_sets_attributes: [ :id, :heart_rate ])
-    end
-
-    def update_heart_rate
-      params[:training_menu][:training_sets_attributes].each do |_, set_params|
-        set = TrainingSet.find(set_params[:id])
-        if set.athlete_id == current_user.id
-          set.update(heart_rate: set_params[:heart_rate])
-        end
-      end
-
-      redirect_to training_menus_path, notice: "心拍数が更新されました。"
-
-      heart_rate_updates = heart_rate_set_params[:training_sets_attributes].to_h.values
-
-      ActiveRecord::Base.transaction do
-        heart_rate_updates.each do |set_params|
-          training_set = @training_menu.training_sets.find(set_params[:id])
-          training_set.update!(heart_rate: set_params[:heart_rate])
-        end
-      end
-      true
-    rescue ActiveRecord::RecordInvalid
-      false
-
-    end
-=end
 
     def set_team
       @team = current_user.teams.first if user_signed_in?

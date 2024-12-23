@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_10_164950) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_23_141715) do
   create_table "bodies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.float "height", null: false
@@ -32,6 +32,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_10_164950) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_conditions_on_user_id"
+  end
+
+  create_table "heart_rates", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "training_set_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "training_heart_rate", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["training_set_id"], name: "index_heart_rates_on_training_set_id"
+    t.index ["user_id"], name: "index_heart_rates_on_user_id"
   end
 
   create_table "roles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -85,11 +95,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_10_164950) do
     t.bigint "training_menu_id", null: false
     t.integer "set_number", null: false
     t.integer "intensity", default: 0, null: false
-    t.integer "heart_rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "athlete_id"
-    t.index ["athlete_id"], name: "index_training_sets_on_athlete_id"
     t.index ["training_menu_id", "set_number"], name: "index_training_sets_on_training_menu_id_and_set_number", unique: true
     t.index ["training_menu_id"], name: "index_training_sets_on_training_menu_id"
     t.index ["user_id"], name: "index_training_sets_on_user_id"
@@ -116,6 +123,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_10_164950) do
 
   add_foreign_key "bodies", "users"
   add_foreign_key "conditions", "users"
+  add_foreign_key "heart_rates", "training_sets"
+  add_foreign_key "heart_rates", "users"
   add_foreign_key "roles", "users"
   add_foreign_key "self_records", "users"
   add_foreign_key "team_invitations", "teams"
