@@ -18,7 +18,15 @@
                 <% training_menu.training_sets.each_with_index do |set, index| %>
                   <div class="flex justify-between items-center bg-gray-100 rounded-lg p-3 shadow-md">
                     <span class="font-semibold text-gray-800"><%= index + 1 %> セット目</span>
-                    <span class="text-sm text-gray-600">運動強度: <%= set.intensity %></span>
+                    <span class="text-sm text-red-500">運動強度: <%= set.intensity %></span>
+                    <% user_heart_rate = set.heart_rates.find { |hr| hr.user_id == current_user.id } %>
+                      <% if current_user.role.athlete? %>
+                        <% if user_heart_rate.present? %>
+                          <span class="text-sm text-green-600">心拍数: <%= user_heart_rate.training_heart_rate %></span>
+                        <% else %>
+                          <span class="text-sm text-gray-400">心拍数未設定</span>
+                      <% end %>
+                    <% end %>
                   </div>
                 <% end %>
               </div>
@@ -29,6 +37,8 @@
             <% if current_user.role.coach? %>
               <%= link_to '編集', edit_training_menu_path(training_menu), class: "btn btn-sm btn-outline btn-info w-20" %>
               <%= button_to '削除', training_menu_path(training_menu), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-outline btn-error w-20" %>
+            <% elsif  current_user.role.athlete? %>
+              <%= link_to '心拍数を入力', new_training_menu_training_set_path(training_menu), class: "btn btn-sm btn-outline btn-info w-20" %>
             <% end %>
           </div>
         </div>

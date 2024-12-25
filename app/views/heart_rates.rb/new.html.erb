@@ -1,0 +1,14 @@
+<h1>心拍数の入力</h1>
+
+<%= form_with model: [@training_set, @heart_rate], local: true do |form| %>
+  <div>
+    <%= form.label :training_heart_rate, '心拍数' %>
+    <%= form.number_field :training_heart_rate, min: 0, required: true %>
+  </div>
+
+  <div>
+    <%= form.submit '登録' %>
+  </div>
+<% end %>
+
+<%= link_to '戻る', training_menu_path(@training_set.training_menu) %>
