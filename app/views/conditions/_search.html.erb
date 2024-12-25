@@ -13,10 +13,10 @@
         </div>
       <% end %>
 
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
         <!-- 測定期間 -->
         <div class="p-4 bg-gray-100 rounded-md shadow-sm">
-          <%= f.label :recorded_on, "測定期間(開始日と終了日を選択してください)", class: "block text-sm font-medium text-gray-700 mb-2" %>
+          <%= f.label :recorded_on, "測定期間", class: "block text-sm font-medium text-gray-700 mb-2" %>
           <div class="flex space-x-2">
             <%= f.date_field :recorded_on_gteq, 
                              class: "form-input block w-1/2 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500",

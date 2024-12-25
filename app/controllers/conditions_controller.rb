@@ -4,12 +4,12 @@ class ConditionsController < ApplicationController
     before_action :authorize_approved, only: %i[index new create edit update show edit update destroy]
 
     def index
-      @q = current_user.conditions.page(params[:page]).per(3).ransack(params[:q])
+      @q = current_user.conditions.page(params[:page]).per(5).ransack(params[:q])
       @conditions = @q.result(distinct: true)
       @all_q = Condition.joins(user: :teams)
                         .where(teams: { id: current_user.teams.ids })
                         .distinct
-                        .page(params[:page]).per(3)
+                        .page(params[:page]).per(5)
                         .ransack(params[:all_q])
       @all_conditions = @all_q.result(distinct: true)
     end

@@ -1,13 +1,13 @@
+<% if current_user.role.athlete? %>
+  <h1 class="text-xl font-bold text-left text-gray-800 mb-4">マイレコード</h1>
+  <%= render 'search', q: @q, url: self_records_path %>
+<% else %>
+  <h1 class="text-xl font-bold text-left text-gray-800 mb-4">選手レコード</h1>
+  <%= render 'search', q: @all_q, url: self_records_path %>
+<% end %>
+
 <div class="container mx-auto p-6">
   <!-- タイトル -->
-  <% if current_user.role.athlete? %>
-    <h1 class="text-xl font-bold text-center text-gray-800 mb-4">マイレコード</h1>
-    <%= render 'search', q: @q, url: self_records_path %>
-  <% else %>
-    <h1 class="text-xl font-bold text-center text-gray-800 mb-4">選手レコード</h1>
-    <%= render 'search', q: @all_q, url: self_records_path %>
-  <% end %>
-
   <% if current_user.role.athlete? && @self_records.any? %>
     <!-- テーブルカード -->
     <div class="overflow-x-auto bg-white shadow-md rounded-lg max-w-full">
