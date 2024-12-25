@@ -1,4 +1,5 @@
 class TrainingSet < ApplicationRecord
+  has_many :heart_rates, dependent: :destroy
   belongs_to :user
   belongs_to :training_menu
 
