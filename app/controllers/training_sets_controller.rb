@@ -1,5 +1,4 @@
 class TrainingSetsController < ApplicationController
-
   def new
     @training_menu = TrainingMenu.find(params[:training_menu_id])
     @training_sets = @training_menu.training_sets.includes(:heart_rates)
@@ -11,7 +10,7 @@ class TrainingSetsController < ApplicationController
 
   def create
     @training_menu = TrainingMenu.find(params[:training_menu_id])
-  
+
     begin
       ActiveRecord::Base.transaction do
         params[:heart_rates].each do |training_set_id, heart_rate|
@@ -22,13 +21,13 @@ class TrainingSetsController < ApplicationController
           )
         end
       end
-      redirect_to training_menus_path, notice: '心拍数が保存されました。'
+      redirect_to training_menus_path, notice: "心拍数が保存されました。"
     rescue ActiveRecord::RecordInvalid
-      flash.now[:alert] = '心拍数の保存に失敗しました。'
+      flash.now[:alert] = "心拍数の保存に失敗しました。"
       render :new, status: :unprocessable_entity
     end
   end
-  
+
 
   private
 

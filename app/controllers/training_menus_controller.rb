@@ -10,7 +10,7 @@ class TrainingMenusController < ApplicationController
       .where(teams: { id: current_user.teams.ids })
       .distinct
       .includes(:training_sets).page(params[:page]).per(6)
-      
+
       @training_sets = TrainingSet.joins(:training_menu)
       .where(training_menu: { id: @training_menus.map(&:id) })
     end
