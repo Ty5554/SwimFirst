@@ -17,14 +17,14 @@
               <div class="space-y-3 mt-4">
                 <% training_menu.training_sets.each_with_index do |set, index| %>
                   <div class="flex justify-between items-center bg-gray-100 rounded-lg p-3 shadow-md">
-                    <span class="font-semibold text-gray-800"><%= index + 1 %> セット目</span>
-                    <span class="text-sm text-red-500">運動強度: <%= set.intensity %></span>
+                    <span class="font-semibold text-gray-800"><%= index + 1 %>set</span>
+                    <span class="text-sm text-blue-500"><i class="fa-solid fa-person-swimming" style="color: #055ffa;"></i>/<%= set.intensity %></span>
                     <% user_heart_rate = set.heart_rates.find { |hr| hr.user_id == current_user.id } %>
                       <% if current_user.role.athlete? %>
                         <% if user_heart_rate.present? %>
-                          <span class="text-sm text-green-600">心拍数: <%= user_heart_rate.training_heart_rate %></span>
+                          <span class="text-sm text-red-500"><i class="fa-solid fa-heart" style="color: #f20707;"></i>/<%= user_heart_rate.training_heart_rate %></span>
                         <% else %>
-                          <span class="text-sm text-gray-400">心拍数未設定</span>
+                          <span class="text-sm text-gray-400">未設定</span>
                       <% end %>
                     <% end %>
                   </div>
