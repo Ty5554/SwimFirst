@@ -39,6 +39,7 @@
               <%= button_to '削除', training_menu_path(training_menu), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-outline btn-error w-20" %>
             <% elsif  current_user.role.athlete? %>
               <%= link_to '心拍数を入力', new_training_menu_training_set_path(training_menu), class: "btn btn-sm btn-outline btn-info w-20" %>
+              <%= link_to '編集', edit_training_menu_training_set_path(training_menu, @training_set), class: "btn btn-sm btn-outline btn-error w-20" %>
             <% end %>
           </div>
         </div>

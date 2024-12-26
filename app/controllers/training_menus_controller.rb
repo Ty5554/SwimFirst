@@ -11,8 +11,16 @@ class TrainingMenusController < ApplicationController
       .distinct
       .includes(:training_sets).page(params[:page]).per(6)
 
-      @training_sets = TrainingSet.joins(:training_menu)
-      .where(training_menu: { id: @training_menus.map(&:id) })
+      if params[:training_menu_id].present?
+        @training_set = TrainingSet.joins(:training_menu)
+                                   .where(training_menu: { id: params[:training_menu_id] })
+                                   .first # 最初の関連セットを取得
+      else
+        # デフォルトで関連する最初のメニューのセットを取得
+        @training_set = TrainingSet.joins(:training_menu)
+                                   .where(training_menu: { id: @training_menus.map(&:id) })
+                                   .first
+      end
     end
 
     def new
