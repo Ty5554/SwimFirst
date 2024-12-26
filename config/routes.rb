@@ -4,12 +4,11 @@ Rails.application.routes.draw do
   resources :conditions, only: [ :index, :new, :create, :edit, :update, :show, :destroy ]
   resources :bodies, only: [ :index, :new, :create, :edit, :update, :show, :destroy ]
   resources :training_menus, only: [ :index, :new, :create, :edit, :update, :destroy ] do
-    resources :training_sets, only: [ :new, :create, :edit, :update, :destroy ], shallow: true do
-      resources :heart_rates, except: [ :show ]
+    resources :training_sets, only: [ :new, :create, :edit ] do
+      collection do
+        patch :update_all
+      end
     end
-  end
-
-  resources :training_sets, only: [ :edit, :update, :destroy ] do
   end
 
   devise_for :users, controllers: {
