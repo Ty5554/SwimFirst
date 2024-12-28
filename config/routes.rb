@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :charts, only: [ :index, :new, :create, :edit, :update, :show, :destroy ]
+
   devise_for :users, controllers: {
     registrations: "registrations"
   }

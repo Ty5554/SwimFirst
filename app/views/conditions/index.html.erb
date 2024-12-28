@@ -34,7 +34,7 @@
           <td class="border border-gray-300 px-4 py-2 text-center">
             <div class="flex justify-center space-x-2">
               <%= link_to '編集', edit_condition_path(condition), class: "btn btn-sm btn-outline btn-info" %>
-              <%= button_to '削除', body_path(condition), 
+              <%= button_to '削除', condition_path(condition), 
                             method: :delete, 
                             data: { confirm: '本当に削除しますか？' }, 
                             class: "btn btn-sm btn-outline btn-error" %>
