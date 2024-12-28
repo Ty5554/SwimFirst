@@ -9,3 +9,6 @@ application.register("generate-url", GenerateUrlController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import Chart from "@stimulus-components/chartjs";
+application.register("chart", Chart);

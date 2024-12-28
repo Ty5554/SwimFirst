@@ -1,0 +1,9 @@
+<%= search_form_for @q, url: charts_path do |f| %>
+  <%= f.label :recorded_on_gteq, "開始日" %>
+  <%= f.date_field :recorded_on_gteq %>
+  
+  <%= f.label :recorded_on_lteq, "終了日" %>
+  <%= f.date_field :recorded_on_lteq %>
+
+  <%= f.submit "検索" %>
+<% end %>
