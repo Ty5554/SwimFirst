@@ -18,6 +18,10 @@ class User < ApplicationRecord
     [ "bodies", "conditions", "role", "self_records", "team_invitations", "teams", "training_menus", "training_sets" ]
   end
 
+  def full_name
+    "#{last_name} #{first_name}"
+  end
+
   accepts_nested_attributes_for :role
   accepts_nested_attributes_for :teams
   devise :database_authenticatable, :registerable,

@@ -4,9 +4,24 @@ class ChartsController < ApplicationController
   def index
     # 現在のユーザーのすべてのConditionデータを取得
     @q = current_user.conditions.ransack(params[:q])
+    @all_q = Condition.joins(user: :teams)
+             .where(teams: { id: current_user.teams.ids })
+             .distinct
+             .ransack(params[:all_q])
     @conditions = @q.result(distinct: true)
+    @all_conditions = @all_q.result(distinct: true)
 
-    condition_data = @conditions.pluck(:recorded_on, :fatigue_level, :mental_state, :body_temperature, :sleep_hours)
+    @athletes = current_user.teams.includes(:users).flat_map(&:users).select { |user| user.role.athlete? }
+    
+    fields = [:recorded_on, :fatigue_level, :mental_state, :body_temperature, :sleep_hours]
+    
+    condition_data = if current_user.role.athlete?
+      @conditions.pluck(*fields)
+    elsif current_user.role.coach?
+      @all_conditions.pluck(*fields)
+    else
+      [] # 万が一ロールが想定外の場合のデフォルト
+    end
 
     # グラフデータを生成
     @chart1_data = {
