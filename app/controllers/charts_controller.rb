@@ -12,9 +12,9 @@ class ChartsController < ApplicationController
     @all_conditions = @all_q.result(distinct: true)
 
     @athletes = current_user.teams.includes(:users).flat_map(&:users).select { |user| user.role.athlete? }
-    
-    fields = [:recorded_on, :fatigue_level, :mental_state, :body_temperature, :sleep_hours]
-    
+
+    fields = [ :recorded_on, :fatigue_level, :mental_state, :body_temperature, :sleep_hours ]
+
     condition_data = if current_user.role.athlete?
       @conditions.pluck(*fields)
     elsif current_user.role.coach?
