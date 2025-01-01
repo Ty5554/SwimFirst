@@ -1,0 +1,20 @@
+<div class="container mx-auto p-6 space-y-8">
+  <!-- 検索フォーム -->
+  <div class="flex justify-center">
+    <%= render 'search', q: @q, url: body_charts_path %>
+  </div>
+
+  <!-- グラフセクション -->
+  <div class="grid grid-cols-1 gap-6">
+    <!-- グラフ1 -->
+    <div class="card shadow-lg bg-base-100 p-4">
+      <h2 class="text-sm font-semibold mb-2 text-center">グラフ</h2>
+      <canvas 
+        class="w-full h-64"
+        data-controller="chart"
+        data-chart-data-value="<%= @chart_data.to_json %>"
+        data-chart-options-value="<%= @chart_options.to_json %>"
+      ></canvas>
+    </div>
+  </div>
+</div>

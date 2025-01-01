@@ -11,7 +11,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :charts, only: [ :index, :new, :create, :edit, :update, :show, :destroy ]
+  resources :condition_charts, only: [ :index ]
+  resources :body_charts, only: [ :index ]
 
   devise_for :users, controllers: {
     registrations: "registrations"
