@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :condition_charts, only: [ :index ]
+  resources :body_charts, only: [ :index ]
 
   devise_for :users, controllers: {
     registrations: "registrations"
