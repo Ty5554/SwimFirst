@@ -2,7 +2,7 @@
   <% search_object = current_user.role.athlete? ? @q : @all_q %>
   <% search_key = current_user.role.athlete? ? :q : :all_q %>
   <form class="space-y-4 p-4 bg-white shadow-md rounded-md mb-4">
-    <%= search_form_for search_object, as: search_key, url: charts_path, method: :get do |f| %>
+    <%= search_form_for search_object, as: search_key, url: condition_charts_path, method: :get do |f| %>
       <% if current_user.role.coach? %>
     <div class="w-full md:w-1/2">
       <%= f.label :user_id_eq, "アスリートを選択", class: "block text-sm font-medium text-gray-700 mb-2" %>

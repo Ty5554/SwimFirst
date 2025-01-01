@@ -1,4 +1,4 @@
-class ChartsController < ApplicationController
+class ConditionChartsController < ApplicationController
   before_action :authenticate_user!
 
   def index
