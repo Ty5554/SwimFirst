@@ -14,6 +14,38 @@ class BodiesController < ApplicationController
       @all_bodies = @all_q.result(distinct: true)
     end
 
+    def export
+      body_data = if current_user.role.athlete?
+        current_user.bodies
+      elsif current_user.role.coach?
+        ::Body.joins(user: :teams)
+                 .where(teams: { id: current_user.teams.ids })
+                 .distinct
+      else
+        [] # 万が一ロールが想定外の場合のデフォルト
+      end
+
+      respond_to do |format|
+        format.csv do
+          headers = %w[BODY_ID HEIGHT WEIGHT BODY_FAT RECORDED_DATE NAME]
+          csv_data = CSV.generate(headers: true) do |csv|
+            csv << headers
+            body_data.each do |body|
+              csv << [
+                body.id,
+                body.height,
+                body.weight,
+                body.body_fat,
+                body.recorded_on,
+                body.user.full_name
+              ]
+            end
+          end
+          send_data csv_data, filename: "bodiess_#{Time.current.strftime('%Y%m%d%H%M%S')}.csv", type: :csv
+        end
+      end
+    end
+
     def new
       @body = current_user.bodies.new
     end

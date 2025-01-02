@@ -10,7 +10,13 @@ Rails.application.routes.draw do
       get "export"
     end
   end
-  resources :bodies, only: [ :index, :new, :create, :edit, :update, :show, :destroy ]
+
+  resources :bodies, only: [ :index, :new, :create, :edit, :update, :show, :destroy ] do
+    collection do
+      get "export"
+    end
+  end
+
   resources :training_menus, only: [ :index, :new, :create, :edit, :update, :destroy ] do
     resources :training_sets, only: [ :new, :create, :edit ] do
       collection do
