@@ -8,6 +8,7 @@
     </h1>
     <%= render 'search', q: @all_q, url: bodies_path %>
   <% end %>
+  <%= link_to 'CSV出力', export_bodies_path(format: 'csv'), class: "btn btn-outline btn-sm text-green-500 border-green-500 hover:bg-green-500 hover:text-white whitespace-nowrap" %>
 <div class="container mx-auto p-6">
   <% if current_user.role.athlete? && @bodies.any? %>
     <!-- テーブルカード -->
