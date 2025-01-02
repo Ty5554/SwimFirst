@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   root "home_pages#top"
+  # 利用規約とプライバシーポリシーのルーティング
+  get "terms_of_use", to: "home_pages#terms_of_use"
+  get "privacy_policy", to: "home_pages#privacy_policy"
+
   resources :self_records, only: [ :index, :new, :create, :edit, :update, :show, :destroy ]
   resources :conditions, only: [ :index, :new, :create, :edit, :update, :show, :destroy ]
   resources :bodies, only: [ :index, :new, :create, :edit, :update, :show, :destroy ]
