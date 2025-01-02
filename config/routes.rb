@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   get "privacy_policy", to: "home_pages#privacy_policy"
 
   resources :self_records, only: [ :index, :new, :create, :edit, :update, :show, :destroy ]
-  resources :conditions, only: [ :index, :new, :create, :edit, :update, :show, :destroy ]
+  resources :conditions, only: [ :index, :new, :create, :edit, :update, :show, :destroy ] do
+    collection do
+      get "export"
+    end
+  end
   resources :bodies, only: [ :index, :new, :create, :edit, :update, :show, :destroy ]
   resources :training_menus, only: [ :index, :new, :create, :edit, :update, :destroy ] do
     resources :training_sets, only: [ :new, :create, :edit ] do
