@@ -11,13 +11,13 @@ class BodyChartsController < ApplicationController
       @bodies = @q.result(distinct: true)
       @all_bodies = @all_q.result(distinct: true)
 
-      @athletes = current_user.teams.includes(:users).flat_map(&:users).select { |user| user.role.athlete? }
+      @athletes = current_user.teams.includes(:users).flat_map(&:users)
 
       fields = [ :recorded_on, :body_fat, :weight ]
 
-      body_data = if current_user.role.athlete?
+      body_data = if current_user.role&.athlete?
         @bodies.pluck(*fields)
-      elsif current_user.role.coach?
+      elsif current_user.role&.coach?
         @all_bodies.pluck(*fields)
       else
         [] # 万が一ロールが想定外の場合のデフォルト

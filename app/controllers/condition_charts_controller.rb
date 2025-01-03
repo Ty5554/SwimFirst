@@ -11,17 +11,20 @@ class ConditionChartsController < ApplicationController
     @conditions = @q.result(distinct: true)
     @all_conditions = @all_q.result(distinct: true)
 
-    @athletes = current_user.teams.includes(:users).flat_map(&:users).select { |user| user.role.athlete? }
+    @athletes = current_user.teams.includes(:users).flat_map(&:users)
 
     fields = [ :recorded_on, :fatigue_level, :mental_state, :body_temperature, :sleep_hours ]
 
-    condition_data = if current_user.role.athlete?
+    condition_data = if current_user.role&.athlete?
       @conditions.pluck(*fields)
-    elsif current_user.role.coach?
+    elsif current_user.role&.coach?
       @all_conditions.pluck(*fields)
     else
       [] # 万が一ロールが想定外の場合のデフォルト
     end
+
+    Rails.logger.debug { "Current User: #{current_user.inspect}" }
+    Rails.logger.debug { "Current User Role: #{current_user.role.inspect}" }
 
     # グラフデータを生成
     @chart1_data = {
