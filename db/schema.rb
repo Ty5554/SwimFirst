@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_23_141715) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_09_045417) do
   create_table "bodies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.float "height", null: false
@@ -61,6 +61,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_23_141715) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_self_records_on_user_id"
+  end
+
+  create_table "sns_credentials", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "provider"
+    t.string "uid"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sns_credentials_on_user_id"
   end
 
   create_table "team_invitations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -127,6 +136,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_23_141715) do
   add_foreign_key "heart_rates", "users"
   add_foreign_key "roles", "users"
   add_foreign_key "self_records", "users"
+  add_foreign_key "sns_credentials", "users"
   add_foreign_key "team_invitations", "teams"
   add_foreign_key "team_invitations", "users"
   add_foreign_key "training_menus", "users"

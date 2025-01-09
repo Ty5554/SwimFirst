@@ -29,7 +29,8 @@ Rails.application.routes.draw do
   resources :body_charts, only: [ :index ]
 
   devise_for :users, controllers: {
-    registrations: "registrations"
+    registrations: "registrations",
+    omniauth_callbacks: "users/omniauth_callbacks"
   }
 
   devise_scope :user do
