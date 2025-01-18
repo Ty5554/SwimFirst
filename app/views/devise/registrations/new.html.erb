@@ -69,7 +69,7 @@
       <% end %>
       <div class="mt-8 border-t-4"></div>
       <div>
-        <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "inline-block dark:bg-gray-800 px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150" do %>
+        <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: "false" }, class: "inline-block dark:bg-gray-800 px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150" do %>
           <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google logo" class="w-6 h-6" loading="lazy">
           <span>Sign up with Google</span>
         <% end %>
