@@ -4,7 +4,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
     callback_for(:google)
   end
-  
+
   def callback_for(provider)
     @omniauth = request.env["omniauth.auth"]
     info = User.find_oauth(@omniauth)
@@ -19,9 +19,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     render template: "devise/registrations/new"
     end
   end
-  
+
   def failure
     redirect_to root_path and return
   end
 end
-  
