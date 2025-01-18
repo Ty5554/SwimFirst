@@ -30,10 +30,10 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[google_oauth2]
 
   class << self   # ここからクラスメソッドで、メソッドの最初につける'self.'を省略できる
-  # SnsCredentialsテーブルにデータがないときの処理
+    # SnsCredentialsテーブルにデータがないときの処理
     def without_sns_data(auth)
       user = User.where(email: auth.info.email).first
-      
+
       if user.present?
         sns = SnsCredential.create(
           uid: auth.uid,
@@ -85,5 +85,5 @@ class User < ApplicationRecord
       end
       { user:, sns: }
     end
-  end   
+  end
 end
