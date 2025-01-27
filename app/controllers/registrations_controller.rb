@@ -45,6 +45,22 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def complete_registration
+    @user = current_user
+    @user.build_role unless @user.role.present?
+    @user.teams.build if @user.teams.empty?
+  end
+
+  def update_registration
+    @user = current_user
+    if @user.update(user_params)
+      redirect_to root_path, notice: "登録が完了しました。"
+    else
+      flash.now[:alert] = "登録内容を保存できませんでした。"
+      render :complete_registration
+    end
+  end
+
   private
 
   def sign_up_params
@@ -59,5 +75,12 @@ class RegistrationsController < Devise::RegistrationsController
 
   def teams_params
     params.require(:user).require(:teams_attributes).permit(:team_name)
+  end
+
+  def user_params
+    params.require(:user).permit(
+      role_attributes: [ :role ],
+      teams_attributes: [ :team_name ]
+    )
   end
 end

@@ -1,0 +1,41 @@
+<section class="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900 min-h-screen flex items-center justify-center">
+  <div class="w-full max-w-lg bg-white rounded-2xl shadow-lg dark:border dark:border-gray-700 dark:bg-gray-800">
+    <div class="p-8 space-y-6 sm:p-10">
+      <h1 class="text-2xl font-extrabold leading-snug tracking-wide text-gray-900 dark:text-white">
+        プロフィールを完成させる
+      </h1>
+      <%= form_with model: @user, url: complete_registration_path, method: :patch, local: true do |f| %>
+        <div class="space-y-4">
+          <!-- Role Field -->
+          <div>
+            <%= f.fields_for :role, @user.role || @user.build_role do |role_form| %>
+              <%= role_form.label :role, class: "block mb-2 text-sm font-semibold text-gray-800 dark:text-gray-200" do %>
+                ロール
+              <% end %>
+              <%= role_form.select :role, Role.roles_i18n, prompt: "役割を選択してください", 
+                  class: "bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" %>
+            <% end %>
+          </div>
+
+          <!-- Team Field -->
+          <div>
+            <%= f.fields_for :teams, @user.teams.build do |team_form| %>
+              <%= team_form.label :team_name, class: "block mb-2 text-sm font-semibold text-gray-800 dark:text-gray-200" do %>
+                チーム名
+              <% end %>
+              <%= team_form.text_field :team_name, 
+                  class: "bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white", 
+                  placeholder: "チーム名を入力してください" %>
+            <% end %>
+          </div>
+
+          <!-- Submit Button -->
+          <div>
+            <%= f.submit "保存", 
+                class: "w-full text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm px-6 py-3 text-center shadow-md dark:from-blue-600 dark:to-blue-700 dark:focus:ring-blue-800" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

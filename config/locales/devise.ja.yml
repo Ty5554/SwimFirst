@@ -20,6 +20,10 @@ ja:
       not_found_in_database: "メールアドレスまたはパスワードが正しくありません"
       already_authenticated: "すでにログインしています"
       invalid: "メールアドレスまたはパスワードが有効ではありません。"
+    omniauth_callbacks:
+      user:
+        success: "ログインに成功しました！"
+      success: "ログインに成功しました！"
   activerecord:
     attributes:
       user: # Userモデルの日本語化

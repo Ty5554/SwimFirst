@@ -35,6 +35,8 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     post "registrations/create_athlete", to: "registrations#create_athlete", as: :registrations_create_athlete
+    get "complete_registration", to: "registrations#complete_registration"
+    patch "complete_registration", to: "registrations#update_registration"
   end
 
   resources :team_invitations, only: [ :index, :show, :destroy ] do
