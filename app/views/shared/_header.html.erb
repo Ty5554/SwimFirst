@@ -4,9 +4,16 @@
     <div>
       <%= link_to "SwimFirst", root_path, class: "text-2xl font-bold text-cyan-300 hover:text-white" %>
       <% if user_signed_in? %>
-        <p class="flex items-center text-sm font-medium text-cyan-300 mt-1"><%= t("role.roles.#{current_user.role.role}") %>
-          <span class="font-bold ml-1"><%= current_user.last_name %><%= current_user.first_name %></span>さん
+        <% if current_user.role.present? %>
+          <p class="flex items-center text-sm font-medium text-cyan-300 mt-1">
+            <%= t("role.roles.#{current_user.role.role}") %>
+            <span class="font-bold ml-1"><%= current_user.last_name %><%= current_user.first_name %></span>さん
+          </p>
+        <% else %>
+        <p class="flex items-center text-sm font-medium text-red-500 mt-1">
+          ロールが未設定です
         </p>
+        <% end %>
       <% end %>
     </div>
 
@@ -26,8 +33,10 @@
             class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
           </li>
           <li class="hidden md:block">
-            <%= link_to "メンバー管理", athletes_team_path(@team), 
-            class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
+            <% if @team.present? %>
+              <%= link_to "メンバー管理", athletes_team_path(@team), 
+                          class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
+            <% end %>
           </li>
           <li>
             <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_confirm: "本当にログアウトしますか？" }, 
@@ -62,17 +71,13 @@
         <%= link_to "TOPページへ戻る", root_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
       </li>
       <li>
-        <%= link_to "メンバー管理", athletes_team_path(@team), class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+        <% if @team.present? %>
+          <%= link_to "メンバー管理", athletes_team_path(@team), class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+        <% end %>
       </li>
-      <% if current_user.role.coach? %>
-      <li>
-        <%= link_to "選手レコード", self_records_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
-      </li>
-      <% else %>
       <li>
         <%= link_to "マイレコード", self_records_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
       </li>
-      <% end %>
       <li>
         <%= link_to "コンディション", conditions_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
       </li>

@@ -10,13 +10,19 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     info = User.find_oauth(@omniauth)
     @user = info[:user]
     if @user.persisted?    # persisted?は保存が完了しているかを評価するメソッド
-    sign_in_and_redirect @user, event: :authentication
-    # is_navigational_formatはフラッシュメッセージを発行する必要があるかどうかを確認する
-    # capitalizeは文字列の先頭を大文字に、それ以外は小文字に変更して返すメソッド
-    set_flash_message(:notice, :success, kind: provider.to_s.capitalize) if is_navigational_format?
+      if @user.role.nil? || @user.teams.empty?
+        # 未設定の場合は登録完了ページへリダイレクト
+        sign_in @user
+        redirect_to complete_registration_path
+      else
+        sign_in_and_redirect @user, event: :authentication
+        # is_navigational_formatはフラッシュメッセージを発行する必要があるかどうかを確認する
+        # capitalizeは文字列の先頭を大文字に、それ以外は小文字に変更して返すメソッド
+        set_flash_message(:notice, :success, kind: provider.to_s.capitalize) if is_navigational_format?
+      end
     else
-    @sns = info[:sns]
-    render template: "devise/registrations/new"
+      @sns = info[:sns]
+      render template: "devise/registrations/new"
     end
   end
 

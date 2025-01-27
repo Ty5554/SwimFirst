@@ -42,9 +42,10 @@ class User < ApplicationRecord
         )
       else   # User.newの記事があるが、newは保存までは行わないのでcreateで保存をかける
         user = User.create(
-          name: auth.info.name,    # デフォルトから追加したカラムがあれば記入
+          name: auth.info.name,   # デフォルトから追加したカラムがあれば記入
+          first_name: auth.info.first_name,   # デフォルトから追加したカラムがあれば記入
+          last_name: auth.info.last_name,   # デフォルトから追加したカラムがあれば記入
           email: auth.info.email,
-          profile_image: auth.info.image,    # デフォルトから追加したカラム
           password: Devise.friendly_token(10)   # 10文字の予測不能な文字列を生成する
         )
         sns = SnsCredential.create(
@@ -64,7 +65,6 @@ class User < ApplicationRecord
         user = User.create(
           name: auth.info.name,
           email: auth.info.email,
-          profile_image: auth.info.image,
           password: Devise.friendly_token(10)
         )
       end
