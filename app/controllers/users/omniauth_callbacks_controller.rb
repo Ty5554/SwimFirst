@@ -10,6 +10,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     info = User.find_oauth(@omniauth)
     @user = info[:user]
     if @user.persisted?    # persisted?は保存が完了しているかを評価するメソッド
+      # Google の OAuth 認証情報を SnsCredential に保存
+      save_google_tokens(@user, @omniauth) if provider == :google
+
       if @user.role.nil? || @user.teams.empty?
         # 未設定の場合は登録完了ページへリダイレクト
         sign_in @user
@@ -28,5 +31,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def failure
     redirect_to root_path and return
+  end
+
+  private
+
+  def save_google_tokens(user, auth)
+    sns_credential = SnsCredential.find_or_create_by(provider: auth.provider, uid: auth.uid, user: user)
+    sns_credential.update!(
+      google_access_token: auth.credentials.token,
+      google_refresh_token: auth.credentials.refresh_token.presence || sns_credential.google_refresh_token
+    )
   end
 end
