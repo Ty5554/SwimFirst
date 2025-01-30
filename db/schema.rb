@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_09_045417) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_29_154739) do
   create_table "bodies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.float "height", null: false
@@ -69,6 +69,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_09_045417) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "google_access_token"
+    t.text "google_refresh_token"
     t.index ["user_id"], name: "index_sns_credentials_on_user_id"
   end
 

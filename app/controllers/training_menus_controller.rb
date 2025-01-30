@@ -32,7 +32,15 @@ class TrainingMenusController < ApplicationController
       @training_menu = current_user.training_menus.new(training_menu_params)
 
       if @training_menu.save
-        redirect_to training_menus_path, notice: "トレーニングメニューが作成されました。"
+        begin
+          calendar_service = GoogleCalendarService.new(current_user)
+          calendar_service.create_event(@training_menu)
+          flash[:notice] = "トレーニングメニューが作成され、Googleカレンダーに追加されました。"
+        rescue => e
+          Rails.logger.error "Googleカレンダーの登録に失敗: #{e.message}"
+          flash[:alert] = "トレーニングメニューは作成されましたが、Googleカレンダーへの登録に失敗しました。"
+        end
+        redirect_to training_menus_path
       else
         render :new, status: :unprocessable_entity
       end
