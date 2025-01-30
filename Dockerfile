@@ -56,8 +56,7 @@ COPY . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompile assets
-ARG RAILS_MASTER_KEY
-
+ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 RUN ./bin/rails assets:precompile
 
 RUN rm -rf node_modules
