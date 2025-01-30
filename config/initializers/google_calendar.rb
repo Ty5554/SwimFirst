@@ -1,3 +1,4 @@
+=begin
 require "google/apis/calendar_v3"
 require "googleauth"
 
@@ -36,3 +37,4 @@ class GoogleCalendarService
     end
   end
 end
+=end
