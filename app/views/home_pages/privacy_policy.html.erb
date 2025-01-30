@@ -3,7 +3,9 @@
 <div class="w-5/6 mx-auto max-w-sm md:max-w-4xl">
     <div class="mt-4 mb-28">
         <div class="flex flex-col items-center justify-center">
-
+            <h1 class="font-bold text-left">
+                プライバシーポリシー
+            </h1>
             <div class="my-4 w-full">
                 <h1 class="font-bold text-left">
                     お客様から取得する情報
@@ -19,8 +21,13 @@
                         <li>メールアドレス</li>
                         <li>外部サービスでお客様が利用するID、その他外部サービスのプライバシー設定によりお客様が連携先に開示を認めた情報</li>
                         <li>Cookie(クッキー)を用いて生成された識別情報</li>
-                        <li>当方ウェブサイトの滞在時間、入力履歴、購買履歴等の当方ウェブサイトにおけるお客様の行動履歴</li>
-                        <li>お客様の位置情報</li>
+                        <li>当方ウェブサイトの滞在時間、入力履歴等の当方ウェブサイトにおけるお客様の行動履歴</li>
+                    </ul>
+                    <h2 class="mt-4">Google OAuthを利用した情報の取得</h2>
+                    <ul class="list-disc ml-4 mt-2">
+                        <li>Googleアカウントの氏名</li>
+                        <li>Googleアカウントに登録されているメールアドレス</li>
+                        <li>Google OAuth認証で取得可能なその他の情報（アクセス許可の範囲による）</li>
                     </ul>
                 </div>
             </div>
@@ -56,28 +63,48 @@
             </div>
             <div class="mb-2 w-full">
                 <div class="mx-4">
-                    <p>
-                        当方が、お客様から取得した情報に関して安全管理のために講じた措置につきましては、末尾記載のお問い合わせ先にご連絡をいただきましたら、法令の定めに従い個別にご回答させていただきます。
+                    <p class="list-disc ml-4 mt-2">
+                      当方が、お客様から取得した情報に関して安全管理のために講じた措置につきましては、末尾記載のお問い合わせ先にご連絡いただきましたら、法令の定めに従い個別にご回答させて頂きます。
                     </p>
                 </div>
             </div>
 
             <div class="my-4 w-full">
                 <h1 class="font-bold text-left">
-                    第三者提供
+                    Googleアカウントの連携解除について
                 </h1>
             </div>
             <div class="mb-2 w-full">
                 <div class="mx-4">
                     <p>
-                        当方は、お客様から取得する情報のうち、個人データ（個人情報保護法第１６条第３項）に該当するものついては、あらかじめお客様の同意を得ずに、第三者（日本国外にある者を含みます。）に提供しません。<br>
-                        但し、次の場合は除きます。
+                        Google OAuthを通じて取得した情報の削除を希望される場合、以下の方法でアカウントの連携を解除してください。
                     </p>
                     <ul class="list-disc ml-4 mt-2">
-                        <li>個人データの取扱いを外部に委託する場合</li>
-                        <li>当方や当方サービスが買収された場合</li>
-                        <li>事業パートナーと共同利用する場合（具体的な共同利用がある場合は、その内容を別途公表します。）</li>
-                        <li>その他、法律によって合法的に第三者提供が許されている場合</li>
+                        <li>当方のサービスの「設定」ページにて、Googleアカウントとの連携を解除してください。</li>
+                        <li>また、お問い合わせフォームまたは以下のメールアドレスにご連絡いただければ、手動で削除を行います。</li>
+                    </ul>
+                    <p>メールアドレス: swimfirst1996@gmail.com</p>
+                </div>
+            </div>
+
+            <div class="my-4 w-full">
+                <h1 class="font-bold text-left">
+                    第三者提供について
+                </h1>
+            </div>
+            <div class="mb-2 w-full">
+                <div class="mx-4">
+                    <p>
+                        当方は、お客様から取得する情報のうち、個人データ(個人情報保護法第16条第3項)に該当するものについては、あらかじめお客様の同意を得ずに、第三者(日本国外にある者を含みます。)に提供しません。
+                    </p>
+                    <p>
+                        ただし、次の場合は除きます：
+                    </p>
+                    <ul class="list-disc ml-4 mt-2">
+                        <li>当方や当サービスが買収された場合</li>
+                        <li>お客様の同意を得た場合</li>
+                        <li>データ処理を外部委託する場合（この場合も適切な契約を締結し、厳格な管理を行います）</li>
+                        <li>事業パートナーと共同利用する場合(具体的な共同利用がある場合は、その内容を別途公表します。</li>
                     </ul>
                 </div>
             </div>
@@ -90,13 +117,19 @@
             <div class="mb-2 w-full">
                 <div class="mx-4">
                     <p>
-                        当方は、お客様のアクセス解析のために、「Googleアナリティクス」を利用しています。Googleアナリティクスは、トラフィックデータの収集のためにCookieを使用しています。トラフィックデータは匿名で収集されており、個人を特定するものではありません。Cookieを無効にすれば、これらの情報の収集を拒否することができます。詳しくはお使いのブラウザの設定をご確認ください。Googleアナリティクスについて、詳しくは以下からご確認ください。
+                        当方は、お客様のアクセス解析のために、「Googleアナリティクス」を利用しています。
                     </p>
-                    <div class="mx-4">
-                        <%= link_to 'https://marketingplatform.google.com/about/analytics/terms/jp/', 'https://marketingplatform.google.com/about/analytics/terms/jp/', class: "link" %>
-                    </div>
+                    <p class="list-disc ml-4 mt-2">
+                        Googleアナリティクスは、トラフィックデータの収集のためにCookieを使用しています。
+                        トラフィックデータは匿名で収集されており、個人を特定するものではありません。
+                        Cookieを無効にすれば、これらの情報の収集を拒否することができます。
+                        詳しくはお使いのブラウザの設定をご確認ください。
+                        Googleアナリティクスについて、詳しくは以下からご確認ください。
+                        <p>https://marketingplatform.google.com/about/analytics/terms/jp/</p>
+                    </p>
                 </div>
             </div>
+
 
             <div class="my-4 w-full">
                 <h1 class="font-bold text-left">
@@ -105,51 +138,16 @@
             </div>
             <div class="mb-2 w-full">
                 <div class="mx-4">
-                    <p>
-                        当方は、必要に応じて、このプライバシーポリシーの内容を変更します。この場合、変更後のプライバシーポリシーの施行時期と内容を適切な方法により周知または通知します。
-                    </p>
-                </div>
-            </div>
-
-            <div class="my-4 w-full">
-                <h1 class="font-bold text-left">
-                    お問い合わせ
-                </h1>
-            </div>
-            <div class="mb-2 w-full">
-                <div class="mx-4">
-                    <p>
-                        お客様の情報の開示、情報の訂正、利用停止、削除をご希望の場合は、以下のお問い合わせフォーム、またはメールアドレスにご連絡ください。
-                    </p>
-                    <div class="mx-4">
-                        <ul class="list-disc ml-4 mt-2">
-                            <li>お問い合わせフォーム</li>
-                        </ul>
-                        <div class="mx-4">
-                            <%= link_to "Googleフォームにアクセス", "https://forms.gle/bo4KiVDo8nYDwM4Y7", target: "_blank", rel: "noopener noreferrer", class: "link" %>
-                        </div>
-                        <ul class="list-disc ml-4 mt-2">
-                            <li>e-mail</li>
-                        </ul>
-                        <div class="mx-4">
-                            <p>
-                                @gmail.com
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-2 w-full">
-                <div class="mx-4">
-                    <p>
-                        この場合、必ず、運転免許証のご提示等当方が指定する方法により、ご本人からのご請求であることの確認をさせていただきます。なお、情報の開示請求については、開示の有無に関わらず、ご申請時に一件あたり1,000円の事務手数料を申し受けます。
+                    <p class="list-disc ml-4 mt-2">
+                      当方は、必要に応じて、このプライバシーポリシーの内容を変更します。
+                      この場合、変更後のプライバシーポリシーの施行時期と内容を適切な方法により周知または通知します。
                     </p>
                 </div>
             </div>
 
             <div class="my-4 w-full">
                 <h1 class="text-left">
-                    2024年10月25日 制定
+                    2025年1月30日 制定
                 </h1>
             </div>
 
