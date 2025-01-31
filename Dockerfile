@@ -55,8 +55,11 @@ COPY . .
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+# RAILS_MASTER_KEY を ARG として受け取る
+ARG RAILS_MASTER_KEY
+
+# assets:precompile を実行（環境変数として一時的に設定）
+RUN RAILS_MASTER_KEY=${RAILS_MASTER_KEY} bundle exec rails assets:precompile
 
 RUN rm -rf node_modules
 
