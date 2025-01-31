@@ -56,8 +56,10 @@ COPY . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompile assets
-ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 RUN ./bin/rails assets:precompile
+
+# コンテナ実行時に master key を渡す
+CMD ["bash", "-c", "bundle exec rails server -b 0.0.0.0"]
 
 RUN rm -rf node_modules
 
