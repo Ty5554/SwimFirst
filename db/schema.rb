@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_29_154739) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_02_102850) do
   create_table "bodies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.float "height", null: false
@@ -32,6 +32,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_29_154739) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_conditions_on_user_id"
+  end
+
+  create_table "diaries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "recorded_on"
+    t.index ["user_id"], name: "index_diaries_on_user_id"
   end
 
   create_table "heart_rates", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -134,6 +143,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_29_154739) do
 
   add_foreign_key "bodies", "users"
   add_foreign_key "conditions", "users"
+  add_foreign_key "diaries", "users"
   add_foreign_key "heart_rates", "training_sets"
   add_foreign_key "heart_rates", "users"
   add_foreign_key "roles", "users"

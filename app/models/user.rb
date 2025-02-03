@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :training_sets
   has_many :sns_credential, dependent: :destroy
   has_many :sns_credentials, dependent: :destroy
+  has_many :diaries, dependent: :destroy
 
   def self.ransackable_attributes(auth_object = nil)
     [ "first_name", "last_name" ]

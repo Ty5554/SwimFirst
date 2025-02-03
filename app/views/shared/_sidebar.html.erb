@@ -28,6 +28,9 @@
         <%= link_to "トレーニング", training_menus_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
       </li>
       <li>
+        <%= link_to "日誌", diaries_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
+      </li>
+      <li>
         <% if @team.present? %>
           <%= link_to "メンバー管理", athletes_team_path(@team), 
                       class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>

@@ -276,9 +276,9 @@ Devise.setup do |config|
   config.omniauth :google_oauth2,
                   Rails.application.credentials.dig(:google, :client_id),
                   Rails.application.credentials.dig(:google, :client_secret),
-                  scope: 'email,profile,https://www.googleapis.com/auth/calendar',
-                  access_type: 'offline',  # これがないと refresh_token が発行されない
-                  prompt: 'consent',       # これがないと refresh_token が返らないことがある
+                  scope: "email,profile,https://www.googleapis.com/auth/calendar",
+                  access_type: "offline",  # これがないと refresh_token が発行されない
+                  prompt: "consent",       # これがないと refresh_token が返らないことがある
                   skip_jwt: true
 
   # ==> Warden configuration

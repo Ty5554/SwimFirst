@@ -16,9 +16,9 @@ class GoogleCalendarService
       start: { date_time: training_menu.training_date.to_time.iso8601, time_zone: "Asia/Tokyo" },
       end: { date_time: (training_menu.training_date.to_time + 1.hour).iso8601, time_zone: "Asia/Tokyo" }
     )
-  
+
     @service.insert_event("primary", event)  # ← ここで引数エラーの可能性
-  end  
+  end
 
   private
 
@@ -30,11 +30,11 @@ class GoogleCalendarService
       refresh_token: @sns_credential.google_refresh_token,
       access_token: @sns_credential.google_access_token
     )
-  
+
     # 既存のトークンが存在し、有効期限が切れている場合に更新
     if @sns_credential.google_access_token.nil? || Time.now >= @sns_credential.updated_at + 3500.seconds
       new_token = @service.authorization.fetch_access_token!
       @sns_credential.update!(google_access_token: new_token["access_token"])
     end
-  end  
+  end
 end
