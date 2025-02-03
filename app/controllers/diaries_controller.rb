@@ -1,17 +1,18 @@
 class DiariesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
-    @diaries = current_user.diaries.order(created_at: :desc).page(params[:page])
+    @q = current_user.diaries.order(created_at: :desc).page(params[:page]).per(5).ransack(params[:q])
+    @diaries = @q.result(distinct: true)
   end
-  
+
   def new
     @diary = Diary.new
   end
-  
+
   def create
     @diary = current_user.diaries.build(diary_params)
-  
+
     if @diary.save
     redirect_to diaries_path, notice: "日誌を保存しました"
     else
@@ -39,16 +40,15 @@ class DiariesController < ApplicationController
     @diary = Diary.find_by(id: params[:id])
     if @diary
       @diary.destroy
-      redirect_to diaries_path, notice: '投稿を削除しました。'
+      redirect_to diaries_path, notice: "投稿を削除しました。"
     else
-      redirect_to diaries_path, alert: '対象の投稿が見つかりませんでした。'
+      redirect_to diaries_path, alert: "対象の投稿が見つかりませんでした。"
     end
-  end  
-  
+  end
+
   private
-  
+
   def diary_params
     params.require(:diary).permit(:content, :recorded_on)
   end
 end
-  
