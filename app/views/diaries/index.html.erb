@@ -1,26 +1,34 @@
-<h2 class="text-2xl font-bold">トレーニング日誌</h2>
+<h2 class="text-2xl font-bold text-center">トレーニング日誌</h2>
+
 <% if @diaries.present? && @diaries.any? %>
-<% @diaries.each do |diary| %>
-  <div class="p-4 mt-4 bg-white shadow rounded">
-    <p class="mt-2"><%= diary.content %></p>
-  <%= link_to '編集', edit_diary_path(diary), class: "btn btn-sm btn-outline btn-info" %>
-  <%= button_to '削除', diary_path(diary), 
-            method: :delete, 
-            data: { confirm: '本当に削除しますか？' }, 
-            class: "btn btn-sm btn-outline btn-error" %>
-  </div>
-<% end %>
+  <div class="mt-6 space-y-4">
+    <% @diaries.each do |diary| %>
+      <div class="p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+        <p class="text-2xl text-gray-800"><%= diary.recorded_on %></p>
+        <p class="text-xl text-gray-800">感想</p>
+        <p class="text-gray-800"><%= diary.content %></p>
+        
+        <div class="mt-4 flex gap-2">
+          <%= link_to '編集', edit_diary_path(diary), class: "btn btn-sm btn-outline btn-info" %>
+          <%= button_to '削除', diary_path(diary), 
+                method: :delete, 
+                data: { confirm: '本当に削除しますか？' }, 
+                class: "btn btn-sm btn-outline btn-error" %>
+        </div>
+      </div>
+    <% end %>
 
-<div class="mt-6">
-  <%= paginate @diaries %>
-</div>
-  <% else %>
-    <!-- 空の状態 -->
-    <div class="text-center p-6 bg-gray-100 rounded-lg shadow-md">
-      <p class="text-lg text-gray-600">現在、登録されている記録はありません。</p>
+    <div class="mt-6">
+      <%= paginate @diaries %>
     </div>
+  </div>
+<% else %>
+  <!-- 空の状態 -->
+  <div class="mt-6 flex flex-col items-center justify-center p-8 bg-gray-100 rounded-lg shadow-md">
+    <p class="text-lg text-gray-600">現在、登録されている記録はありません。</p>
+  </div>
 <% end %>
 
-  <div class="mt-6 text-center">
-    <%= link_to '新しい日誌を追加', new_diary_path, class: "btn btn-primary btn-lg" %>
-  </div>
+<div class="mt-6 text-center">
+  <%= link_to '新しい日誌を追加', new_diary_path, class: "btn btn-primary btn-lg" %>
+</div>

@@ -1,6 +1,5 @@
 class DiariesController < ApplicationController
   before_action :authenticate_user!
-  #before_action :set_diaries
   
   def index
     @diaries = current_user.diaries.order(created_at: :desc).page(params[:page])
@@ -49,15 +48,7 @@ class DiariesController < ApplicationController
   private
   
   def diary_params
-    params.require(:diary).permit(:content)
+    params.require(:diary).permit(:content, :recorded_on)
   end
-
-=begin
-  def set_diaries
-    @diary = current_user.diaries.find(params[:id]) || []
-  rescue ActiveRecord::RecordNotFound
-    redirect_to diaries_path, alert: "指定されたフィジカルデータが見つかりませんでした。"
-  end
-=end
 end
   
