@@ -14,6 +14,8 @@ class DiariesController < ApplicationController
     @diary = current_user.diaries.build(diary_params)
 
     if @diary.save
+    feedback = AiService.get_feedback(@diary.content) # 直接 API を呼び出し
+    @diary.update(feedback: feedback)
     redirect_to diaries_path, notice: "日誌を保存しました"
     else
     render :new, status: :unprocessable_entity
@@ -49,6 +51,6 @@ class DiariesController < ApplicationController
   private
 
   def diary_params
-    params.require(:diary).permit(:content, :recorded_on)
+    params.require(:diary).permit(:content, :recorded_on, :feedback)
   end
 end
