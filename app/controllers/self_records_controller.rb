@@ -12,6 +12,7 @@ class SelfRecordsController < ApplicationController
                          .page(params[:page]).per(5)
                          .ransack(params[:all_q])
       @all_records = @all_q.result(distinct: true)
+      @athletes = current_user.teams.includes(:users).flat_map(&:users)
     end
 
     def new
