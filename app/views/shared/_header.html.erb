@@ -29,11 +29,13 @@
               class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
           </li>
           <li class="hidden md:block">
+           <% if current_user.role.coach? %>
             <%= link_to "招待URL", team_invitations_path, 
             class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
+            <% end %>
           </li>
           <li class="hidden md:block">
-            <% if @team.present? %>
+            <% if @team.present? && current_user.role.coach? %>
               <%= link_to "メンバー管理", athletes_team_path(@team), 
                           class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
             <% end %>
@@ -71,7 +73,7 @@
         <%= link_to "TOPページへ戻る", root_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
       </li>
       <li>
-        <% if @team.present? %>
+        <% if @team.present? && current_user.role.coach? %>
           <%= link_to "メンバー管理", athletes_team_path(@team), class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
         <% end %>
       </li>
@@ -82,13 +84,7 @@
         <%= link_to "コンディション", conditions_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
       </li>
       <li>
-        <%= link_to "コンディションレポート", condition_charts_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
-      </li>
-      <li>
         <%= link_to "フィジカル", bodies_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
-      </li>
-      <li>
-        <%= link_to "フィジカルレポート", body_charts_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
       </li>
       <li>
         <%= link_to "トレーニング", training_menus_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>

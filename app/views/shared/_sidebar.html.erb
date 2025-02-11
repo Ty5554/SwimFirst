@@ -4,41 +4,43 @@
       <!-- メニュー項目 -->
       <% if user_signed_in? %>
       <% if current_user.role.coach? %>
-      <li class="mt-2">
-        <%= link_to "選手レコード", self_records_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
-      </li>
-      <% else %>
-      <li class="mt-2">
-        <%= link_to "マイレコード", self_records_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
-      </li>
-      <% end %>
-      <li>
-        <%= link_to "コンディション", conditions_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
-      </li>
-      <li>
-        <%= link_to "コンディションレポート", condition_charts_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
-      </li>
-      <li>
-        <%= link_to "フィジカル", bodies_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
-      </li>
-      <li>
-        <%= link_to "フィジカルレポート", body_charts_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
-      </li>
-      <li>
-        <%= link_to "トレーニング", training_menus_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
-      </li>
-      <li>
-        <%= link_to "日誌", diaries_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
-      </li>
-      <li>
-        <% if @team.present? %>
-          <%= link_to "メンバー管理", athletes_team_path(@team), 
-                      class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
-        <% end %>
-      </li>
-      <li class="mt-2">
-        <%= link_to "TOPページ", root_path, class: "text-lg rounded hover:bg-sky-700 text-cyan-300 hover:text-white transition ease-in-out duration-300" %>
-      </li>
+<li class="mt-2">
+  <%= link_to "選手レコード", self_records_path, 
+        class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+</li>
+<% else %>
+<li class="mt-2">
+  <%= link_to "マイレコード", self_records_path, 
+        class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+</li>
+<% end %>
+<li>
+  <%= link_to "コンディション", conditions_path, 
+        class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+</li>
+<li>
+  <%= link_to "フィジカル", bodies_path, 
+        class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+</li>
+<li>
+  <%= link_to "トレーニング", training_menus_path, 
+        class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+</li>
+<li>
+  <%= link_to "日誌", diaries_path, 
+        class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+</li>
+
+<li>
+  <% if @team.present? && current_user.role.coach? %>
+    <%= link_to "メンバー管理", athletes_team_path(@team), 
+                class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+  <% end %>
+</li>
+<li class="mt-2">
+  <%= link_to "TOPページ", root_path, 
+              class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+</li>
     <% end %>
     </ul>
   </nav>

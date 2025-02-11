@@ -1,32 +1,31 @@
 <% if current_user.role.athlete? || current_user.role.coach? %>
   <% search_object = current_user.role.athlete? ? @q : @all_q %>
   <% search_key = current_user.role.athlete? ? :q : :all_q %>
-  <form class="space-y-4 p-4 bg-white shadow-md rounded-md mb-4">
-    <%= search_form_for search_object, as: search_key, url: url, method: :get do |f| %>
+  
+  <%= search_form_for search_object, as: search_key, url: url, method: :get, class: "bg-white shadow-md rounded-md p-4 mb-6" do |f| %>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <% if current_user.role.coach? %>
-        <div class="flex flex-col md:flex-row md:space-x-4 items-start">
-          <div class="w-full md:w-1/2">
-            <%= f.label :user_first_name_or_user_last_name_cont, "名前", class: "block text-sm font-medium text-gray-700 mb-2" %>
-            <%= f.search_field :user_first_name_or_user_last_name_cont, 
-                               class: "form-input block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" %>
-          </div>
+        <div>
+          <%= f.label :user_id_eq, "選手を選択", class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <%= f.collection_select :user_id_eq, @athletes, :id, :full_name, 
+                                  { prompt: "アスリートを選択してください" },
+                                  class: "form-select w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" %>
         </div>
       <% end %>
-
-      <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
-        <!-- 測定期間 -->
-        <div class="p-4 bg-gray-100 rounded-md shadow-sm">
-          <%= f.label :recorded_on, "測定期間", class: "block text-sm font-medium text-gray-700 mb-2" %>
-          <div class="flex space-x-2">
-            <%= f.date_field :recorded_on_gteq, 
-                             class: "form-input block w-1/2 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500",
-                             placeholder: "開始日" %>
-            <%= f.date_field :recorded_on_lteq, 
-                             class: "form-input block w-1/2 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500",
-                             placeholder: "終了日" %>
-          </div>
+      <div>
+        <%= f.label :recorded_on, "測定期間", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <div class="flex space-x-2">
+          <%= f.date_field :recorded_on_gteq, 
+                           class: "form-input w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2",
+                           placeholder: "開始日" %>
+          <span class="text-gray-500">〜</span>
+          <%= f.date_field :recorded_on_lteq, 
+                           class: "form-input w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2",
+                           placeholder: "終了日" %>
         </div>
-        <!-- 肉体的疲労度 -->
+      </div>
+
+        <!-- 
         <div class="p-4 bg-gray-100 rounded-md shadow-sm">
           <%= f.label :fatigue_level_gteq, "肉体的疲労度", class: "block text-sm font-medium text-gray-700 mb-2" %>
           <div class="flex space-x-2">
@@ -38,8 +37,6 @@
                                placeholder: "最高値" %>
           </div>
         </div>
-
-        <!-- 精神的疲労度 -->
         <div class="p-4 bg-gray-100 rounded-md shadow-sm">
           <%= f.label :mental_state_gteq, "精神的疲労度", class: "block text-sm font-medium text-gray-700 mb-2" %>
           <div class="flex space-x-2">
@@ -51,10 +48,11 @@
                                placeholder: "最高値" %>
           </div>
         </div>
+        -->
       </div>
 
-      <div class="flex justify-end">
-        <%= f.submit "検索", class: "btn btn-info text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600" %>
+      <div class="flex items-end">
+        <%= f.submit "🔍 検索", class: "w-full bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-semibold px-4 py-2 rounded-md shadow-md hover:from-blue-600 hover:to-cyan-500 hover:shadow-lg transition duration-300 ease-in-out" %>
       </div>
     <% end %>
   </form>

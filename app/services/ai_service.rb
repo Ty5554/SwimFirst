@@ -3,7 +3,7 @@ require "httparty"
 class AiService
   include HTTParty
   base_uri "https://api.openai.com/v1"
-  
+
   def self.get_feedback(content)
     Rails.logger.info "AIService: OpenAI API にリクエストを送信します。"
 
@@ -14,7 +14,7 @@ class AiService
       },
       body: {
         model: "gpt-4o-mini",
-        messages: [{ role: "user", content: "この日誌の感想について、フィードバックを1〜2行で返してください: #{content}" }],
+        messages: [ { role: "user", content: "あなたは優秀な水泳のコーチです。この日誌の感想について、プロフェッショナルな観点からフィードバックを3~4行で返してください: #{content}" } ],
         max_tokens: 100
       }.to_json
     )
