@@ -3,17 +3,10 @@
     <ul class="menu menu-compact">
       <!-- メニュー項目 -->
       <% if user_signed_in? %>
-      <% if current_user.role.coach? %>
 <li class="mt-2">
-  <%= link_to "選手レコード", self_records_path, 
+  <%= link_to "レコード", self_records_path, 
         class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
 </li>
-<% else %>
-<li class="mt-2">
-  <%= link_to "マイレコード", self_records_path, 
-        class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
-</li>
-<% end %>
 <li>
   <%= link_to "コンディション", conditions_path, 
         class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
@@ -29,13 +22,6 @@
 <li>
   <%= link_to "日誌", diaries_path, 
         class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
-</li>
-
-<li>
-  <% if @team.present? && current_user.role.coach? %>
-    <%= link_to "メンバー管理", athletes_team_path(@team), 
-                class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
-  <% end %>
 </li>
 <li class="mt-2">
   <%= link_to "TOPページ", root_path, 

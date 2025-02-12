@@ -41,3 +41,4 @@ ja:
       not_found: "見つかりませんでした。"
       too_short: "短すぎます（%{count}文字以上）"
       too_long: "長すぎます（%{count}文字以内）"
+      not_saved: "保存に失敗しました。入力内容を確認してください。"

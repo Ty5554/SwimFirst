@@ -26,34 +26,34 @@
         <% if user_signed_in? %>
           <li class="hidden md:block">
             <%= link_to "メニュー", self_records_path, 
-              class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
+                  class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
           </li>
+          <% if current_user.role.coach? %>
+            <li class="hidden md:block">
+              <%= link_to "メンバー招待", team_invitations_path, 
+                    class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+            </li>
+          <% end %>
+        <% if @team.present? && current_user.role.coach? %>
           <li class="hidden md:block">
-           <% if current_user.role.coach? %>
-            <%= link_to "招待URL", team_invitations_path, 
-            class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
-            <% end %>
-          </li>
-          <li class="hidden md:block">
-            <% if @team.present? && current_user.role.coach? %>
-              <%= link_to "メンバー管理", athletes_team_path(@team), 
-                          class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
-            <% end %>
-          </li>
-          <li>
-            <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_confirm: "本当にログアウトしますか？" }, 
-            class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
-          </li>
-        <% else %>
-          <li>
-            <%= link_to "新規登録", new_user_registration_path, 
-            class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
-          </li>
-          <li>
-            <%= link_to "ログイン", new_user_session_path, 
-            class: "btn btn-outline bg-sky-700 text-cyan-200 hover:text-white hover:bg-cyan-300 border-cyan-600 shadow-lg" %>
+            <%= link_to "メンバー管理", athletes_team_path(@team), 
+                  class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
           </li>
         <% end %>
+        <li>
+          <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_confirm: "本当にログアウトしますか？" }, 
+                class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-red-500 to-red-700 hover:shadow-lg px-4 py-2" %>
+        </li>
+        <% else %>
+        <li>
+          <%= link_to "新規登録", new_user_registration_path, 
+                class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+        </li>
+        <li>
+          <%= link_to "ログイン", new_user_session_path, 
+                class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+        </li>
+       <% end %>
         </ul>
       </div>
     </div>
@@ -78,7 +78,7 @@
         <% end %>
       </li>
       <li>
-        <%= link_to "マイレコード", self_records_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
+        <%= link_to "レコード", self_records_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>
       </li>
       <li>
         <%= link_to "コンディション", conditions_path, class: "btn bg-white text-cyan-500 hover:bg-cyan-600 w-full h-12 rounded-md shadow-md" %>

@@ -3,7 +3,7 @@
   <% search_key = current_user.role.athlete? ? :q : :all_q %>
 
   <%= search_form_for search_object, as: search_key, url: url, method: :get, class: "bg-white shadow-md rounded-md p-4 mb-6" do |f| %>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
       <% if current_user.role.coach? %>
         <div>
           <%= f.label :user_id_eq, "選手を選択", class: "block text-sm font-medium text-gray-700 mb-1" %>
