@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get "terms_of_use", to: "home_pages#terms_of_use"
   get "privacy_policy", to: "home_pages#privacy_policy"
 
+  get "/users/sign_in/google783a1c6f3e6491e1.html", to: redirect("/google783a1c6f3e6491e1.html")
+
   resources :self_records, only: [ :index, :new, :create, :edit, :update, :show, :destroy ]
   resources :conditions, only: [ :index, :new, :create, :edit, :update, :show, :destroy ] do
     collection do
