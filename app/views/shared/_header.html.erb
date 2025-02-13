@@ -22,23 +22,30 @@
     <div class="bg-blue-950 text-white">
       <div class="container mx-auto flex justify-center items-center h-16">
     <!-- メニューリスト -->
+      <div x-data="{ open: false, menu: false, invite: false }">
         <ul class="flex space-x-4 items-center">
         <% if user_signed_in? %>
+        <li class="hidden md:block">
+          <button @click="menu = true"
+                  class="block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2">
+            メニュー
+          </button>
+        </li>
+
+        <% if current_user.role.coach? %>
           <li class="hidden md:block">
-            <%= link_to "メニュー", self_records_path, 
-                  class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+            <button @click="invite = true"
+                    class="block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2">
+              メンバー招待
+            </button>
           </li>
-          <% if current_user.role.coach? %>
-            <li class="hidden md:block">
-              <%= link_to "メンバー招待", team_invitations_path, 
-                    class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
-            </li>
-          <% end %>
+        <% end %>
+
         <% if @team.present? && current_user.role.coach? %>
-          <li class="hidden md:block">
-            <%= link_to "メンバー管理", athletes_team_path(@team), 
-                  class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
-          </li>
+        <li class="hidden md:block">
+          <%= link_to "メンバー管理", athletes_team_path(@team), 
+                class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+        </li>
         <% end %>
         <li>
           <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_confirm: "本当にログアウトしますか？" }, 
@@ -46,8 +53,10 @@
         </li>
         <% else %>
         <li>
-          <%= link_to "新規登録", new_user_registration_path, 
-                class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+          <button @click="open = true" 
+                  class="block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2">
+            新規登録
+          </button>
         </li>
         <li>
           <%= link_to "ログイン", new_user_session_path, 
@@ -55,6 +64,8 @@
         </li>
        <% end %>
         </ul>
+      <%= render 'shared/modal' %>
+  </div>
       </div>
     </div>
     <% if user_signed_in? %>
