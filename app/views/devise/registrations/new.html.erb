@@ -1,9 +1,25 @@
-<section class="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-center">
-  <div class="w-full max-w-md bg-white rounded-lg shadow-md dark:border dark:border-gray-700 dark:bg-gray-800">
-    <div class="p-6 space-y-4 sm:p-8">
-      <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-        新規アカウント登録
-      </h1>
+<section class="bg-gray-100 dark:bg-gray-900 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+  <div class="w-full max-w-md bg-white rounded-xl shadow-lg dark:bg-gray-800 dark:border dark:border-gray-700 p-8">
+    <h1 class="text-2xl font-extrabold text-gray-900 dark:text-white text-center mb-4">
+      新規登録
+    </h1>
+    <p class="text-center text-gray-600 dark:text-gray-300 mb-6">
+      アカウントを作成して、SwimFisrtを利用しましょう
+    </p>
+    <!-- Google Sign Up Button -->
+    <div class="flex justify-center mb-6">
+      <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: "false" }, class: "inline-block dark:bg-gray-800 px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150" do %>
+        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google logo" class="w-6 h-6" loading="lazy">
+        <span>Sign up with Google</span>
+      <% end %>
+    </div>
+
+    <div class="relative flex items-center mb-6">
+      <div class="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
+      <span class="px-2 text-gray-500 dark:text-gray-400 text-sm">または</span>
+      <div class="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
+    </div>
+
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-4" }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <div>
@@ -57,27 +73,17 @@
           <div class="flex items-center h-5">
             <%= check_box_tag :terms, "1", false, class: "w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:ring-offset-gray-800" %>
           </div>
-          <div class="ml-3 text-sm">
-            <label for="terms" class="font-light text-gray-500 dark:text-gray-300">
-              I accept the <a href="#" class="font-medium text-blue-500 hover:underline dark:text-blue-400">Terms and Conditions</a>
-            </label>
-          </div>
+        <div class="ml-3 text-sm">
+          <%= link_to "利用規約に同意しました", terms_of_use_path, class: "font-medium text-blue-500 hover:underline dark:text-blue-400" %>
+        </div>
         </div>
         <div>
           <%= f.submit "登録", class: "w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
         </div>
       <% end %>
-      <div class="mt-8 border-t-4"></div>
-      <div class="flex justify-center">
-        <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: "false" }, class: "inline-block dark:bg-gray-800 px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150" do %>
-          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google logo" class="w-6 h-6" loading="lazy">
-          <span>Sign up with Google</span>
-        <% end %>
-      </div>
       <p class="text-sm font-light text-gray-500 dark:text-gray-400">
         Already have an account? <%= link_to "Login here", new_user_session_path, class: "font-medium text-blue-500 hover:underline dark:text-blue-400" %>
       </p>
     </div>
-  </div>
 </section>
 <%= render 'shared/footer' %>

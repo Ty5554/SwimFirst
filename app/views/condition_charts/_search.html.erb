@@ -2,7 +2,7 @@
   <% search_object = current_user.role.athlete? ? @q : @all_q %>
   <% search_key = current_user.role.athlete? ? :q : :all_q %>
 
-  <%= search_form_for search_object, as: search_key, url: condition_charts_path, method: :get, class: "bg-white shadow-md rounded-md p-4 mb-6" do |f| %>
+  <%= search_form_for search_object, as: search_key, url: condition_charts_path, method: :get, class: "bg-white shadow-md rounded-md p-4 mb-4" do |f| %>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
       <% if current_user.role.coach? %>
         <div>
