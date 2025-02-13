@@ -1,4 +1,4 @@
-<h1 class="text-2xl font-bold mb-6 text-gray-800">招待URLを発行する</h1>
+<h1 class="text-2xl font-extrabold text-cyan-800 mb-3 text-center">メンバー招待</h1>
 <div class="flex items-center justify-center" data-controller="generate-url">
   <div class="w-full max-w-4xl bg-white rounded-lg shadow-lg p-4">
     <p class="text-gray-600 mb-8 leading-relaxed">
@@ -12,24 +12,24 @@
       <span class="font-bold text-lg text-blue-600 bg-blue-50 px-2 py-1 rounded-md">
       <%= @team.team_name %>
       </span>
-      の招待URLです。指導者の皆さんは下記の「URLを生成」をクリックして招待URLを発行してください。
+      の招待URLです。指導者の皆さんは下記の「URLを発行」をクリックして招待URLを発行してください。
       </p>
       <button
         data-action="click->generate-url#generate"
         class="btn btn-primary w-full"
       >
-        URLを生成
+        招待URLを発行
       </button>
 
       <!-- 招待URLを表示する場所 -->
       <div data-generate-url-target="urlContainer" class="hidden bg-blue-50 mt-6 p-4 rounded-xl shadow-md">
-        <p class="text-gray-800 font-medium">以下のリンクを選手に共有してください:</p>
+        <p class="text-gray-800 font-medium">以下のURLを選手に共有してください(※チームメンバー以外に共有しないでください。)</p>
         <a data-generate-url-target="link" class="text-blue-600 underline break-all"></a>
       </div>
     </div>
 
     <p class="text-gray-600">
-      選手が登録申請をしたら、メンバー管理ページにて申請状況が表示されますので、そちらより「承認」をしてください。
+      選手が登録申請をしたら、メンバー管理ページで選手登録の申請を「承認」してください。
     </p>
   </div>
 </div>
