@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  before_create :set_default_modal_shown
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_one :role, dependent: :destroy
@@ -87,5 +88,11 @@ class User < ApplicationRecord
       end
       { user:, sns: }
     end
+  end
+
+  private
+
+  def set_default_modal_shown
+    self.modal_shown = false if modal_shown.nil?
   end
 end

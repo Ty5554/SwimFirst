@@ -32,8 +32,9 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     registrations: "registrations",
-    omniauth_callbacks: "users/omniauth_callbacks"
+    omniauth_callbacks: "users/omniauth_callbacks",
   }
+  post "/hide_modal", to: "application#hide_modal"
 
   devise_scope :user do
     post "registrations/create_athlete", to: "registrations#create_athlete", as: :registrations_create_athlete
