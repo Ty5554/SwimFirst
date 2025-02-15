@@ -19,53 +19,63 @@
 
     <!-- メニューリスト -->
     <!-- ヘッダー -->
-    <div class="bg-blue-950 text-white">
+      <div class="bg-blue-950 text-white">
+        <div x-data="{ menu: false, invite: false, open: false }" x-init="
+          <% if @show_modal && @modal_type.present? %>
+            <%= @modal_type %> = true;
+          <% end %>
+        ">
       <div class="container mx-auto flex justify-center items-center h-16">
     <!-- メニューリスト -->
-      <div x-data="{ open: false, menu: false, invite: false }">
         <ul class="flex space-x-4 items-center">
-        <% if user_signed_in? %>
-        <li class="hidden md:block">
-          <button @click="menu = true"
-                  class="block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2">
-            メニュー
-          </button>
-        </li>
-
+          <% if user_signed_in? %>
+          <li>
+            <%= link_to "メニュー", self_records_path, 
+                  class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+          </li>
         <% if current_user.role.coach? %>
-          <li class="hidden md:block">
-            <button @click="invite = true"
-                    class="block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2">
+          <li>
+            <%= link_to team_invitations_path(show_modal: "invite"),
+                        class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" do %>
               メンバー招待
-            </button>
+            <% end %>
           </li>
         <% end %>
 
         <% if @team.present? && current_user.role.coach? %>
-        <li class="hidden md:block">
-          <%= link_to "メンバー管理", athletes_team_path(@team), 
-                class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
-        </li>
+          <li class="hidden md:block">
+            <%= link_to "メンバー管理", athletes_team_path(@team), 
+                  class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+          </li>
         <% end %>
-        <li>
-          <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_confirm: "本当にログアウトしますか？" }, 
-                class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-red-500 to-red-700 hover:shadow-lg px-4 py-2" %>
-        </li>
+          <li>
+            <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_confirm: "本当にログアウトしますか？" }, 
+                  class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-red-500 to-red-700 hover:shadow-lg px-4 py-2" %>
+          </li>
         <% else %>
-        <li>
-          <button @click="open = true" 
-                  class="block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2">
-            新規登録
-          </button>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_user_session_path, 
-                class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
-        </li>
-       <% end %>
+          <li>
+            <button @click="open = true" 
+                    class="block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2">
+              新規登録
+            </button>
+          </li>
+          <li>
+            <%= link_to "ログイン", new_user_session_path, 
+                  class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+          </li>
+        <% end %>
         </ul>
-      <%= render 'shared/modal' %>
-  </div>
+        <%= render 'shared/modal_component', 
+          modal_variable: 'open',
+          title: '新規登録ガイドをご覧になりますか？',
+          links: [{ url: 'https://youtu.be/QTo8oXM1pi4?si=bw3o3fZz6gUdsjDz', text: 'ガイドを見る' }],
+          action_link: { url: new_user_registration_path, text: '新規登録へ進む' } %>
+        <%= render 'shared/modal_component', 
+          modal_variable: 'invite',
+          title: '招待ガイドをご覧になりますか？',
+          links: [{ url: 'https://youtu.be/QTo8oXM1pi4?si=bw3o3fZz6gUdsjDz', text: 'ガイドを見る' }],
+          action_link: { url: team_invitations_path, text: '招待ページへ進む' } %>
+        </div>
       </div>
     </div>
     <% if user_signed_in? %>

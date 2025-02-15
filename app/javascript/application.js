@@ -2,4 +2,5 @@
 import "@hotwired/turbo-rails"
 Turbo.session.drive = false
 import "./controllers"
-import "./modal";
+import "./modal"
+import "./modal_control";

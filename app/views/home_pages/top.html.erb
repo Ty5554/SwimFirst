@@ -49,64 +49,94 @@
 <div class="bg-gradient-to-b from-blue-900 to-blue-500 text-white py-12">
   <section class="text-center mb-12">
     <h2 class="text-4xl font-bold">SWIM FIRSTの</h2>
-    <h3 class="text-5xl font-bold text-cyan-300">機能のご紹介</h3>
+    <h3 class="text-5xl font-bold text-cyan-300 mb-2">機能のご紹介</h3>
+    <p class="text-base font-bold">(※機能をクリックすると操作ガイドを確認できます。)</p>
   </section>
-
+  <div x-data="{ open: false, menu: false, invite: false }">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-8">
     <!-- グラフ機能 -->
-    <section class="card bg-white text-black shadow-md p-6 text-center">
-    <div class="bg-white text-black p-2 text-center">
-      <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-md shadow-md">01 コンディション機能</h3>
-      <hr class="my-2 border-blue-500">
-      <p class="text-cyan-500 font-bold">
-        コンディションデータの管理
-      </p>
-      <p class="mt-4 text-gray-700">
-        <li>選手の体温、睡眠時間、疲労度をデータ化し、一元管理します。</li>
-        <li>グラフ化により、コンディションの変化を視覚的に把握できます。</li>
-      </p>
-    </section>
+<section @click="menu = true" 
+         class="card bg-white text-black shadow-md p-6 text-center cursor-pointer 
+                hover:scale-105 hover:shadow-lg transition duration-300">
+  <div class="bg-white text-black p-2 text-center">
+    <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-md shadow-md">
+      01 コンディション機能
+    </h3>
+    <hr class="my-2 border-blue-500">
+    <p class="text-cyan-500 font-bold">
+      コンディションデータの管理
+    </p>
+    <p class="mt-4 text-gray-700">
+      <li>選手の体温、睡眠時間、疲労度をデータ化し、一元管理します。</li>
+      <li>グラフ化により、コンディションの変化を視覚的に把握できます。</li>
+    </p>
+  </div>
+</section>
 
     <!-- コンディション機能 -->
-    <section class="card bg-white text-black shadow-md p-6 text-center">
-    <div class="bg-white text-black p-2 text-center">
-      <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-md shadow-md">02 フィジカル機能</h3>
-      <hr class="my-2 border-blue-500">
-      <p class="text-cyan-500 font-bold">
+<section @click="menu = true" 
+         class="card bg-white text-black shadow-md p-6 text-center cursor-pointer 
+                hover:scale-105 hover:shadow-lg transition duration-300">
+  <div class="bg-white text-black p-2 text-center">
+    <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-md shadow-md">
+        02 フィジカル機能
+    </h3>
+    <hr class="my-2 border-blue-500">
+    <p class="text-cyan-500 font-bold">
         フィジカルデータの管理
-      </p>
-      <p class="mt-4 text-gray-700">
+    </p>
+    <p class="mt-4 text-gray-700">
       <li>選手の身長、体重、体脂肪率をデータ管理します。</li>
       <li>グラフ化により、身体の成長をわかりやすく確認できます。</li>
-      </p>
-    </section>
+    </p>
+  </div>
+</section>
 
     <!-- フィジカル機能 -->
-    <section class="card bg-white text-black shadow-md p-6 text-center">
-    <div class="bg-white text-black p-2 text-center">
-      <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-md shadow-md">03 トレーニング機能</h3>
-      <hr class="my-2 border-blue-500">
-      <p class="text-cyan-500 font-bold">
+<section @click="menu = true" 
+         class="card bg-white text-black shadow-md p-6 text-center cursor-pointer 
+                hover:scale-105 hover:shadow-lg transition duration-300">
+  <div class="bg-white text-black p-2 text-center">
+    <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-md shadow-md">
+        03 トレーニング機能
+    </h3>
+    <hr class="my-2 border-blue-500">
+    <p class="text-cyan-500 font-bold">
         トレーニングメニューの作成
-      </p>
-      <p class="mt-4 text-gray-700">
+    </p>
+    <p class="mt-4 text-gray-700">
       <li>水泳のトレーニングメニューを作成し、運動強度を適切に設定します。</li>
       <li>選手は心拍数を入力し、トレーニングの評価を数値化できます。</li>
-      </p>
-    </section>
+    </p>
+  </div>
+</section>
 
-    <section class="card bg-white text-black shadow-md p-6 text-center">
-    <div class="bg-white text-black p-2 text-center">
-      <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-md shadow-md">04 AI機能</h3>
-      <hr class="my-2 border-blue-500">
-      <p class="text-cyan-500 font-bold">
+<section @click="menu = true" 
+         class="card bg-white text-black shadow-md p-6 text-center cursor-pointer 
+                hover:scale-105 hover:shadow-lg transition duration-300">
+  <div class="bg-white text-black p-2 text-center">
+    <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-md shadow-md">
+        04 AI機能
+    </h3>
+    <hr class="my-2 border-blue-500">
+    <p class="text-cyan-500 font-bold">
         トレーニング日誌の作成
-      </p>
-      <p class="mt-4 text-gray-700">
+    </p>
+    <p class="mt-4 text-gray-700">
       <li>選手が記録したトレーニング日誌に対し、AIがフィードバックを提供します。</li>
       <li>日誌の習慣化をサポートし、継続的な成長を促します。</li>
-      </p>
-    </section>
+    </p>
+  </div>
+</section>
+  <%= render 'shared/modal_component', 
+        modal_variable: 'menu',
+        title: '操作ガイドをご覧になりますか？',
+        links: [
+          { url: 'https://youtu.be/SA1FAdTz7HU?si=_P77LuYiPWK14wWP', text: 'コーチの方はこちら' },
+          { url: 'https://youtu.be/Ms2sfDpcoyA?si=EFFMA8a2FJCoPHw_', text: 'アスリートの方はこちら' }
+        ],
+        action_link: nil %>
+  </div>
   </div>
 </div>
 <%= render 'shared/footer' %>
