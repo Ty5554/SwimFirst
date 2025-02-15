@@ -27,7 +27,6 @@ class ApplicationController < ActionController::Base
     @show_modal = false
     @modal_type = nil
 
-  #`params[:show_modal]` があれば、強制的にモーダルを開く
     if params[:show_modal].present? && !current_user.modal_shown
       @show_modal = true
       @modal_type = params[:show_modal]
