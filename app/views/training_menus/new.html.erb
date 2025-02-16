@@ -1,6 +1,5 @@
+<h1 class="text-2xl font-extrabold text-cyan-800 mb-3 text-center">トレーニングメニュー作成</h1>
 <div class="container mx-auto p-6" >
-  <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">メニュー設定</h1>
-
   <%= form_with model: @training_menu, class: "space-y-6 bg-white p-6 shadow-lg rounded-lg" do |f| %>
     <!-- トレーニング日 -->
     <div>
@@ -22,7 +21,7 @@
     </div>
 
     <!-- 動的フィールド: セット毎の運動強度 -->
-    <div id="training-sets-fields" class="space-y-4 mt-4" >
+    <div id="training-sets-fields" class="space-y-4 mt-4 mb-3" >
       <!-- 初期セットフィールド -->
       <div class="form-control border border-gray-200 rounded-lg p-4 bg-gray-50 shadow-sm" >
         <div>

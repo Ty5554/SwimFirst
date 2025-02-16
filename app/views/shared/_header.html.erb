@@ -29,12 +29,12 @@
     <!-- メニューリスト -->
         <ul class="flex space-x-4 items-center">
           <% if user_signed_in? %>
-          <li>
+          <li class="hidden md:block" data-turbo="false">
             <%= link_to "メニュー", self_records_path, 
                   class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
           </li>
         <% if current_user.role.coach? %>
-          <li>
+          <li class="hidden md:block" data-turbo="false">
             <%= link_to team_invitations_path(show_modal: "invite"),
                         class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" do %>
               メンバー招待
@@ -53,7 +53,7 @@
                   class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-red-500 to-red-700 hover:shadow-lg px-4 py-2" %>
           </li>
         <% else %>
-          <li>
+          <li data-turbo="false">
             <button @click="open = true" 
                     class="block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2">
               新規登録
@@ -68,7 +68,7 @@
         <%= render 'shared/modal_component', 
           modal_variable: 'open',
           title: '新規登録ガイドをご覧になりますか？',
-          links: [{ url: 'https://youtu.be/QTo8oXM1pi4?si=bw3o3fZz6gUdsjDz', text: 'ガイドを見る' }],
+          links: [{ url: 'https://youtu.be/LhQykSOoEUA?si=ApDQod8N6I_CiUmO', text: 'ガイドを見る' }],
           action_link: { url: new_user_registration_path, text: '新規登録へ進む' } %>
         <%= render 'shared/modal_component', 
           modal_variable: 'invite',

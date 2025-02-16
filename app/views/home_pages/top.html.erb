@@ -52,12 +52,12 @@
     <h3 class="text-5xl font-bold text-cyan-300 mb-2">機能のご紹介</h3>
     <p class="text-base font-bold">(※機能をクリックすると操作ガイドを確認できます。)</p>
   </section>
-  <div x-data="{ open: false, menu: false, invite: false }">
+  <div x-data="{ condition: false, physical: false, training: false, ai: false }">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-8">
     <!-- グラフ機能 -->
-<section @click="menu = true" 
+<section @click="condition = true" 
          class="card bg-white text-black shadow-md p-6 text-center cursor-pointer 
-                hover:scale-105 hover:shadow-lg transition duration-300">
+                hover:scale-105 hover:shadow-lg transition duration-300" data-turbo="false">
   <div class="bg-white text-black p-2 text-center">
     <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-md shadow-md">
       01 コンディション機能
@@ -74,9 +74,9 @@
 </section>
 
     <!-- コンディション機能 -->
-<section @click="menu = true" 
+<section @click="physical = true" 
          class="card bg-white text-black shadow-md p-6 text-center cursor-pointer 
-                hover:scale-105 hover:shadow-lg transition duration-300">
+                hover:scale-105 hover:shadow-lg transition duration-300" data-turbo="false">
   <div class="bg-white text-black p-2 text-center">
     <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-md shadow-md">
         02 フィジカル機能
@@ -92,10 +92,10 @@
   </div>
 </section>
 
-    <!-- フィジカル機能 -->
-<section @click="menu = true" 
+    <!-- トレーニング機能 -->
+<section @click="training = true" 
          class="card bg-white text-black shadow-md p-6 text-center cursor-pointer 
-                hover:scale-105 hover:shadow-lg transition duration-300">
+                hover:scale-105 hover:shadow-lg transition duration-300" data-turbo="false">
   <div class="bg-white text-black p-2 text-center">
     <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-md shadow-md">
         03 トレーニング機能
@@ -111,9 +111,9 @@
   </div>
 </section>
 
-<section @click="menu = true" 
+<section @click="ai = true" 
          class="card bg-white text-black shadow-md p-6 text-center cursor-pointer 
-                hover:scale-105 hover:shadow-lg transition duration-300">
+                hover:scale-105 hover:shadow-lg transition duration-300" data-turbo="false">
   <div class="bg-white text-black p-2 text-center">
     <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-md shadow-md">
         04 AI機能
@@ -129,13 +129,40 @@
   </div>
 </section>
   <%= render 'shared/modal_component', 
-        modal_variable: 'menu',
-        title: '操作ガイドをご覧になりますか？',
+        modal_variable: 'condition',
+        title: 'コンディション機能ガイドをご覧になりますか？',
         links: [
-          { url: 'https://youtu.be/SA1FAdTz7HU?si=_P77LuYiPWK14wWP', text: 'コーチの方はこちら' },
-          { url: 'https://youtu.be/Ms2sfDpcoyA?si=EFFMA8a2FJCoPHw_', text: 'アスリートの方はこちら' }
+          { url: 'https://youtu.be/TCUQmHzMRaI?si=6VZnvfMyBtMf9BbW', text: 'コーチの方はこちら' },
+          { url: 'https://youtu.be/Rm_9bnU8VO8?si=11bKtRH-YWpg2Iw2', text: 'アスリートの方はこちら' }
         ],
         action_link: nil %>
+
+  <%= render 'shared/modal_component', 
+        modal_variable: 'physical',
+        title: 'フィジカル機能ガイドをご覧になりますか？',
+        links: [
+          { url: 'https://youtu.be/bYdqrcqXWZo?si=HHjM4JDI9HS5lytK', text: 'コーチの方はこちら' },
+          { url: 'https://youtu.be/X3mu-ou72co?si=WiibTfDeAlmvn1J5', text: 'アスリートの方はこちら' }
+        ],
+        action_link: nil %>
+
+  <%= render 'shared/modal_component', 
+        modal_variable: 'training',
+        title: 'トレーニング機能ガイドをご覧になりますか？',
+        links: [
+          { url: 'https://youtu.be/xy3G1UIQ5hg?si=UurQjlbNHKhqn3R5', text: 'コーチの方はこちら' },
+          { url: 'https://youtu.be/i1GYVa2EC-0?si=tgNplHof2M0MUMEs', text: 'アスリートの方はこちら' }
+        ],
+        action_link: nil %>
+
+  <%= render 'shared/modal_component', 
+        modal_variable: 'ai',
+        title: 'AI機能ガイドをご覧になりますか？',
+        links: [
+          { url: 'https://youtu.be/aZ-dFqRMfS8?si=J-7VuntdU__ECwOP', text: 'ガイドはこちら' }
+        ],
+        action_link: nil %>
+
   </div>
   </div>
 </div>
