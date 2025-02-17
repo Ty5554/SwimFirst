@@ -31,10 +31,10 @@
                 <%= f.check_box :remember_me, class: "w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-500 dark:ring-offset-gray-800" %>
               </div>
               <div class="ml-3 text-sm">
-                <%= f.label :remember_me, "Remember me", class: "text-gray-500 dark:text-gray-300" %>
+                <%= f.label :remember_me, "ログイン状態を保持する", class: "text-gray-500 dark:text-gray-300" %>
               </div>
             </div>
-            <a href="#" class="text-sm font-medium text-blue-500 hover:underline dark:text-blue-400">Forgot password?</a>
+            <%= link_to "パスワードをお忘れですか？", new_user_password_path, class: "text-sm font-medium text-blue-500 hover:underline dark:text-blue-400" %>
           </div>
         <% end %>
         <div>
@@ -42,7 +42,8 @@
         </div>
       <% end %>
       <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-        Don’t have an account yet? <a href="<%= new_registration_path(resource_name) %>" class="font-medium text-blue-500 hover:underline dark:text-blue-400">Sign up</a>
+        アカウントをお持ちでないですか？
+        <a href="<%= new_registration_path(resource_name) %>" class="font-medium text-blue-500 hover:underline dark:text-blue-400">新規登録</a>
       </p>
     </div>
   </div>
