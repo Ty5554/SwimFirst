@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   before_create :set_default_modal_shown
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_one :role, dependent: :destroy
@@ -30,7 +31,10 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :teams
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
+         :confirmable,
          :omniauthable, omniauth_providers: %i[google_oauth2]
+
+  before_validation :skip_confirmation_for_google, on: :create
 
   class << self   # ここからクラスメソッドで、メソッドの最初につける'self.'を省略できる
     # SnsCredentialsテーブルにデータがないときの処理
@@ -90,9 +94,20 @@ class User < ApplicationRecord
     end
   end
 
+  def is_confirmation_period_expired?
+    # メールアドレス確認メール有効期限チェック(期限はconfig/initializers/devise.rbのconfirm_withinで設定)
+    self.confirmation_period_expired?
+  end
+
   private
 
   def set_default_modal_shown
     self.modal_shown = false if modal_shown.nil?
+  end
+
+  def skip_confirmation_for_google
+    if sns_credentials.exists?(provider: "google_oauth2")
+      self.confirmed_at = Time.current
+    end
   end
 end

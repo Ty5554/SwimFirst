@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     registrations: "registrations",
+    confirmations: "users/confirmations",
     omniauth_callbacks: "users/omniauth_callbacks"
   }
   post "/hide_modal", to: "application#hide_modal"
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
     post "registrations/create_athlete", to: "registrations#create_athlete", as: :registrations_create_athlete
     get "complete_registration", to: "registrations#complete_registration"
     patch "complete_registration", to: "registrations#update_registration"
+    put "confirmation", to: "users/confirmations#show", as: :back_confirmation
   end
 
   resources :team_invitations, only: [ :index, :show, :destroy ] do
