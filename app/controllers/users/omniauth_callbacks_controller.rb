@@ -13,6 +13,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       # Google の OAuth 認証情報を SnsCredential に保存
       save_google_tokens(@user, @omniauth) if provider == :google
 
+      if @user.sns_credentials.exists?(provider: "google_oauth2")
+        @user.update(confirmed_at: Time.current) unless @user.confirmed?
+      end
+
       if @user.role.nil? || @user.teams.empty?
         # 未設定の場合は登録完了ページへリダイレクト
         sign_in @user

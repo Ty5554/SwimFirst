@@ -1,0 +1,16 @@
+<h2>エラー画面</h2>
+<% if resource.errors.any? %>
+  <article class="message is-danger">
+    <div class="message-header">
+      <p><%= pluralize(resource.errors.count, "件のエラー") %> により、この操作を完了できませんでした。</p>
+      <button class="delete" aria-label="削除"></button>
+    </div>
+    <div class="message-body">
+      <ul>
+      <% resource.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  </article>
+<% end %>
