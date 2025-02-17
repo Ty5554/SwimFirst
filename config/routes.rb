@@ -33,8 +33,10 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: "registrations",
     confirmations: "users/confirmations",
+    passwords: "users/passwords",
     omniauth_callbacks: "users/omniauth_callbacks"
   }
+  resources :users, only: [ :show ]
   post "/hide_modal", to: "application#hide_modal"
 
   devise_scope :user do
