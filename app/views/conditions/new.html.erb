@@ -14,17 +14,35 @@
         <%= form.number_field :sleep_hours, step: 0.1, class: "input input-bordered w-full", placeholder: "例: 7.5" %>
       </div>
 
-      <!-- 疲労度 -->
-      <div class="form-control">
-        <%= form.label :fatigue_level, '疲労度', class: "label font-bold text-gray-700" %>
-        <%= form.range_field :fatigue_level, min: 0, max: 100, class: "range w-full" %>
-      </div>
+<!-- 疲労度 -->
+<div class="form-control">
+  <%= form.label :fatigue_level, '肉体的疲労度(1:低い〜10:高い)', class: "label font-bold text-gray-700" %>
+  <div class="grid grid-cols-5 sm:grid-cols-5 md:grid-cols-10 gap-2">
+    <% (1..10).each do |num| %>
+      <label class="flex items-center justify-center">
+        <%= form.radio_button :fatigue_level, num, class: "hidden peer" %>
+        <span class="w-full text-center px-3 py-1 border border-gray-400 rounded-lg text-gray-700 cursor-pointer hover:bg-blue-500 hover:text-white peer-checked:bg-blue-500 peer-checked:text-white">
+          <%= num %>
+        </span>
+      </label>
+    <% end %>
+  </div>
+</div>
 
-      <!-- 精神的疲労 -->
-      <div class="form-control">
-        <%= form.label :mental_state, '精神的疲労', class: "label font-bold text-gray-700" %>
-        <%= form.range_field :mental_state, min: 0, max: 100, class: "range w-full" %>
-      </div>
+<!-- 精神的疲労 -->
+<div class="form-control">
+  <%= form.label :mental_state, '精神的疲労(1:低い〜10:高い)', class: "label font-bold text-gray-700" %>
+  <div class="grid grid-cols-5 sm:grid-cols-5 md:grid-cols-10 gap-2">
+    <% (1..10).each do |num| %>
+      <label class="flex items-center justify-center">
+        <%= form.radio_button :mental_state, num, class: "hidden peer" %>
+        <span class="w-full text-center px-3 py-1 border border-gray-400 rounded-lg text-gray-700 cursor-pointer hover:bg-blue-500 hover:text-white peer-checked:bg-blue-500 peer-checked:text-white">
+          <%= num %>
+        </span>
+      </label>
+    <% end %>
+  </div>
+</div>
 
       <!-- 記録日 -->
       <div class="form-control">

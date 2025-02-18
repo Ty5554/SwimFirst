@@ -14,4 +14,17 @@ class SelfRecord < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     [ "user" ]
   end
+
+  def formatted_record
+    total_seconds = record / 100.0
+    minutes = (total_seconds / 60).to_i
+    seconds = (total_seconds % 60).to_i
+    milliseconds = (record % 100).to_s.rjust(2, '0')
+
+    if minutes > 0
+      "#{minutes}'#{seconds}\"#{milliseconds}"
+    else
+      "#{seconds}.#{milliseconds}"
+    end
+  end
 end

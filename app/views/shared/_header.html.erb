@@ -20,12 +20,12 @@
     <!-- メニューリスト -->
     <!-- ヘッダー -->
       <div class="bg-blue-950 text-white">
-        <div x-data="{ menu: false, invite: false, open: false }" x-init="
+        <div x-data="{ menu: false, invite: false, open: false }" data-turbo="false" data-turbo-permanent x-init="
           <% if @show_modal && @modal_type.present? %>
             <%= @modal_type %> = true;
           <% end %>
         ">
-      <div class="container mx-auto flex justify-center items-center h-16">
+      <div class="container mx-auto flex justify-center items-center h-16" data-turbo="false">
     <!-- メニューリスト -->
         <ul class="flex space-x-4 items-center">
           <% if user_signed_in? %>
@@ -34,7 +34,7 @@
                   class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
           </li>
         <% if current_user.role.coach? %>
-          <li class="hidden md:block" data-turbo="false">
+          <li class="hidden md:block" data-turbo="false" x-cloak>
             <%= link_to team_invitations_path(show_modal: "invite"),
                         class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" do %>
               メンバー招待
@@ -53,7 +53,7 @@
                   class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-red-500 to-red-700 hover:shadow-lg px-4 py-2" %>
           </li>
         <% else %>
-          <li data-turbo="false">
+          <li data-turbo="false" x-cloak>
             <button @click="open = true" 
                     class="block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2">
               新規登録

@@ -3,31 +3,31 @@
     <ul class="menu menu-compact">
       <!-- メニュー項目 -->
       <% if user_signed_in? %>
-<li class="mt-2">
-  <%= link_to "レコード", self_records_path, 
-        class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
-</li>
-<li>
-  <%= link_to "コンディション", conditions_path, 
-        class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
-</li>
-<li>
-  <%= link_to "フィジカル", bodies_path, 
-        class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
-</li>
-<li>
-  <%= link_to "トレーニング", training_menus_path, 
-        class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
-</li>
-<li>
-  <%= link_to "日誌", diaries_path, 
-        class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
-</li>
-<li class="mt-2">
-  <%= link_to "TOPページ", root_path, 
+        <li class="mt-2">  
+        <%= link_to "レコード", self_records_path, 
               class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
-</li>
-    <% end %>
+        </li>
+        <li>  
+        <%= link_to "コンディション", conditions_path, 
+              class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+        </li>
+        <li>  
+        <%= link_to "フィジカル", bodies_path, 
+              class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+        </li>
+        <li>  
+        <%= link_to "トレーニング", training_menus_path, 
+              class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+        </li>
+        <li>  
+        <%= link_to "日誌", diaries_path, 
+              class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+        </li>
+        <li class="mt-2">
+          <%= link_to "TOPページ", root_path, 
+              class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
+        </li>
+      <% end %>
     </ul>
   </nav>
 </aside>
