@@ -15,13 +15,16 @@
       <!-- 距離 -->
       <div class="form-control">
         <%= form.label :distance, '距離', class: "label font-bold text-gray-700" %>
-        <%= form.number_field :distance, class: "input input-bordered w-full" %>
+        <%= form.select :distance, 
+              [[50, 50], [100, 100], [200, 200], [400, 400], [800, 800], [1500, 1500]], 
+              {}, 
+              class: "select select-bordered w-full" %>
       </div>
-
-      <!-- 記録 -->
+      <!-- 記録（入力） -->
       <div class="form-control">
-        <%= form.label :record, '記録', class: "label font-bold text-gray-700" %>
-        <%= form.number_field :record, step: "0.01", class: "input input-bordered w-full" %>
+        <%= form.label :record, '記録 (例: 1\'10"10)', class: "label font-bold text-gray-700" %>
+        <%= form.text_field :record, id: "record_input", class: "input input-bordered w-full" %>
+        <%= form.hidden_field :record, id: "record_hidden" %>
       </div>
 
       <!-- 記録日 -->

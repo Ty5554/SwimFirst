@@ -27,7 +27,7 @@
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.recorded_on %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.style %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.distance %></td>
-              <td class="border border-gray-300 px-4 py-2 text-center"><%= record.record %></td>
+              <td class="border border-gray-300 px-4 py-2 text-center"><%= record.formatted_record %></td>
               <td class="border border-gray-300 px-4 py-2 text-center">
                 <div class="flex justify-center space-x-2">
                   <%= link_to '編集', edit_self_record_path(record), class: "btn btn-sm btn-outline btn-info" %>
@@ -61,7 +61,7 @@
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.recorded_on %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.style %></td>
               <td class="border border-gray-300 px-4 py-2 text-center"><%= record.distance %></td>
-              <td class="border border-gray-300 px-4 py-2 text-center"><%= record.record %></td>
+              <td class="border border-gray-300 px-4 py-2 text-center"><%= record.formatted_record %></td>
             </tr>
           <% end %>
         </tbody>

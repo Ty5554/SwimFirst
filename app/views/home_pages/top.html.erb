@@ -1,4 +1,4 @@
-<div class="top-wrapper">
+<div class="top-wrapper" data-turbo="false">
   <div class="top-inner-text">
     <%= image_tag 'top.png', class: 'top-image w-full h-full' %>
   </div>
@@ -52,12 +52,12 @@
     <h3 class="text-5xl font-bold text-cyan-300 mb-2">機能のご紹介</h3>
     <p class="text-base font-bold">(※機能をクリックすると操作ガイドを確認できます。)</p>
   </section>
-  <div x-data="{ condition: false, physical: false, training: false, ai: false }">
+  <div x-data="{ condition: false, physical: false, training: false, ai: false }" x-cloak>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-8">
     <!-- グラフ機能 -->
 <section @click="condition = true" 
          class="card bg-white text-black shadow-md p-6 text-center cursor-pointer 
-                hover:scale-105 hover:shadow-lg transition duration-300" data-turbo="false">
+                hover:scale-105 hover:shadow-lg transition duration-300" data-turbo="false" x-cloak>
   <div class="bg-white text-black p-2 text-center">
     <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-md shadow-md">
       01 コンディション機能
@@ -76,7 +76,7 @@
     <!-- コンディション機能 -->
 <section @click="physical = true" 
          class="card bg-white text-black shadow-md p-6 text-center cursor-pointer 
-                hover:scale-105 hover:shadow-lg transition duration-300" data-turbo="false">
+                hover:scale-105 hover:shadow-lg transition duration-300" data-turbo="false" x-cloak>
   <div class="bg-white text-black p-2 text-center">
     <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-md shadow-md">
         02 フィジカル機能
@@ -95,7 +95,7 @@
     <!-- トレーニング機能 -->
 <section @click="training = true" 
          class="card bg-white text-black shadow-md p-6 text-center cursor-pointer 
-                hover:scale-105 hover:shadow-lg transition duration-300" data-turbo="false">
+                hover:scale-105 hover:shadow-lg transition duration-300" data-turbo="false" x-cloak>
   <div class="bg-white text-black p-2 text-center">
     <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-md shadow-md">
         03 トレーニング機能
@@ -113,7 +113,7 @@
 
 <section @click="ai = true" 
          class="card bg-white text-black shadow-md p-6 text-center cursor-pointer 
-                hover:scale-105 hover:shadow-lg transition duration-300" data-turbo="false">
+                hover:scale-105 hover:shadow-lg transition duration-300" data-turbo="false" x-cloak>
   <div class="bg-white text-black p-2 text-center">
     <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-md shadow-md">
         04 AI機能

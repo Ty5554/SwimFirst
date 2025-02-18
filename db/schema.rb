@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_14_064324) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_18_145537) do
   create_table "bodies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.float "height", null: false
@@ -66,7 +66,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_14_064324) do
     t.bigint "user_id", null: false
     t.integer "style", null: false
     t.integer "distance", null: false
-    t.float "record", null: false
+    t.integer "record", null: false
     t.date "recorded_on", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -138,7 +138,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_14_064324) do
     t.string "unconfirmed_email"
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.boolean "modal_shown", default: false, null: false
+    t.boolean "modal_shown"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
