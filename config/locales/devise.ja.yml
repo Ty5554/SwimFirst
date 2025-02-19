@@ -21,7 +21,7 @@ ja:
       already_authenticated: "すでにログインしています"
       invalid: "メールアドレスまたはパスワードが有効ではありません。"
       locked: "アカウントがロックされています。"
-      unconfirmed: "アカウントの確認が必要です。メールを確認してください。"
+      unconfirmed: "確認メールを送信しました。メールに記載されたリンクをクリックしてアカウントを有効化してください。"
     omniauth_callbacks:
       user:
         success: "ログインに成功しました！"

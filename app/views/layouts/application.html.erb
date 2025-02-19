@@ -32,7 +32,7 @@
     <!-- Google Analytics 終了 -->
   </head>
 
-  <body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-100 text-gray-800">
     <%= render 'shared/header' %>
 
     <!-- Flash メッセージ -->
@@ -64,8 +64,10 @@
 <% end %>
 
     <!-- レイアウトの主な構造 -->
-    <% if (controller_name == "home_pages" && action_name == "top") || 
-      (controller_name == "sessions" && action_name == "new") || 
+    <% if (controller_name == "home_pages" && action_name == "top") ||
+      (controller_name == "home_pages" && action_name == "terms_of_use") ||
+      (controller_name == "home_pages" && action_name == "privacy_policy") ||
+      (controller_name == "sessions" && action_name == "new") ||
       (controller_name == "registrations" && (action_name == "new" || action_name == "create")) %>
     <%= yield %>
     <% else %>

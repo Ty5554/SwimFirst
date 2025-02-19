@@ -20,7 +20,7 @@
     <!-- メニューリスト -->
     <!-- ヘッダー -->
       <div class="bg-blue-950 text-white">
-        <div x-data="{ menu: false, invite: false, open: false }" data-turbo="false" data-turbo-permanent x-init="
+        <div x-data="{ invite: false, open: false }" data-turbo="false" data-turbo-permanent x-init="
           <% if @show_modal && @modal_type.present? %>
             <%= @modal_type %> = true;
           <% end %>

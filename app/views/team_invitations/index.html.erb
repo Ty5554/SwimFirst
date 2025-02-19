@@ -2,7 +2,7 @@
 <div class="flex items-center justify-center" data-controller="generate-url">
   <div class="w-full max-w-4xl bg-white rounded-lg shadow-lg p-4">
     <p class="text-gray-600 mb-8 leading-relaxed">
-      チームに所属する選手を登録しましょう。<br>
+      チームメンバーを登録しましょう。<br>
       下記の招待URLを選手に送信し、選手自身に選手登録をしてもらいましょう。
     </p>
 <% puts "@show_modal: #{@show_modal}, @modal_type: #{@modal_type}" %>
@@ -12,7 +12,7 @@
       <span class="font-bold text-lg text-blue-600 bg-blue-50 px-2 py-1 rounded-md">
       <%= @team.team_name %>
       </span>
-      の招待URLです。指導者の皆さんは下記の「URLを発行」をクリックして招待URLを発行してください。
+      の招待URLです。指導者の皆さんは下記の「招待URLを発行」をクリックしてURLを発行してください。
       </p>
       <button
         data-action="click->generate-url#generate"
