@@ -31,16 +31,16 @@ class BodyChartsController < ApplicationController
             type: "line",
             label: "体脂肪率",
             data: body_data.map { |_, body_fat, *_| body_fat },
-            borderColor: "#D00000",
-            backgroundColor: "#D00000",
+            borderColor: "#104911",
+            backgroundColor: "#104911",
             yAxisID: "y1"
           },
           {
             type: "bar",
             label: "体重",
             data: body_data.map { |_, _, weight, *_| weight },
-            borderColor: "#03045E",
-            backgroundColor: "#03045E",
+            borderColor: "#70e000",
+            backgroundColor: "#70e000",
             yAxisID: "y2"
           }
         ]
@@ -54,13 +54,13 @@ class BodyChartsController < ApplicationController
             display: true,
             position: "left",
             min: 5,
-            max: 20
+            max: 25
           },
           y2: {
             type: "linear",
             display: true,
             position: "right",
-            min: 40,
+            min: 20,
             max: 100
           }
         }

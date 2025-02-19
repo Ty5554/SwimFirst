@@ -57,7 +57,7 @@ class ConditionChartsController < ApplicationController
           display: true,
           position: "left",
           min: 0,
-          max: 100
+          max: 10
         }
       }
     }

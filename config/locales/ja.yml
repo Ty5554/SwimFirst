@@ -54,3 +54,8 @@ ja:
     pagination:
       previous: "前へ"
       next: "次へ"
+  home_pages:
+    terms_of_use:
+      title: "利用規約"
+    privacy_policy:
+      title: "プライバシーポリシー"
