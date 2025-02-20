@@ -1,26 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
   const recordInput = document.getElementById("record_input");
   const hiddenInput = document.getElementById("record_hidden");
-  
-  if (!recordInput || !hiddenInput) return; // 要素がない場合は処理しない
-  
-  recordInput.addEventListener("input", (event) => {
-    const value = event.target.value.trim();
-  
-    // 正規表現で "1'27"28" のような形式をキャッチ
+  const form = document.querySelector("form");
+
+  if (!recordInput || !hiddenInput || !form) return;
+
+  const updateHiddenInput = () => {
+    const value = recordInput.value.trim();
     const match = value.match(/^(\d*)'*(\d{1,2})"(\d{1,2})$/);
     if (match) {
       const minutes = parseInt(match[1] || "0", 10);
       const seconds = parseInt(match[2], 10);
       const milliseconds = parseInt(match[3], 10);
       const totalMilliseconds = (minutes * 60 + seconds) * 100 + milliseconds;
-  
-      // hidden input に変換後のデータを入れる
       hiddenInput.value = totalMilliseconds;
     } else {
-      // 無効な入力時は hidden フィールドを空にする
       hiddenInput.value = "";
     }
+  };
+
+  // スマホ対策: `input`, `change`, `blur` の全てで発火させる
+  recordInput.addEventListener("input", updateHiddenInput);
+  recordInput.addEventListener("change", updateHiddenInput);
+  recordInput.addEventListener("blur", updateHiddenInput);
+
+  // フォーム送信時に hiddenInput の値を確実にセット
+  form.addEventListener("submit", () => {
+    updateHiddenInput();
   });
 });
-  

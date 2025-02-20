@@ -23,7 +23,9 @@
       <!-- 記録（入力） -->
       <div class="form-control">
         <%= form.label :record, '記録 (例: 1\'10"10)', class: "label font-bold text-gray-700" %>
-        <%= form.text_field :record, id: "record_input", class: "input input-bordered w-full" %>
+        <%= form.text_field :record, id: "record_input", 
+               class: "input input-bordered w-full",
+               autocomplete: "off", autocorrect: "off", autocapitalize: "off", spellcheck: "false" %>
         <%= form.hidden_field :record, id: "record_hidden" %>
       </div>
 
