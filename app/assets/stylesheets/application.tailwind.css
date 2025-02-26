@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#imageModal {
+    display: none !important;  /* **確実に非表示にする** */
+    opacity: 0;                /* **一瞬でも表示されるのを防ぐ** */
+    visibility: hidden;         /* **さらに表示を防ぐ** */
+  }
+  
