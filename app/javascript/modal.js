@@ -1,5 +1,5 @@
-window.addEventListener("load", function () {
-  requestIdleCallback(() => {  // ブラウザのアイドル状態で実行
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(() => { // 100ms 遅延させる
     const modal = document.createElement("div");
     modal.id = "imageModal";
     modal.className = "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50";
@@ -35,5 +35,6 @@ window.addEventListener("load", function () {
         modal.classList.add("hidden");
       }
     });
-  });
+
+  }, 300); // 300ms 遅延
 });
