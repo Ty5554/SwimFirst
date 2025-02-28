@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (window.showModal && window.modalType) {
     setTimeout(() => { // 遷移後の処理を遅延させる
-      Alpine.store(window.modalType, true);
+      Alpine.store(window.modalType, false);
       console.log("モーダルを開きます:", window.modalType);
     }, 100); // 100ms の遅延を入れる
 
