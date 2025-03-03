@@ -278,7 +278,8 @@ Devise.setup do |config|
                   Rails.application.credentials.dig(:google, :client_secret),
                   access_type: "offline",  # これがないと refresh_token が発行されない
                   prompt: "consent",       # これがないと refresh_token が返らないことがある
-                  skip_jwt: true
+                  skip_jwt: true,
+                  redirect_uri: "https://swimfirst.net/users/auth/google_oauth2/callback"  # リダイレクトURIを指定
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
