@@ -1,3 +1,6 @@
+require 'net/http'
+require 'json'
+
 class RegistrationsController < Devise::RegistrationsController
   def new
     build_resource({})
@@ -7,21 +10,27 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    build_resource(sign_up_params)
-    resource.build_role(role_params) unless resource.role.present?
-    resource.teams.build(teams_params) if resource.teams.empty?
+    recaptcha_token = params[:recaptcha_token]
+    if verify_recaptcha(recaptcha_token)
+      build_resource(sign_up_params)
+      resource.build_role(role_params) unless resource.role.present?
+      resource.teams.build(teams_params) if resource.teams.empty?
 
-    if resource.save
-      sign_up(resource_name, resource)
-      flash[:notice] = "登録が完了しました。メンバー管理ページにてステータスを更新してください。"
-      respond_with resource, location: after_sign_up_path_for(resource)
+      if resource.save
+        sign_up(resource_name, resource)
+        flash[:notice] = "登録が完了しました。メンバー管理ページにてステータスを更新してください。"
+        respond_with resource, location: after_sign_up_path_for(resource)
+      else
+        flash.now[:alert] = "登録に失敗しました。"
+        clean_up_passwords resource
+        set_minimum_password_length
+        respond_with resource
+      end
     else
-      flash.now[:alert] = "登録に失敗しました。"
-      clean_up_passwords resource
-      set_minimum_password_length
-      respond_with resource
+      flash.now[:alert] = "reCAPTCHA 認証に失敗しました"
+      render :new
     end
-  end
+  end 
 
   def create_athlete
     @team = Team.find_by(invitation_token: params[:invitation_token])
@@ -82,5 +91,17 @@ class RegistrationsController < Devise::RegistrationsController
       role_attributes: [ :role ],
       teams_attributes: [ :team_name ]
     )
+  end
+
+
+  def verify_recaptcha(token)
+    secret_key = Recaptcha.configuration.secret_key
+    uri = URI("https://www.google.com/recaptcha/api/siteverify")
+    response = Net::HTTP.post_form(uri, {
+      "secret" => secret_key,
+      "response" => token
+    })
+    json = JSON.parse(response.body)
+    json["success"] && json["score"].to_f > 0.5 # scoreが0.5以上ならOK
   end
 end

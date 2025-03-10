@@ -20,7 +20,7 @@
       <div class="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
     </div>
 
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-4" }) do |f| %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { controller: "recaptcha" }, html: { class: "space-y-4" }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <div>
           <%= f.label :email, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" do %>
@@ -78,7 +78,7 @@
         </div>
         </div>
         <div>
-          <%= f.submit "登録", class: "w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+          <%= f.submit "登録", id: "submit-button", class: "w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
         </div>
       <% end %>
       <p class="text-sm font-light text-gray-500 dark:text-gray-400">
@@ -87,3 +87,25 @@
     </div>
 </section>
 <%= render 'shared/footer' %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("submit-button").addEventListener("click", function(event) {
+      event.preventDefault(); // 通常の送信を防ぐ
+
+      grecaptcha.ready(function() {
+        grecaptcha.execute("<%= Recaptcha.configuration.site_key %>", {action: "submit"}).then(function(token) {
+          // トークンをフォームに追加
+          let form = document.querySelector("form");
+          let input = document.createElement("input");
+          input.setAttribute("type", "hidden");
+          input.setAttribute("name", "recaptcha_token");
+          input.setAttribute("value", token);
+          form.appendChild(input);
+
+          form.submit(); // reCAPTCHAを通過したら送信
+        });
+      });
+    });
+  });
+</script>
