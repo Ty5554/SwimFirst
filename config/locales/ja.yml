@@ -45,6 +45,8 @@ ja:
       models:
         user:
           taken: "このメールアドレスはすでに使用されています"
+      messages:
+        confirmation: "が一致しません"
   date:
     order:
       - :year

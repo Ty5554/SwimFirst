@@ -11,28 +11,36 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     recaptcha_token = params[:recaptcha_token]
-    if verify_recaptcha(recaptcha_token)
-      build_resource(sign_up_params)
-      resource.build_role(role_params) unless resource.role.present?
-      resource.teams.build(teams_params) if resource.teams.empty?
-
-      if resource.save
-        sign_up(resource_name, resource)
-        flash[:notice] = "登録が完了しました。メンバー管理ページにてステータスを更新してください。"
-        respond_with resource, location: after_sign_up_path_for(resource)
-      else
-        flash.now[:alert] = "登録に失敗しました。"
-        clean_up_passwords resource
-        set_minimum_password_length
-        respond_with resource
-      end
-    else
+    unless verify_recaptcha(recaptcha_token)
       flash.now[:alert] = "reCAPTCHA 認証に失敗しました"
-      render :new
+      render :new and return
+    end
+
+    build_resource(sign_up_params)
+    resource.build_role(role_params) unless resource.role.present?
+    resource.teams.build(teams_params) if resource.teams.empty?
+
+    if resource.save
+      if resource.persisted? && resource.sns_credentials.empty?
+        sign_up(resource_name, resource)
+      end
+      flash[:notice] = "登録が完了しました。メンバー管理ページにてステータスを更新してください。"
+      respond_with resource, location: after_sign_up_path_for(resource)
+    else
+      flash.now[:alert] = "登録に失敗しました。"
+      clean_up_passwords resource
+      set_minimum_password_length
+      respond_with resource
     end
   end 
 
   def create_athlete
+    recaptcha_token = params[:recaptcha_token]
+    unless verify_recaptcha(recaptcha_token)
+      redirect_to root_path, alert: "reCAPTCHA 認証に失敗しました。"
+      return
+    end
+
     @team = Team.find_by(invitation_token: params[:invitation_token])
     unless @team
       redirect_to root_path, alert: "無効な招待リンクです。"
@@ -43,14 +51,15 @@ class RegistrationsController < Devise::RegistrationsController
     @user.teams << @team # チームに紐付ける
 
     if @user.save
-      # 招待ステータスをapprovedに更新
+      # 招待ステータスをpendingに更新
       invitation = TeamInvitation.find_by(user: resource, team: @team)
       invitation&.update!(status: :pending)
 
       sign_up(resource_name, @user)
       redirect_to root_path, notice: "選手登録を申請しました。"
     else
-      render "teams/invite", alert: "選手登録の申請に失敗しました。"
+      flash.now[:alert] = "選手登録の申請に失敗しました。"
+      render "teams/invite"
     end
   end
 
@@ -74,7 +83,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def sign_up_params
     params.require(:user).permit(
-      :email, :password, :password_confirmation, :first_name, :last_name, role_attributes: [ :role ]
+      :email, :password, :password_confirmation, :first_name, :last_name, role_attributes: [:role]
     )
   end
 
@@ -88,20 +97,23 @@ class RegistrationsController < Devise::RegistrationsController
 
   def user_params
     params.require(:user).permit(
-      role_attributes: [ :role ],
-      teams_attributes: [ :team_name ]
+      role_attributes: [:role],
+      teams_attributes: [:team_name]
     )
   end
 
-
   def verify_recaptcha(token)
-    secret_key = Recaptcha.configuration.secret_key
+    secret_key = Rails.application.credentials.dig(:recaptcha, :secret_key)
     uri = URI("https://www.google.com/recaptcha/api/siteverify")
     response = Net::HTTP.post_form(uri, {
       "secret" => secret_key,
       "response" => token
     })
     json = JSON.parse(response.body)
-    json["success"] && json["score"].to_f > 0.5 # scoreが0.5以上ならOK
+    json["success"] && json["score"].to_f > 0.5 # スコアが0.5以上ならOK
   end
+
+  def after_sign_up_path_for(resource)
+    root_path # 例: root_path や dashboard_path など
+  end  
 end
