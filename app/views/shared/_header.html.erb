@@ -53,6 +53,7 @@
                   class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-red-500 to-red-700 hover:shadow-lg px-4 py-2" %>
           </li>
         <% else %>
+<!--
           <li data-turbo="false" x-cloak>
             <button @click="open = true" 
                     class="block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2">
@@ -63,6 +64,8 @@
             <%= link_to "ログイン", new_user_session_path, 
                   class: "block text-lg font-semibold tracking-wide rounded transition ease-in-out duration-300 text-gray-300 hover:text-white hover:bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg px-4 py-2" %>
           </li>
+
+-->
         <% end %>
         </ul>
         <%= render 'shared/modal_component', 
