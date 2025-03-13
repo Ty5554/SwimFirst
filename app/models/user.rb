@@ -32,37 +32,41 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable,
-         :omniauthable, omniauth_providers: %i[google_oauth2]
+         :omniauthable, omniauth_providers: (Rails.application.credentials.dig(:enable_google_oauth) ? [:google_oauth2] : [])
 
   before_validation :skip_confirmation_for_google, on: :create
 
   class << self   # ここからクラスメソッドで、メソッドの最初につける'self.'を省略できる
     # SnsCredentialsテーブルにデータがないときの処理
-    def without_sns_data(auth)
+    def self.without_sns_data(auth)
       user = User.where(email: auth.info.email).first
-
+    
       if user.present?
-        sns = SnsCredential.create(
-          uid: auth.uid,
-          provider: auth.provider,
-          user_id: user.id
-        )
-      else   # User.newの記事があるが、newは保存までは行わないのでcreateで保存をかける
+        if auth.provider.present? # OAuth経由のログインの場合のみ SnsCredential を作成
+          sns = SnsCredential.create(
+            uid: auth.uid,
+            provider: auth.provider,
+            user_id: user.id
+          )
+        end
+      else
         user = User.create(
-          name: auth.info.name,   # デフォルトから追加したカラムがあれば記入
-          first_name: auth.info.first_name,   # デフォルトから追加したカラムがあれば記入
-          last_name: auth.info.last_name,   # デフォルトから追加したカラムがあれば記入
+          name: auth.info.name,
+          first_name: auth.info.first_name,
+          last_name: auth.info.last_name,
           email: auth.info.email,
-          password: Devise.friendly_token(10)   # 10文字の予測不能な文字列を生成する
+          password: Devise.friendly_token(10)
         )
-        sns = SnsCredential.create(
-          user_id: user.id,
-          uid: auth.uid,
-          provider: auth.provider
-        )
+        if auth.provider.present? # OAuth経由のログインの場合のみ SnsCredential を作成
+          sns = SnsCredential.create(
+            user_id: user.id,
+            uid: auth.uid,
+            provider: auth.provider
+          )
+        end
       end
-      { user:, sns: }   # ハッシュ形式で呼び出し元に返す
-    end
+      { user:, sns: }
+    end    
 
     # SnsCredentialsテーブルにデータがあるときの処理
     def with_sns_data(auth, snscredential)
@@ -82,6 +86,9 @@ class User < ApplicationRecord
     def find_oauth(auth)
       uid = auth.uid
       provider = auth.provider
+
+      return unless provider.present? # 通常登録の場合は処理を実行しない
+
       snscredential = SnsCredential.where(uid:, provider:).first
       if snscredential.present?
         user = with_sns_data(auth, snscredential)[:user]
