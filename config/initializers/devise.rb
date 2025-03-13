@@ -272,14 +272,13 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  if Rails.application.credentials.dig(:enable_google_oauth)
   config.omniauth :google_oauth2,
                 Rails.application.credentials.dig(:google, :client_id),
                 Rails.application.credentials.dig(:google, :client_secret),
                 access_type: "offline",  # これがないと refresh_token が発行されない
                 prompt: "select_account",       # これがないと refresh_token が返らないことがある
-                skip_jwt: false
-  end
+                skip_jwt: false,
+                redirect_uri: "https://swimfirst.net/users/auth/google_oauth2/callback"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

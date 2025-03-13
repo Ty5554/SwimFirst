@@ -32,7 +32,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable,
-         :omniauthable, omniauth_providers: (Rails.application.credentials.dig(:enable_google_oauth) ? [:google_oauth2] : [])
+         :omniauthable, omniauth_providers: (Rails.application.credentials.dig(:enable_google_oauth) ? [ :google_oauth2 ] : [])
 
   before_validation :skip_confirmation_for_google, on: :create
 
@@ -40,7 +40,7 @@ class User < ApplicationRecord
     # SnsCredentialsテーブルにデータがないときの処理
     def self.without_sns_data(auth)
       user = User.where(email: auth.info.email).first
-    
+
       if user.present?
         if auth.provider.present? # OAuth経由のログインの場合のみ SnsCredential を作成
           sns = SnsCredential.create(
@@ -66,7 +66,7 @@ class User < ApplicationRecord
         end
       end
       { user:, sns: }
-    end    
+    end
 
     # SnsCredentialsテーブルにデータがあるときの処理
     def with_sns_data(auth, snscredential)

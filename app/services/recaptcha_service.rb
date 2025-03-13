@@ -22,16 +22,16 @@ class RecaptchaService
 
     if !response.token_properties.valid
       Rails.logger.warn "reCAPTCHA トークンが無効: #{response.token_properties.invalid_reason}"
-      return false
+      false
     elsif response.token_properties.action != action
       Rails.logger.warn "reCAPTCHA アクションが一致しません: #{response.token_properties.action} != #{action}"
-      return false
+      false
     else
       Rails.logger.info "reCAPTCHA スコア: #{response.risk_analysis.score}"
-      return response.risk_analysis.score.to_f > 0.5
+      response.risk_analysis.score.to_f > 0.5
     end
   rescue => e
     Rails.logger.error "reCAPTCHA API 呼び出しエラー: #{e.message}"
-    return false
+    false
   end
 end
