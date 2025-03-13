@@ -1,5 +1,5 @@
-require 'net/http'
-require 'json'
+require "net/http"
+require "json"
 
 class RegistrationsController < Devise::RegistrationsController
   def new
@@ -32,7 +32,7 @@ class RegistrationsController < Devise::RegistrationsController
       set_minimum_password_length
       respond_with resource
     end
-  end 
+  end
 
   def create_athlete
     recaptcha_token = params[:recaptcha_token]
@@ -83,7 +83,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def sign_up_params
     params.require(:user).permit(
-      :email, :password, :password_confirmation, :first_name, :last_name, role_attributes: [:role]
+      :email, :password, :password_confirmation, :first_name, :last_name, role_attributes: [ :role ]
     )
   end
 
@@ -97,8 +97,8 @@ class RegistrationsController < Devise::RegistrationsController
 
   def user_params
     params.require(:user).permit(
-      role_attributes: [:role],
-      teams_attributes: [:team_name]
+      role_attributes: [ :role ],
+      teams_attributes: [ :team_name ]
     )
   end
 
@@ -115,5 +115,5 @@ class RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(resource)
     root_path # 例: root_path や dashboard_path など
-  end  
+  end
 end
