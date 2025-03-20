@@ -45,6 +45,10 @@ ja:
       models:
         user:
           taken: "このメールアドレスはすでに使用されています"
+          attributes:
+            email:
+              email_domain_allowed: "許可されたドメインのメールアドレスを使用してください"
+              email_domain_not_blocked: "フリーメールは使用できません"
       messages:
         confirmation: "が一致しません"
   date:

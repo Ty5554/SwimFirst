@@ -10,11 +10,13 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def create
+=begin
     recaptcha_token = params[:recaptcha_token]
     unless verify_recaptcha(recaptcha_token)
       flash.now[:alert] = "reCAPTCHA 認証に失敗しました"
       render :new and return
     end
+=end
 
     build_resource(sign_up_params)
     resource.build_role(role_params) unless resource.role.present?
