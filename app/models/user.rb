@@ -1,8 +1,11 @@
 class User < ApplicationRecord
   before_create :set_default_modal_shown
-  BLOCKED_DOMAINS = %w[ gmail.com ]
+  BLOCKED_DOMAINS = %w[
+    gmail.com yahoo.com outlook.com hotmail.com icloud.com
+    mail.ru yandex.ru protonmail.com rambler.ru qq.com 163.com
+  ]
   # スパムワード（スパム業者がよく使う単語を追加）
-  BLOCKED_KEYWORDS = %w[prize winner gift free money viagra casino]
+  BLOCKED_KEYWORDS = %w[prize winner gift free money viagra casino lottery bonus]
   
   # スパムURLを検出するパターン
   URL_REGEX = /https?:\/\/[^\s]+/i
@@ -41,6 +44,12 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: (Rails.application.credentials.dig(:enable_google_oauth) ? [ :google_oauth2 ] : [])
 
   before_validation :skip_confirmation_for_google, on: :create
+  # 🔹 追加: バリデーションを明示的に定義
+  validates :first_name, :last_name, presence: true
+  validate :email_domain_not_blocked
+  validate :block_spam_content
+  validate :block_suspicious_email_format
+  validate :prevent_duplicate_registrations
 
   class << self   # ここからクラスメソッドで、メソッドの最初につける'self.'を省略できる
     # SnsCredentialsテーブルにデータがないときの処理
@@ -125,15 +134,17 @@ class User < ApplicationRecord
   end
 
   def email_domain_not_blocked
-    domain = email.split("@").last if email.present?
+    return if email.blank?
+
+    domain = email.split("@").last
     if BLOCKED_DOMAINS.include?(domain)
-      errors.add(:email, "フリーメールは使用できません")
+      errors.add(:email, "このドメインのメールアドレスは使用できません")
     end
   end
 
   # スパムワード & URL チェック
   def block_spam_content
-    attributes_to_check = [first_name, last_name, email]
+    attributes_to_check = [first_name, last_name, email, password]
 
     attributes_to_check.each do |value|
       next if value.blank?
@@ -147,6 +158,22 @@ class User < ApplicationRecord
       if value.match?(URL_REGEX)
         errors.add(:base, "リンクを含む名前やメールアドレスは使用できません")
       end
+    end
+  end
+
+  def block_suspicious_email_format
+    return if email.blank?
+
+    # 数字やランダムな文字列のみのメールアドレスをブロック
+    if email.match?(/\A[a-zA-Z0-9_.+-]+@(xn--|[0-9]+|mailinator|tempmail)\.[a-z]{2,}\z/)
+      errors.add(:email, "無効なメールアドレスです")
+    end
+  end
+
+  # 🔹 **新規追加: 短時間での大量登録を防ぐ**
+  def prevent_duplicate_registrations
+    if User.where(email: email).where("created_at > ?", 5.minutes.ago).exists?
+      errors.add(:email, "短時間に複数回の登録はできません")
     end
   end
 end
