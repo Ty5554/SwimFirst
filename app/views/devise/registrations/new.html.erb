@@ -22,7 +22,8 @@
       <div class="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
     </div>
 
-      <%= form_for(resource, as: resource_name, url: new_user_registration_path(resource_name), data: { controller: "recaptcha" }, html: { class: "space-y-4" }) do |f| %>
+      <%= form_for(resource, as: resource_name, url: user_registration_path(resource_name), html: { id: "sign-up-form", class: "space-y-4" }) do |f| %>
+      <% Rails.logger.debug "resource: #{resource.inspect}, resource_name: #{resource_name.inspect}" %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <div>
           <%= f.label :email, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" do %>
@@ -99,7 +100,18 @@
       grecaptcha.ready(function() {
         grecaptcha.execute("<%= Recaptcha.configuration.site_key %>", {action: "submit"}).then(function(token) {
           document.getElementById("recaptcha_token").value = token;
-          document.querySelector("form").submit(); // reCAPTCHA を通過したら送信
+          const form = document.getElementById("sign-up-form");
+
+          // `submit` イベントのリスナーを適切に処理
+          form.addEventListener("submit", function(e) {
+            e.preventDefault(); // `submit()` を手動で呼び出すため、デフォルトの動作を無効化
+          });
+
+          // `submit` イベントを発火
+          form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+
+          // `setTimeout` で次のフレームで実行するようにする
+          setTimeout(() => form.submit(), 100);
         });
       });
     });

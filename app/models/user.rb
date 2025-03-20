@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   before_create :set_default_modal_shown
+  BLOCKED_DOMAINS = %w[ gmail.com ]
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -115,6 +116,13 @@ class User < ApplicationRecord
   def skip_confirmation_for_google
     if sns_credentials.exists?(provider: "google_oauth2")
       self.confirmed_at = Time.current
+    end
+  end
+
+  def email_domain_not_blocked
+    domain = email.split("@").last if email.present?
+    if BLOCKED_DOMAINS.include?(domain)
+      errors.add(:email, "フリーメールは使用できません")
     end
   end
 end
