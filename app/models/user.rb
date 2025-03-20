@@ -1,6 +1,11 @@
 class User < ApplicationRecord
   before_create :set_default_modal_shown
   BLOCKED_DOMAINS = %w[ gmail.com ]
+  # スパムワード（スパム業者がよく使う単語を追加）
+  BLOCKED_KEYWORDS = %w[prize winner gift free money viagra casino]
+  
+  # スパムURLを検出するパターン
+  URL_REGEX = /https?:\/\/[^\s]+/i
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -123,6 +128,25 @@ class User < ApplicationRecord
     domain = email.split("@").last if email.present?
     if BLOCKED_DOMAINS.include?(domain)
       errors.add(:email, "フリーメールは使用できません")
+    end
+  end
+
+  # スパムワード & URL チェック
+  def block_spam_content
+    attributes_to_check = [first_name, last_name, email]
+
+    attributes_to_check.each do |value|
+      next if value.blank?
+
+      # スパムワードチェック
+      if BLOCKED_KEYWORDS.any? { |word| value.downcase.include?(word) }
+        errors.add(:base, "スパムワードが含まれています")
+      end
+
+      # URL のチェック
+      if value.match?(URL_REGEX)
+        errors.add(:base, "リンクを含む名前やメールアドレスは使用できません")
+      end
     end
   end
 end
