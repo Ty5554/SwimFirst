@@ -22,7 +22,7 @@
       <div class="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
     </div>
 
-      <%= form_for(resource, as: resource_name, url: user_registration_path(resource_name), html: { id: "sign-up-form", class: "space-y-4" }) do |f| %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { id: "sign-up-form", class: "space-y-4" }) do |f| %>
       <% Rails.logger.debug "resource: #{resource.inspect}, resource_name: #{resource_name.inspect}" %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <div>

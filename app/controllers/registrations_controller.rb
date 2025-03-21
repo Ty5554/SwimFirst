@@ -116,6 +116,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
-    root_path # 例: root_path や dashboard_path など
+    redirect_to root_path # 例: root_path や dashboard_path など
   end
 end
