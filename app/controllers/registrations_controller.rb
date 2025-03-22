@@ -37,12 +37,13 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def create_athlete
+=begin
     recaptcha_token = params[:recaptcha_token]
     unless verify_recaptcha(recaptcha_token)
       redirect_to root_path, alert: "reCAPTCHA 認証に失敗しました。"
       return
     end
-
+=end
     @team = Team.find_by(invitation_token: params[:invitation_token])
     unless @team
       redirect_to root_path, alert: "無効な招待リンクです。"

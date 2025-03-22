@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   before_create :set_default_modal_shown
   BLOCKED_DOMAINS = %w[
-    gmail.com hotmail.com mail.ru yandex.ru protonmail.com rambler.ru qq.com 163.com
+    hotmail.com mail.ru yandex.ru protonmail.com rambler.ru qq.com 163.com
   ]
   # スパムワード（スパム業者がよく使う単語を追加）
   BLOCKED_KEYWORDS = %w[prize winner gift free money viagra casino lottery bonus]
